@@ -3,4 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="main_btn_prog">Progress</string>
+    <string name="main_btn_cam">Camera</string>
+    <string name="main_itm_abt">About</string>
+    <string name="main_itm_priv">Privacy Statement</string>
 </resources>
