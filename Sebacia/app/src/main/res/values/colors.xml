@@ -1,0 +1,8 @@
+<resources>
+    <color name="gold1">#ffffa605</color> <!-- cmyk 0,35,98,0 -->
+    <color name="gold2">#ffffc151</color>
+    <color name="gold3">#ffffdc9e</color>
+
+    <color name="black">#ff000000</color> <!-- cmyk 0,0,0,100 -->
+    <color name="grey">#ff808080</color> <!-- cmyk 0,0,0,50 -->
+</resources>
