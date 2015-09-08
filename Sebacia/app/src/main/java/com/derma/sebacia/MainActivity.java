@@ -9,9 +9,11 @@ import android.view.View;
 import android.graphics.Typeface;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
     Button btnProg, btnAbt;
+    ImageButton btnCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
 
         btnAbt = (Button)findViewById(R.id.main_btn_abt);
         btnAbt.setTypeface(face);
+
+        btnCamera = (ImageButton) findViewById(R.id.main_btn_cam);
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
