@@ -4,32 +4,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import android.graphics.Typeface;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
 
-public class MainActivity extends AppCompatActivity {
-    Button btnProg, btnAbt;
+public class PageAboutActivity extends AppCompatActivity {
+    TextView tvTitleCompany, tvContentCompany,
+            tvTitleApp, tvContentApp;
+    Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_page_about);
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
-        btnProg = (Button)findViewById(R.id.main_btn_prog);
-        btnProg.setTypeface(face);
+        tvTitleCompany = (TextView)findViewById(R.id.pageabout_tv_title_company);
+        tvTitleCompany.setTypeface(face);
 
-        btnAbt = (Button)findViewById(R.id.main_btn_abt);
-        btnAbt.setTypeface(face);
+        tvContentCompany = (TextView)findViewById(R.id.pageabout_tv_content_company);
+        tvContentCompany.setTypeface(face);
+
+        tvTitleApp = (TextView)findViewById(R.id.pageabout_tv_title_app);
+        tvTitleApp.setTypeface(face);
+
+        tvContentApp = (TextView)findViewById(R.id.pageabout_tv_content_app);
+        tvContentApp.setTypeface(face);
+
+        btnBack = (Button)findViewById(R.id.pageabout_btn_back);
+        btnBack.setTypeface(face);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_page_about, menu);
         return true;
     }
 
@@ -48,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startPageAbout(View view) {
-        Intent intent = new Intent(this, PageAboutActivity.class);
+    public void startMain(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

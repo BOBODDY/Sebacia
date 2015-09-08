@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gold3">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"></LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/page_about_title_company"
+            android:id="@+id/pageabout_tv_title_company"
+            android:contextClickable="true"
+            android:textSize="30dp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/page_about_content_company"
+            android:id="@+id/pageabout_tv_content_company"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/page_about_title_app"
+            android:id="@+id/pageabout_tv_title_app"
+            android:textSize="30dp"
+            android:layout_marginTop="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/page_about_content_app"
+            android:id="@+id/pageabout_tv_content_app"
+            android:layout_marginTop="5dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="0.18"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/common_back"
+                android:id="@+id/pageabout_btn_back"
+                android:layout_gravity="right"
+                android:background="@color/black"
+                android:textColor="@color/gold1"
+                android:layout_marginRight="15dp"
+                android:onClick="startMain" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
