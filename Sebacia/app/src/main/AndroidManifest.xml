@@ -45,6 +45,10 @@
             android:name=".PageAboutActivity"
             android:label="@string/title_activity_page_about" >
         </activity>
+        <activity
+            android:name=".PrivacyActivity"
+            android:label="@string/title_activity_privacy" >
+        </activity>
     </application>
 
 </manifest>

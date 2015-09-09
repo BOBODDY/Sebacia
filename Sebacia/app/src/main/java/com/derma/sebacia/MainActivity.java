@@ -52,7 +52,12 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        //DANIEL'S NOTE: MAKE THIS IS SWITCH STATEMENT FOR CLARITY
         if (id == R.id.action_settings) {
+            return true;
+        } else if (id == R.id.privacy) {
+            Intent intent = new Intent(this, PrivacyActivity.class);
+            startActivity(intent);
             return true;
         }
 

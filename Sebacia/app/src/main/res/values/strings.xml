@@ -17,4 +17,7 @@
     <string name="page_about_title_company">About SEBACIA, Inc.</string>
     <string name="page_about_content_app">APP is a medical application that allows you to determine acne severity on your own without consulting a doctor. Doing so allows you to get in touch with medical professionals who will be willing to treat your particular type of acne. You can use this application to track you acne over time. If you decide to consult a professional, you can use this app to help you locate one nearby. Being a medical application you are also protected under HIPPA and any other medical laws that pertain to the country that you live in.</string>
     <string name="page_about_content_company">Sebacia, Inc. is a clinical-stage private medical device company dedicated to creating new light-based therapies for the treatment of dermatological conditions. Founded as part of The Innovation Factory, SEBACIA seeks to provide an alternative to the topical and systemic drugs currently available for the treatment of acne.</string>
+    <string name="title_activity_privacy">PrivacyActivity</string>
+    <string name="privacy_disagree">Close Application</string>
+    <string name="privacy_agree">Agree</string>
 </resources>
