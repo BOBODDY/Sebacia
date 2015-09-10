@@ -25,7 +25,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView)this.findViewById(R.id.hist_view_img);
         File[] imgs = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).listFiles();
-        if(imgs.length > 0) {
+        if(imgs != null && imgs.length > 0) {
             File img = imgs[0];
             Bitmap bm = BitmapFactory.decodeFile(img.getPath());
             imageView.setImageBitmap(bm);
