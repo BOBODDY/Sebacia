@@ -1,5 +1,6 @@
 package com.derma.sebacia;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,7 @@ import android.content.Intent;
 
 
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
 
     /*@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 try {
                     super.run();
-                    sleep(5000);  //Delay of 10 seconds
+                    sleep(5000);  //Delay of 5 seconds
                 } catch (Exception e) {
 
                 } finally {
