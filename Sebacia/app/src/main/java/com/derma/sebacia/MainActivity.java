@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         switch(id) {
             case (R.id.action_settings) :
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
             case (R.id.privacy) :
                 intent = new Intent(this, PrivacyActivity.class);
