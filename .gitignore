@@ -33,3 +33,4 @@ captures/
 
 # IntelliJ stuff
 .idea/
+*.iml
