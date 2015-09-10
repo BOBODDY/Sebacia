@@ -1,11 +1,18 @@
 package com.derma.sebacia;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.derma.sebacia.R;
+
+import java.io.File;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -13,6 +20,12 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        ImageView imageView = (ImageView)this.findViewById(R.id.hist_view_img);
+        File img = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).listFiles()[0];
+        Bitmap bm = BitmapFactory.decodeFile(img.getPath());
+        imageView.setImageBitmap(bm);
+        System.out.println("Hello World! " + img.getPath());
     }
 
     @Override
