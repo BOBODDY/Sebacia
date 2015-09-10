@@ -9,8 +9,9 @@
     <string name="title_activity_camera">Camera</string>
     <string name="title_activity_about">About</string>
     <string name="title_activity_page_about">PageAbout</string>
-    <string name="title_activity_privacy">PrivacyActivity</string>
+    <string name="title_activity_privacy">Privacy Statement</string>
     <string name="title_activity_history">History</string>
+    <string name="title_activity_find_doctor">Find a Doctor</string>
 
     <string name="main_btn_cam">Camera</string>
     <string name="main_btn_prog">Progress</string>

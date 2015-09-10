@@ -1,5 +1,6 @@
 package com.derma.sebacia;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.derma.sebacia.R;
@@ -22,10 +24,19 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         ImageView imageView = (ImageView)this.findViewById(R.id.hist_view_img);
-        File img = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).listFiles()[0];
-        Bitmap bm = BitmapFactory.decodeFile(img.getPath());
-        imageView.setImageBitmap(bm);
-        System.out.println("Hello World! " + img.getPath());
+        File[] imgs = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).listFiles();
+        if(imgs.length > 0) {
+            File img = imgs[0];
+            Bitmap bm = BitmapFactory.decodeFile(img.getPath());
+            imageView.setImageBitmap(bm);
+            imageView.setOnClickListener(new ImageView.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), FindDoctorActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
     }
 
     @Override
