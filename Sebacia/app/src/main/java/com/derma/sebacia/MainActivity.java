@@ -23,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
         btnProg = (Button)findViewById(R.id.main_btn_prog);
         btnProg.setTypeface(face);
+        btnProg.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), HistoryActivity.class);
+                startActivity(i);
+            }
+        });
 
         btnAbt = (Button)findViewById(R.id.main_btn_abt);
         btnAbt.setTypeface(face);
@@ -51,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        //DANIEL'S NOTE: MAKE THIS IS SWITCH STATEMENT FOR CLARITY
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.privacy) {
-            Intent intent = new Intent(this, PrivacyActivity.class);
-            startActivity(intent);
-            return true;
+        Intent intent;
+        switch(id) {
+            case (R.id.action_settings) :
+                return true;
+            case (R.id.privacy) :
+                intent = new Intent(this, PrivacyActivity.class);
+                startActivity(intent);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
