@@ -28,18 +28,30 @@
         <activity
             android:name=".PageAboutActivity"
             android:label="@string/title_activity_page_about" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.derma.sebacia.MainActivity" />
         </activity>
         <activity
             android:name=".PrivacyActivity"
             android:label="@string/title_activity_privacy" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.derma.sebacia.MainActivity" />
         </activity>
         <activity
             android:name=".HistoryActivity"
             android:label="@string/title_activity_history" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.derma.sebacia.MainActivity" />
         </activity>
         <activity
             android:name=".FindDoctorActivity"
             android:label="@string/title_activity_find_doctor" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.derma.sebacia.MainActivity" />
         </activity>
         <activity
             android:name=".SettingsActivity"
