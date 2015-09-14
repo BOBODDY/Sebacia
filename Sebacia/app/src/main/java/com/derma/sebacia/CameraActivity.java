@@ -33,7 +33,9 @@ public class CameraActivity extends AppCompatActivity {
     public static Camera getCameraInstance(){
         Camera c = null;
         try {
-            c = Camera.open(); // attempt to get a Camera instance
+            if(Camera.getNumberOfCameras() > 1) {
+                c = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+            }
         }
         catch (Exception e){
             // Camera is not available (in use or does not exist)
