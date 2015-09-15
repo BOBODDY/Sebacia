@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +16,13 @@ import android.widget.ImageView;
 import com.derma.sebacia.R;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class HistoryActivity extends AppCompatActivity {
+
+    private static String TAG = "HistoryActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +30,10 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         ImageView imageView = (ImageView)this.findViewById(R.id.hist_view_img);
-        File[] imgs = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).listFiles();
-        if(imgs != null && imgs.length > 0) {
-            File img = imgs[0];
-            Bitmap bm = BitmapFactory.decodeFile(img.getPath());
+
+        try {
+
+            Bitmap bm = BitmapFactory.decodeStream(openFileInput("20150915_123503.jpg"));
             imageView.setImageBitmap(bm);
             imageView.setOnClickListener(new ImageView.OnClickListener() {
                 @Override
@@ -36,6 +42,8 @@ public class HistoryActivity extends AppCompatActivity {
                     startActivity(i);
                 }
             });
+        } catch(FileNotFoundException fnfe) {
+            Log.e(TAG, "file not found", fnfe);
         }
     }
 
