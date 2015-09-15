@@ -29,4 +29,6 @@ string>    <string name="hello_world">Hello world!</string>
     <string name="privacy_agree">Agree</string>
 
     <string name="hist_view_img">History of previous pictures</string>
+
+    <string name="take_picture">Take Picture</string>
 </resources>
