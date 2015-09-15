@@ -29,6 +29,8 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        //TODO: pull images from database
+
         ImageView imageView = (ImageView)this.findViewById(R.id.hist_view_img);
 
         try {

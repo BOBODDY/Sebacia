@@ -77,11 +77,7 @@ public class CameraActivity extends AppCompatActivity {
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-//            File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-//            if (pictureFile == null){
-//                Log.d(TAG, "Error creating media file, check storage permissions");
-//                return;
-//            }
+            //TODO: write image to database
             String filename = getImageFileName();
             try {
 //                FileOutputStream fos
