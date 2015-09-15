@@ -24,9 +24,18 @@ string>    <string name="hello_world">Hello world!</string>
     <string name="page_about_content_company">Sebacia, Inc. is a clinical-stage private medical device company dedicated to creating new light-based therapies for the treatment of dermatological conditions. Founded as part of The Innovation Factory, SEBACIA seeks to provide an alternative to the topical and systemic drugs currently available for the treatment of acne.</string>
     <string name="title_activity_splash">SplashActivity</string>
 
+    <string name="diagnosis_options_autoclassify">AutoClassify</string>
+    <string name="diagnosis_options_survey">Survey</string>
 
     <string name="privacy_disagree">Close Application</string>
     <string name="privacy_agree">Agree</string>
 
     <string name="hist_view_img">History of previous pictures</string>
+
+    <string name="title_activity_survey">SurveyActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -4,5 +4,7 @@
     <color name="gold3">#ffffdc9e</color>
 
     <color name="black">#ff000000</color> <!-- cmyk 0,0,0,100 -->
-    <color name="grey">#ff808080</color> <!-- cmyk 0,0,0,50 -->
+    <color name="grey">#ff808080</color>
+
+    <color name="black_overlay">#66000000</color> <!-- cmyk 0,0,0,50 -->
 </resources>
