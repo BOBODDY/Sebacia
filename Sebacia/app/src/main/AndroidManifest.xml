@@ -72,6 +72,7 @@
             android:name=".SurveyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_survey"
+            android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" >
         </activity>
     </application>

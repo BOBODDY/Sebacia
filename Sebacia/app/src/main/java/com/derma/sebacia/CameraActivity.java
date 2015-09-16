@@ -1,6 +1,7 @@
 package com.derma.sebacia;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+import android.app.FragmentTransaction;
+import android.app.FragmentManager;
+import android.app.DialogFragment;
 
 import com.derma.sebacia.camera.CameraPreview;
 
@@ -29,7 +33,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private Camera mCamera;
     private CameraPreview mPreview;
-    private Button captureButton;
+    private Button captureButton, diagnoseButton;
 
     private static String TAG = "CameraActivity";
 
@@ -60,6 +64,8 @@ public class CameraActivity extends AppCompatActivity {
                 }
             }
         });
+
+        captureButton = (Button) findViewById(R.id.camera_diagnose);
     }
 
     protected void onPause() {
@@ -120,5 +126,20 @@ public class CameraActivity extends AppCompatActivity {
             // Camera is not available (in use or does not exist)
         }
         return c; // returns null if camera is unavailable
+    }
+
+    public void showDiagnosisOptions(View view) {
+        //FragmentTransaction ft = getFragmentManager().beginTransaction();
+        DialogFragment dofrag = new DiagnosisOptionsFragment();
+        dofrag.show(getFragmentManager(), "do_dialog");
+    }
+
+    public void beginAutoClassification(View view) {
+        // TODO : add code for going to classification results page
+    }
+
+    public void beginSurvey(View view) {
+        Intent intent = new Intent(this, SurveyActivity.class);
+        startActivity(intent);
     }
 }

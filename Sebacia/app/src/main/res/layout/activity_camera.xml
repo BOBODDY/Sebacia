@@ -16,11 +16,20 @@
 
     <Button
         android:id="@+id/camera_capture"
-        android:text="@string/take_picture"
+        android:text="@string/camera_take_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/camera_preview"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/camera_diagnose"
+        android:id="@+id/camera_diagnose"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="showDiagnosisOptions" />
 
 </RelativeLayout>

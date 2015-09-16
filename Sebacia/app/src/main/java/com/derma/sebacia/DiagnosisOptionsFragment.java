@@ -1,13 +1,16 @@
 package com.derma.sebacia;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -18,7 +21,7 @@ import android.view.ViewGroup;
  * Use the {@link DiagnosisOptionsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DiagnosisOptionsFragment extends Fragment {
+public class DiagnosisOptionsFragment extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,6 +30,8 @@ public class DiagnosisOptionsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button btnAuto, btnSurvey;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +70,29 @@ public class DiagnosisOptionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diagnosis_options, container, false);
+        View v = inflater.inflate(R.layout.fragment_diagnosis_options, container, false);
+
+        Typeface face = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
+
+        btnAuto = (Button)v.findViewById(R.id.diagnosis_options_btn_auto);
+        btnAuto.setTypeface(face);
+        btnAuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CameraActivity)getActivity()).beginAutoClassification(v);
+            }
+        });
+
+        btnSurvey = (Button)v.findViewById(R.id.diagnosis_options_btn_survey);
+        btnSurvey.setTypeface(face);
+        btnSurvey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CameraActivity) getActivity()).beginSurvey(v);
+            }
+        });
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -78,12 +105,12 @@ public class DiagnosisOptionsFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
+        /*try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
+        }*/
     }
 
     @Override
@@ -105,16 +132,6 @@ public class DiagnosisOptionsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
-    }
-
-    public void startAutoClassification(View view) {
-        //Intent intent = new Intent(this, PageAboutActivity.class);
-        //startActivity(intent);
-    }
-
-    public void startSurvey(View view) {
-        //Intent intent = new Intent(this, PageAboutActivity.class);
-        //startActivity(intent);
     }
 
 }
