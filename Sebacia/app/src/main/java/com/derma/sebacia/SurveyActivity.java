@@ -23,8 +23,8 @@ public class SurveyActivity extends Activity {
     ImageView imgCompare, imgSelfie;
     int compareIds[];
     int[] answers;
-    final int numQuestions = 6;  // TODO : make this a constant somewhere in the application because it
-                                 //        because it corerespnds to the number of aacne classifications
+    final int numQuestions = 6;  // TODO : make this a constant somewhere in the application
+                                 //        because it corresponds to the number of acne classifications
                                  //        and other classes will make use of this value
     int currentQuestion = 0;
 
