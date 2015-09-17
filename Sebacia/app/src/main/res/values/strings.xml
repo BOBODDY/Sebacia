@@ -2,8 +2,23 @@
 <resources>
 
     <string name="app_name">Sebacia</string>
+    <string name="common_next">Next</string>
+    <string name="common_prev">Previous</string>
     <string name="common_back">Back</string>
     <string name="common_ok">OK</string>
+    <string name="common_doctor">Find Doctor</string>
+    <string name="common_recommendation">Recommendation</string>
+    <string name="common_0">0</string>
+    <string name="common_1">1</string>
+    <string name="common_2">2</string>
+    <string name="common_3">3</string>
+    <string name="common_4">4</string>
+    <string name="common_5">5</string>
+    <string name="common_6">6</string>
+    <string name="common_7">7</string>
+    <string name="common_8">8</string>
+    <string name="common_9">9</string>
+    <string name="common_acne_lvl">Acne Level</string>
 string>    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -15,6 +30,7 @@ string>    <string name="hello_world">Hello world!</string>
     <string name="title_activity_find_doctor">Find a Doctor</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_survey">SurveyActivity</string>
+    <string name="title_activity_recommendation">RecommendationActivity</string>
 
     <string name="main_btn_cam">Camera</string>
     <string name="main_btn_prog">Progress</string>
@@ -29,7 +45,11 @@ string>    <string name="hello_world">Hello world!</string>
     <string name="diagnosis_options_autoclassify">Auto-Diagnosis</string>
     <string name="diagnosis_options_survey">Survey</string>
 
-    <string name="survey_tutorial_instructions">This is a survey to help you diagnose your acne. If a picture resmebles your acne click the picture, if not click your selfie.</string>
+    <string name="survey_tutorial_instructions">This is a survey to help you diagnose your acne. You will be shown a sequence of six levels of acne, ranging from 1-6. If your acne is less severe than the acne presented in the picture, click your selfie. If it is more severe, then click the acne level picture.</string>
+    <string name="survey_tutorial_take">Take Survey</string>
+    <string name="survey_results_explanation">The survey has diagnosed you acne as:</string>
+
+    <string name="recommendation_recommendation">Based on your histroy of acne we recommend blah blah blah.</string>
 
     <string name="privacy_disagree">Close Application</string>
     <string name="privacy_agree">Agree</string>

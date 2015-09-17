@@ -16,12 +16,12 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SurveyTutorialFragment.OnFragmentInteractionListener} interface
+ * {@link SurveyResultsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SurveyTutorialFragment#newInstance} factory method to
+ * Use the {@link SurveyResultsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SurveyTutorialFragment extends DialogFragment {
+public class SurveyResultsFragment extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,8 +33,8 @@ public class SurveyTutorialFragment extends DialogFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    Button btnOK;
-    TextView txtTutorial;
+    TextView txtExpl, txtLvlTxt, txtLvlNum;
+    Button btnRec;
 
     /**
      * Use this factory method to create a new instance of
@@ -42,11 +42,11 @@ public class SurveyTutorialFragment extends DialogFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SurveyTutorialFragment.
+     * @return A new instance of fragment SurveyResultsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SurveyTutorialFragment newInstance(String param1, String param2) {
-        SurveyTutorialFragment fragment = new SurveyTutorialFragment();
+    public static SurveyResultsFragment newInstance(String param1, String param2) {
+        SurveyResultsFragment fragment = new SurveyResultsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -54,7 +54,7 @@ public class SurveyTutorialFragment extends DialogFragment {
         return fragment;
     }
 
-    public SurveyTutorialFragment() {
+    public SurveyResultsFragment() {
         // Required empty public constructor
     }
 
@@ -71,19 +71,25 @@ public class SurveyTutorialFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_survey_tutorial, container, false);
+        View v = inflater.inflate(R.layout.fragment_survey_results, container, false);
 
         Typeface face = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
 
-        txtTutorial = (TextView)v.findViewById(R.id.survey_turorial_txt_txt);
-        txtTutorial.setTypeface(face);
+        txtExpl = (TextView)v.findViewById(R.id.survey_results_txt_expl);
+        txtExpl.setTypeface(face);
 
-        btnOK = (Button)v.findViewById(R.id.survey_turorial_btn_ok);
-        btnOK.setTypeface(face);
-        btnOK.setOnClickListener(new View.OnClickListener() {
+        txtLvlTxt = (TextView)v.findViewById(R.id.survey_results_txt_lvltxt);
+        txtLvlTxt.setTypeface(face);
+
+        txtLvlNum = (TextView)v.findViewById(R.id.survey_results_txt_lvlnum);
+        txtLvlNum.setTypeface(face);
+
+        btnRec = (Button)v.findViewById(R.id.survey_results_btn_rec);
+        btnRec.setTypeface(face);
+        btnRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                ((SurveyActivity)getActivity()).goToRecommendation(v);
             }
         });
 

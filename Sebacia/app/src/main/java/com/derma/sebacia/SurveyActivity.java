@@ -13,12 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- *
- * @see SystemUiHider
- */
+
 public class SurveyActivity extends Activity {
     ImageView imgCompare, imgSelfie;
     int compareIds[];
@@ -26,7 +21,7 @@ public class SurveyActivity extends Activity {
     final int numQuestions = 6;  // TODO : make this a constant somewhere in the application
                                  //        because it corresponds to the number of acne classifications
                                  //        and other classes will make use of this value
-    int currentQuestion = 0;
+    int currentQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +35,7 @@ public class SurveyActivity extends Activity {
         compareIds[3] = R.drawable.penguin0;
         compareIds[4] = R.drawable.phone0;
         compareIds[5] = R.drawable.sun0;
+        currentQuestion = 0;
 
         answers = new int[numQuestions];
 
@@ -70,8 +66,8 @@ public class SurveyActivity extends Activity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE
         );
 
-        DialogFragment stfrag = new SurveyTutorialFragment();
-        stfrag.show(getFragmentManager(), "st_dialog");
+        DialogFragment tutorialFrag = new SurveyTutorialFragment();
+        tutorialFrag.show(getFragmentManager(), "tutorial_dialog");
     }
 
     private void handleAcneClick (View view) {
@@ -86,11 +82,17 @@ public class SurveyActivity extends Activity {
 
     private void handleSurveyResponse (View view) {
         if (currentQuestion == numQuestions) {
-            Intent intent = new Intent(view.getContext(), MainActivity.class);
-            startActivity(intent);
+            DialogFragment resultsFrag = new SurveyResultsFragment ();
+            resultsFrag.show(getFragmentManager(), "results_dialog");
         }
         else {
             imgCompare.setImageResource(compareIds[currentQuestion]);
         }
+    }
+
+    public void goToRecommendation (View view)
+    {
+        Intent intent = new Intent(view.getContext(), RecommendationActivity.class);
+        startActivity(intent);
     }
 }

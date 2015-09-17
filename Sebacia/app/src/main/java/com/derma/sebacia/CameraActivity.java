@@ -69,8 +69,8 @@ public class CameraActivity extends AppCompatActivity {
         diagnoseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dofrag = new DiagnosisOptionsFragment();
-                dofrag.show(getFragmentManager(), "do_dialog");
+                DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
+                diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
             }
         });
     }

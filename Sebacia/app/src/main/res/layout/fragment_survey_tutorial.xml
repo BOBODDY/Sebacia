@@ -8,17 +8,18 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/survey_tutorial_instructions"
-            android:id="@+id/survey_turorial_txt_txt" />
+            android:id="@+id/survey_turorial_txt_txt"
+            android:textSize="15dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -28,16 +29,16 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33">
 
             </LinearLayout>
 
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/common_ok"
+                android:text="@string/survey_tutorial_take"
                 android:id="@+id/survey_turorial_btn_ok"
                 android:layout_below="@+id/survey_turorial_txt_txt"
                 android:layout_centerHorizontal="true"
@@ -45,7 +46,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"></LinearLayout>
 
