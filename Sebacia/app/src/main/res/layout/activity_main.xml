@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"
         android:text="@string/main_btn_abt"
         android:id="@+id/main_btn_abt"
-        android:onClick="startPageAbout"
         android:layout_below="@+id/main_btn_prog"
         android:layout_centerHorizontal="true" />
 

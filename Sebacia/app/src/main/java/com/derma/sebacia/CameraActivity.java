@@ -65,7 +65,14 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-        captureButton = (Button) findViewById(R.id.camera_diagnose);
+        diagnoseButton = (Button) findViewById(R.id.camera_diagnose);
+        diagnoseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment dofrag = new DiagnosisOptionsFragment();
+                dofrag.show(getFragmentManager(), "do_dialog");
+            }
+        });
     }
 
     protected void onPause() {
@@ -126,12 +133,6 @@ public class CameraActivity extends AppCompatActivity {
             // Camera is not available (in use or does not exist)
         }
         return c; // returns null if camera is unavailable
-    }
-
-    public void showDiagnosisOptions(View view) {
-        //FragmentTransaction ft = getFragmentManager().beginTransaction();
-        DialogFragment dofrag = new DiagnosisOptionsFragment();
-        dofrag.show(getFragmentManager(), "do_dialog");
     }
 
     public void beginAutoClassification(View view) {

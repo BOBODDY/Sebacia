@@ -2,7 +2,6 @@ package com.derma.sebacia;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,17 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DiagnosisOptionsFragment.OnFragmentInteractionListener} interface
+ * {@link SurveyTutorialFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DiagnosisOptionsFragment#newInstance} factory method to
+ * Use the {@link SurveyTutorialFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DiagnosisOptionsFragment extends DialogFragment {
+public class SurveyTutorialFragment extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,7 +33,8 @@ public class DiagnosisOptionsFragment extends DialogFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    Button btnAuto, btnSurvey;
+    Button btnOK;
+    TextView survey_turorial_txt;
 
     /**
      * Use this factory method to create a new instance of
@@ -41,11 +42,11 @@ public class DiagnosisOptionsFragment extends DialogFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DiagnosisOptionsFragment.
+     * @return A new instance of fragment SurveyTutorialFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DiagnosisOptionsFragment newInstance(String param1, String param2) {
-        DiagnosisOptionsFragment fragment = new DiagnosisOptionsFragment();
+    public static SurveyTutorialFragment newInstance(String param1, String param2) {
+        SurveyTutorialFragment fragment = new SurveyTutorialFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -53,7 +54,7 @@ public class DiagnosisOptionsFragment extends DialogFragment {
         return fragment;
     }
 
-    public DiagnosisOptionsFragment() {
+    public SurveyTutorialFragment() {
         // Required empty public constructor
     }
 
@@ -70,25 +71,20 @@ public class DiagnosisOptionsFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_diagnosis_options, container, false);
+        View v = inflater.inflate(R.layout.fragment_survey_tutorial, container, false);
 
         Typeface face = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
 
-        btnAuto = (Button)v.findViewById(R.id.diagnosis_options_btn_auto);
-        btnAuto.setTypeface(face);
-        btnAuto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((CameraActivity)getActivity()).beginAutoClassification(v);
-            }
-        });
+        survey_turorial_txt = (TextView)v.findViewById(R.id.survey_turorial_txt_txt);
+        survey_turorial_txt.setTypeface(face);
 
-        btnSurvey = (Button)v.findViewById(R.id.diagnosis_options_btn_survey);
-        btnSurvey.setTypeface(face);
-        btnSurvey.setOnClickListener(new View.OnClickListener() {
+        btnOK = (Button)v.findViewById(R.id.survey_turorial_btn_ok);
+        btnOK.setTypeface(face);
+        btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CameraActivity) getActivity()).beginSurvey(v);
+                //((SurveyActivity) getActivity());
+                dismiss();
             }
         });
 

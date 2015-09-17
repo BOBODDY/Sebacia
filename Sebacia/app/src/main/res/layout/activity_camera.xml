@@ -29,7 +29,6 @@
         android:text="@string/camera_diagnose"
         android:id="@+id/camera_diagnose"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="showDiagnosisOptions" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

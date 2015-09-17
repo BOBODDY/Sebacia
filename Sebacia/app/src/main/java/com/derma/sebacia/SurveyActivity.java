@@ -4,6 +4,7 @@ import com.derma.sebacia.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -68,6 +69,9 @@ public class SurveyActivity extends Activity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE
         );
+
+        DialogFragment stfrag = new SurveyTutorialFragment();
+        stfrag.show(getFragmentManager(), "st_dialog");
     }
 
     private void handleAcneClick (View view) {

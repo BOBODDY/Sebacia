@@ -3,6 +3,7 @@
 
     <string name="app_name">Sebacia</string>
     <string name="common_back">Back</string>
+    <string name="common_ok">OK</string>
 string>    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -12,6 +13,8 @@ string>    <string name="hello_world">Hello world!</string>
     <string name="title_activity_privacy">Privacy Statement</string>
     <string name="title_activity_history">History</string>
     <string name="title_activity_find_doctor">Find a Doctor</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_survey">SurveyActivity</string>
 
     <string name="main_btn_cam">Camera</string>
     <string name="main_btn_prog">Progress</string>
@@ -22,22 +25,16 @@ string>    <string name="hello_world">Hello world!</string>
     <string name="page_about_title_company">About SEBACIA, Inc.</string>
     <string name="page_about_content_app">APP is a medical application that allows you to determine acne severity on your own without consulting a doctor. Doing so allows you to get in touch with medical professionals who will be willing to treat your particular type of acne. You can use this application to track you acne over time. If you decide to consult a professional, you can use this app to help you locate one nearby. Being a medical application you are also protected under HIPPA and any other medical laws that pertain to the country that you live in.</string>
     <string name="page_about_content_company">Sebacia, Inc. is a clinical-stage private medical device company dedicated to creating new light-based therapies for the treatment of dermatological conditions. Founded as part of The Innovation Factory, SEBACIA seeks to provide an alternative to the topical and systemic drugs currently available for the treatment of acne.</string>
-    <string name="title_activity_splash">SplashActivity</string>
 
     <string name="diagnosis_options_autoclassify">Auto-Diagnosis</string>
     <string name="diagnosis_options_survey">Survey</string>
+
+    <string name="survey_tutorial_instructions">This is a survey to help you diagnose your acne. If a picture resmebles your acne click the picture, if not click your selfie.</string>
 
     <string name="privacy_disagree">Close Application</string>
     <string name="privacy_agree">Agree</string>
 
     <string name="hist_view_img">History of previous pictures</string>
-
-    <string name="title_activity_survey">SurveyActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="camera_take_picture">Take Picture</string>
     <string name="camera_diagnose">Diagnose Acne</string>
