@@ -36,6 +36,13 @@ public class PageAboutActivity extends AppCompatActivity {
 
         btnBack = (Button)findViewById(R.id.pageabout_btn_back);
         btnBack.setTypeface(face);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -60,8 +67,4 @@ public class PageAboutActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startMain(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }

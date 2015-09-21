@@ -1,6 +1,7 @@
 package com.derma.sebacia;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+import android.app.FragmentTransaction;
+import android.app.FragmentManager;
+import android.app.DialogFragment;
 
 import com.derma.sebacia.camera.CameraPreview;
 import com.derma.sebacia.data.AcneLevel;
@@ -32,7 +36,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private Camera mCamera;
     private CameraPreview mPreview;
-    private Button captureButton;
+    private Button captureButton, diagnoseButton;
     LocalDb db;
 
     private static String TAG = "CameraActivity";
@@ -66,6 +70,15 @@ public class CameraActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
                     finish();
                 }
+            }
+        });
+
+        diagnoseButton = (Button) findViewById(R.id.camera_diagnose);
+        diagnoseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
+                diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
             }
         });
     }
@@ -129,5 +142,14 @@ public class CameraActivity extends AppCompatActivity {
             Log.e(TAG, "error getting camera instance", e);
         }
         return c; // returns null if camera is unavailable
+    }
+
+    public void beginAutoClassification(View view) {
+        // TODO : add code for going to classification results page
+    }
+
+    public void beginSurvey(View view) {
+        Intent intent = new Intent(this, SurveyActivity.class);
+        startActivity(intent);
     }
 }
