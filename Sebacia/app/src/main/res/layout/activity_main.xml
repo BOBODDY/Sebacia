@@ -5,6 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:id="@+id/app"
+    android:background="@color/gold3"
     android:focusable="false">
 
     <ImageButton
@@ -13,6 +14,8 @@
         android:id="@+id/main_btn_cam"
         android:src="@android:drawable/ic_menu_camera"
         android:contentDescription="@string/main_btn_cam"
+        android:background="@color/black"
+        android:textColor="@color/gold1"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -21,9 +24,12 @@
         android:layout_height="wrap_content"
         android:text="@string/main_btn_prog"
         android:id="@+id/main_btn_prog"
+        android:layout_marginTop="56dp"
+        android:background="@color/black"
+        android:textColor="@color/gold1"
         android:layout_below="@+id/main_btn_cam"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp" />
+        android:layout_marginBottom="15dp"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -31,6 +37,9 @@
         android:text="@string/main_btn_abt"
         android:id="@+id/main_btn_abt"
         android:layout_below="@+id/main_btn_prog"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/main_btn_prog"
+        android:layout_alignStart="@+id/main_btn_prog"
+        android:textColor="@color/gold1"
+        android:background="@color/black" />
 
 </RelativeLayout>
