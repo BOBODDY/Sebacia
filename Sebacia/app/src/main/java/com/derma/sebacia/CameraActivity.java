@@ -39,7 +39,7 @@ public class CameraActivity extends AppCompatActivity {
     private Button captureButton, diagnoseButton;
     LocalDb db;
 
-    private static String TAG = "CameraActivity";
+    private static String TAG = "Sebacia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,8 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         
         db = new LocalDb(getApplicationContext());
+        
+        Log.d(TAG, "in CameraActivity");
 
         // Create an instance of Camera
         mCamera = getCameraInstance();
@@ -65,10 +67,10 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mCamera != null) {
-                    mCamera.takePicture(null, mPicture, null);
+                    mCamera.takePicture(null, null, mPicture);
 
-                    Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
-                    finish();
+//                    Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
+//                    finish();
                 }
             }
         });
@@ -104,6 +106,9 @@ public class CameraActivity extends AppCompatActivity {
             db.addPicture(newPic);
             
             Log.d(TAG, "saved picture to " + filename);
+
+            Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
+            finish();
 //            try {
 ////                FileOutputStream fos
 //

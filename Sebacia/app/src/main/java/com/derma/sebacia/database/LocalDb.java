@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
@@ -19,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +32,7 @@ public class LocalDb implements databaseInterface {
     DatabaseOpenHelper dbHelper;
     Context context;
     
-    private final String TAG = "LocalDb";
+    private final String TAG = "Sebacia";
     
     public LocalDb(Context ctx) {
         context = ctx;
@@ -37,6 +40,7 @@ public class LocalDb implements databaseInterface {
     }
 
     private void initializeDbHelper() {
+        Log.d(TAG, "initializing db helper");
         if(context != null) {
             dbHelper = new DatabaseOpenHelper(context);
         }
@@ -97,7 +101,68 @@ public class LocalDb implements databaseInterface {
     }
 
     public List<Picture> getPatientPics(Patient patient){
-        return null;
+        List<Picture> pics = new ArrayList<>();
+        int patientId = patient.getPatientID();
+        
+        if(dbHelper == null) {
+            initializeDbHelper();
+        }
+        
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        // The names of the columns we will use from the database
+        String[] projection = {
+                PictureEntry._ID,
+                PictureEntry.COLUMN_NAME_PATIENT,
+                PictureEntry.COLUMN_NAME_PATH
+        };
+        
+        String sortOrder = PictureEntry.COLUMN_NAME_PATH + " DESC";
+        String where = PictureEntry.COLUMN_NAME_PATIENT + "=?"; // Statement for the WHERE clause
+        String[] whereArgs = {patientId + ""};     // What the WHERE clause should equal to be returned
+        
+        Cursor c = db.query(
+                PictureEntry.TABLE_NAME,
+                projection,
+                where,
+                whereArgs,
+                null,
+                null,
+                sortOrder
+        );
+        
+        c.moveToFirst();
+        
+        if(c.getCount() > 0) {
+            Log.d(TAG, "there are some lines");
+            do {
+                String path = c.getString(c.getColumnIndexOrThrow(PictureEntry.COLUMN_NAME_PATH));
+
+                try {
+                    FileInputStream fis = context.openFileInput(path);
+
+                    int n = fis.available();
+                    byte[] bytes = new byte[n];
+                    int res = fis.read(bytes);
+
+                    if (res != -1) {
+                        pics.add(new Picture(path, null, bytes));
+                    }
+
+                } catch (FileNotFoundException fnfe) {
+                    Log.e(TAG, "file not found", fnfe);
+                } catch (IOException ioe) {
+                    Log.e(TAG, "io exception", ioe);
+                }
+
+            } while (c.moveToNext());
+        } else {
+            Log.e(TAG, "no lines received from database");
+        }
+        
+        c.close();
+        
+        return pics;
     }
 
     public List<Doctor> getDoctors(AcneLevel Severity){
@@ -126,10 +191,19 @@ public class LocalDb implements databaseInterface {
             initializeDbHelper();
         
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Log.d(TAG, "got a database: db == null: " + (db == null));
         
         try {
+            Log.d(TAG, "path to save picture: " + picture.getFilePath());
             FileOutputStream fos = context.openFileOutput(picture.getFilePath(), Context.MODE_PRIVATE);
-            fos.write(picture.getPic());
+
+            byte[] bytes = picture.getPic();
+            if(bytes != null) {
+                Log.d(TAG, "writing picture");
+                fos.write(bytes);
+            } else {
+                Log.d(TAG, "no data to write");
+            }
             fos.close();
         } catch(FileNotFoundException fnfe) {
             Log.e(TAG, "file not found writing picture", fnfe);
@@ -142,10 +216,13 @@ public class LocalDb implements databaseInterface {
         ContentValues values = new ContentValues();
         values.put(PictureEntry.COLUMN_NAME_PATH, picture.getFilePath());
         values.put(PictureEntry.COLUMN_NAME_SEVERITY, picture.getSeverity().getLevel());
+        values.put(PictureEntry.COLUMN_NAME_PATIENT, 1); //TODO: very very bad, please change to actual patient id
         
         long newRowId = db.insert(PictureEntry.TABLE_NAME, null, values);
         
         db.close();
+        
+        Log.d(TAG, "inserted picture: " + newRowId);
         
         return newRowId != -1;
     }
