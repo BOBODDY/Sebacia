@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
         btnProg = (Button)findViewById(R.id.main_btn_prog);
         btnProg.setTypeface(face);
-        btnProg.setOnClickListener(new View.OnClickListener(){
+        btnProg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), HistoryActivity.class);
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
     }
 
     @Override
