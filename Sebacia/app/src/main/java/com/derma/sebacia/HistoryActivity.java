@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,36 +15,65 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.derma.sebacia.R;
+import com.derma.sebacia.data.Patient;
+import com.derma.sebacia.data.Picture;
+import com.derma.sebacia.database.LocalDb;
+import com.derma.sebacia.database.databaseInterface;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private static String TAG = "HistoryActivity";
+    private static String TAG = "Sebacia";
+    
+    databaseInterface db;
+    
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        ImageView imageView = (ImageView)this.findViewById(R.id.hist_view_img);
+        //TODO: pull images from database
 
-        try {
+        imageView = (ImageView)this.findViewById(R.id.hist_view_img);
+        
+        db = new LocalDb(getApplicationContext());
+    }
+    
+    protected void onStart() {
+        super.onStart();
+        
+        new getPicturesTask().execute();
+    }
+    
+    private class getPicturesTask extends AsyncTask<Void, Void, List<Picture>> {
+        public List<Picture> doInBackground(Void... params) {
+            List<Picture> pics = db.getPatientPics(new Patient(1));
+            
+            return pics;
+        }
+        
+        
+        protected void onPostExecute(List<Picture> pictures) {
+            if(pictures.size() > 0) {
+                Picture topPic = pictures.get(0);
+                Bitmap bmp = topPic.getPicBitmap();
 
-            Bitmap bm = BitmapFactory.decodeStream(openFileInput("20150915_123503.jpg"));
-            imageView.setImageBitmap(bm);
-            imageView.setOnClickListener(new ImageView.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(getApplicationContext(), FindDoctorActivity.class);
-                    startActivity(i);
-                }
-            });
-        } catch(FileNotFoundException fnfe) {
-            Log.e(TAG, "file not found", fnfe);
+                imageView.setImageBitmap(bmp);
+                imageView.setOnClickListener(new ImageView.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(getApplicationContext(), FindDoctorActivity.class);
+                        startActivity(i);
+                    }
+                });
+            }
         }
     }
 

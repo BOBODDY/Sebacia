@@ -15,7 +15,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private SurfaceHolder mHolder;
     private Camera mCamera;
 
-    private static String TAG = "CameraPreview.java";
+    private static String TAG = "Sebacia";
 
     public CameraPreview(Context context, Camera camera) {
         super(context);

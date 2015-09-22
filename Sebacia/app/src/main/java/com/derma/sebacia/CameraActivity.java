@@ -18,6 +18,9 @@ import android.app.FragmentManager;
 import android.app.DialogFragment;
 
 import com.derma.sebacia.camera.CameraPreview;
+import com.derma.sebacia.data.AcneLevel;
+import com.derma.sebacia.data.Picture;
+import com.derma.sebacia.database.LocalDb;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,13 +37,18 @@ public class CameraActivity extends AppCompatActivity {
     private Camera mCamera;
     private CameraPreview mPreview;
     private Button captureButton, diagnoseButton;
+    LocalDb db;
 
-    private static String TAG = "CameraActivity";
+    private static String TAG = "Sebacia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        
+        db = new LocalDb(getApplicationContext());
+        
+        Log.d(TAG, "in CameraActivity");
 
         // Create an instance of Camera
         mCamera = getCameraInstance();
@@ -50,6 +58,8 @@ public class CameraActivity extends AppCompatActivity {
             mPreview = new CameraPreview(this, mCamera);
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(mPreview);
+        } else {
+            Log.e(TAG, "no camera found");
         }
 
         captureButton = (Button) findViewById(R.id.camera_capture);
@@ -59,8 +69,8 @@ public class CameraActivity extends AppCompatActivity {
                 if(mCamera != null) {
                     mCamera.takePicture(null, null, mPicture);
 
-                    Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
-                    finish();
+//                    Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
+//                    finish();
                 }
             }
         });
@@ -90,25 +100,28 @@ public class CameraActivity extends AppCompatActivity {
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-//            File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-//            if (pictureFile == null){
-//                Log.d(TAG, "Error creating media file, check storage permissions");
-//                return;
-//            }
+            //TODO: write image to database
             String filename = getImageFileName();
-            try {
-//                FileOutputStream fos
-
-                FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
-                fos.write(data);
-                fos.close();
-            } catch (FileNotFoundException e) {
-                Log.e(TAG, "File not found", e);
-            } catch (IOException e) {
-                Log.e(TAG, "Error accessing file", e);
-            }
-
+            Picture newPic = new Picture(filename, new AcneLevel(1, "1"), data);
+            db.addPicture(newPic);
+            
             Log.d(TAG, "saved picture to " + filename);
+
+            Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
+            finish();
+//            try {
+////                FileOutputStream fos
+//
+//                FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+//                fos.write(data);
+//                fos.close();
+//            } catch (FileNotFoundException e) {
+//                Log.e(TAG, "File not found", e);
+//            } catch (IOException e) {
+//                Log.e(TAG, "Error accessing file", e);
+//            }
+//
+//            Log.d(TAG, "saved picture to " + filename);
         }
     };
 
@@ -131,6 +144,7 @@ public class CameraActivity extends AppCompatActivity {
         }
         catch (Exception e){
             // Camera is not available (in use or does not exist)
+            Log.e(TAG, "error getting camera instance", e);
         }
         return c; // returns null if camera is unavailable
     }

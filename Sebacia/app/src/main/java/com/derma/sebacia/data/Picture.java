@@ -1,5 +1,8 @@
 package com.derma.sebacia.data;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 /**
  * Created by Daniel on 9/12/2015.
  */
@@ -10,7 +13,13 @@ public class Picture {
     byte[] Pic;
 
     //FUNCTIONALITY
-
+    public Bitmap getPicBitmap() {
+        if(Pic != null) {
+            return BitmapFactory.decodeByteArray(Pic, 0, Pic.length);
+        } else {
+            return null;
+        }
+    }
 
 
     //CONSTRUCTOR

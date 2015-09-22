@@ -42,6 +42,8 @@
                 android:id="@+id/survey_turorial_btn_ok"
                 android:layout_below="@+id/survey_turorial_txt_txt"
                 android:layout_centerHorizontal="true"
+                android:background="@color/black"
+                android:textColor="@color/gold1"
                 android:layout_weight="0.33" />
 
             <LinearLayout
