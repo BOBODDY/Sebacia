@@ -31,16 +31,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnAbt = (Button)findViewById(R.id.main_btn_abt);
-        btnAbt.setTypeface(face);
-        btnAbt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PageAboutActivity.class);
-                startActivity(intent);
-            }
-        });
-
         btnCamera = (ImageButton) findViewById(R.id.main_btn_cam);
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
         switch(id) {
             case (R.id.action_settings) :
                 intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            case (R.id.about) :
+                intent = new Intent(this, PageAboutActivity.class);
                 startActivity(intent);
                 return true;
             case (R.id.privacy) :
