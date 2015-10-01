@@ -40,6 +40,9 @@ public class CameraActivity extends AppCompatActivity {
     LocalDb db;
 
     private static String TAG = "Sebacia";
+    
+    private byte[] pictureData;
+    private Picture selfie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,9 @@ public class CameraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(mCamera != null) {
                     mCamera.takePicture(null, null, mPicture);
+
+                    DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
+                    diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
 
 //                    Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
 //                    finish();
@@ -105,10 +111,13 @@ public class CameraActivity extends AppCompatActivity {
             Picture newPic = new Picture(filename, new AcneLevel(1, "1"), data);
             db.addPicture(newPic);
             
+            pictureData = data;
+            selfie = newPic;
+            
             Log.d(TAG, "saved picture to " + filename);
 
             Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
-            finish();
+//            finish();
 //            try {
 ////                FileOutputStream fos
 //
@@ -130,7 +139,7 @@ public class CameraActivity extends AppCompatActivity {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
-        filename = timeStamp + ".jpg";
+        filename = timeStamp + ".png";
 
         return filename;
     }
@@ -155,6 +164,8 @@ public class CameraActivity extends AppCompatActivity {
 
     public void beginSurvey(View view) {
         Intent intent = new Intent(this, SurveyActivity.class);
+        Log.d(TAG, "is Picture null? " + (selfie == null));
+        intent.putExtra("picturePath", selfie.getFilePath());
         startActivity(intent);
     }
 }

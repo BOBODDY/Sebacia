@@ -6,12 +6,19 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+
+import java.io.FileNotFoundException;
 
 
 public class SurveyActivity extends Activity {
@@ -22,6 +29,8 @@ public class SurveyActivity extends Activity {
                                  //        because it corresponds to the number of acne classifications
                                  //        and other classes will make use of this value
     int currentQuestion;
+    
+    private final String TAG = "Sebacia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,29 @@ public class SurveyActivity extends Activity {
 
         imgCompare = (ImageView)findViewById(R.id.survey_img_compare);
         imgSelfie = (ImageView)findViewById(R.id.survey_img_selfie);
+        
+        // Filepath of selfie given as a bundle in intent
+        Bundle b = getIntent().getExtras();
+        Log.d(TAG, "in SurveyActivity onCreate()");
+        if(b != null) {
+            String filepath = b.getString("picturePath");
+            Log.d(TAG, "looking at picture path: " + filepath);
+            Bitmap bmp = null;
+            try {
+                bmp = BitmapFactory.decodeStream(openFileInput(filepath));
+            } catch(FileNotFoundException fnfe) {
+                Log.e(TAG, "file not found", fnfe);
+            }
+            if(bmp != null) {
+                Log.d(TAG, "bmp width: " + bmp.getWidth());
+                Log.d(TAG, "bmp height: " + bmp.getHeight());
+                imgSelfie.setImageBitmap(bmp);
+            } else {
+                Log.d(TAG, "bitmap is null");
+            }
+        } else {
+            Log.d(TAG, "bundle is null");
+        }
 
         // Set up the user interaction to manually show or hide the system UI.
         imgCompare.setOnClickListener(new View.OnClickListener() {

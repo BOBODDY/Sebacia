@@ -35,7 +35,7 @@ public class FindDoctorActivity extends AppCompatActivity implements GoogleApiCl
                 .addApi(LocationServices.API)
                 .build();
 
-        Toast.makeText(FindDoctorActivity.this, "Location is " + mLastLocation, Toast.LENGTH_LONG).show();
+//        Toast.makeText(FindDoctorActivity.this, "Location is " + mLastLocation, Toast.LENGTH_LONG).show();
     }
 
 
@@ -48,6 +48,7 @@ public class FindDoctorActivity extends AppCompatActivity implements GoogleApiCl
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             locationTextField.setText(String.valueOf(mLastLocation.getLatitude()) + String.valueOf(mLastLocation.getLongitude()));
+            Toast.makeText(FindDoctorActivity.this, "Location is " + mLastLocation, Toast.LENGTH_LONG).show();
         }
     }
 
