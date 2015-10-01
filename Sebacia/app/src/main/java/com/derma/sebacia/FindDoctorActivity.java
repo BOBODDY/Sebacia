@@ -1,6 +1,7 @@
 package com.derma.sebacia;
 
 import android.Manifest;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -10,21 +11,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.security.Permission;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FindDoctorActivity extends AppCompatActivity {
+public class FindDoctorActivity extends ListActivity {
     private Location mLastLocation;
-    TextView locationTextField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_doctor);
 
-        locationTextField =  (TextView)this.findViewById(R.id.finddoc_textfield_loc);
 
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
@@ -57,12 +59,19 @@ public class FindDoctorActivity extends AppCompatActivity {
         // Used for debugging
         //Toast.makeText(FindDoctorActivity.this, "Location is " + mLastLocation, Toast.LENGTH_LONG).show();
 
-        String message = "Unable to determine location";
+        List<String> messages = new ArrayList<>();
         if(mLastLocation != null) {
-            message = "Latitute: " + String.valueOf(mLastLocation.getLatitude()) + "\nLongitude: " + String.valueOf(mLastLocation.getLongitude());
+            String lastLocationString = "Latitute: " + String.valueOf(mLastLocation.getLatitude()) + "\nLongitude: " + String.valueOf(mLastLocation.getLongitude());
+            messages.add(lastLocationString);
+            for(int i=0; i < 10; i++) {
+                messages.add(lastLocationString);
+            }
+        } else {
+            messages.add("Unable to determine location");
         }
 
-        locationTextField.setText(message);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
+        setListAdapter(adapter);
     }
 
     @Override
