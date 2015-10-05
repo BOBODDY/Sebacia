@@ -12,37 +12,11 @@ import android.widget.Button;
 import android.content.Intent;
 
 public class PageAboutActivity extends AppCompatActivity {
-    TextView tvTitleCompany, tvContentCompany,
-            tvTitleApp, tvContentApp;
-    Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_about);
-
-        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
-        tvTitleCompany = (TextView)findViewById(R.id.pageabout_tv_title_company);
-        tvTitleCompany.setTypeface(face);
-
-        tvContentCompany = (TextView)findViewById(R.id.pageabout_tv_content_company);
-        tvContentCompany.setTypeface(face);
-
-        tvTitleApp = (TextView)findViewById(R.id.pageabout_tv_title_app);
-        tvTitleApp.setTypeface(face);
-
-        tvContentApp = (TextView)findViewById(R.id.pageabout_tv_content_app);
-        tvContentApp.setTypeface(face);
-
-        btnBack = (Button)findViewById(R.id.pageabout_btn_back);
-        btnBack.setTypeface(face);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override

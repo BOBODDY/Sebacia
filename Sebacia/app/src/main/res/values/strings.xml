@@ -19,7 +19,7 @@
     <string name="common_8">8</string>
     <string name="common_9">9</string>
     <string name="common_acne_lvl">Acne Level</string>
-string>    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <string name="title_activity_camera">Camera</string>
@@ -36,10 +36,11 @@ string>    <string name="hello_world">Hello world!</string>
     <string name="main_btn_prog">Progress</string>
     <string name="main_btn_abt">About</string>
     <string name="main_itm_priv">Privacy Statement</string>
+    <string name="main_itm_abt">About</string>
 
-    <string name="page_about_title_app">About APP</string>
+    <string name="page_about_title_app">About SEBACIA APP</string>
     <string name="page_about_title_company">About SEBACIA, Inc.</string>
-    <string name="page_about_content_app">APP is a medical application that allows you to determine acne severity on your own without consulting a doctor. Doing so allows you to get in touch with medical professionals who will be willing to treat your particular type of acne. You can use this application to track you acne over time. If you decide to consult a professional, you can use this app to help you locate one nearby. Being a medical application you are also protected under HIPPA and any other medical laws that pertain to the country that you live in.</string>
+    <string name="page_about_content_app">SEBACIA APP is a medical application that allows you to determine acne severity on your own without consulting a doctor. Doing so allows you to get in touch with medical professionals who will be willing to treat your particular type of acne. You can use this application to track you acne over time. If you decide to consult a professional, you can use this app to help you locate one nearby. Being a medical application you are also protected under HIPPA and any other medical laws that pertain to the country that you live in.</string>
     <string name="page_about_content_company">Sebacia, Inc. is a clinical-stage private medical device company dedicated to creating new light-based therapies for the treatment of dermatological conditions. Founded as part of The Innovation Factory, SEBACIA seeks to provide an alternative to the topical and systemic drugs currently available for the treatment of acne.</string>
 
     <string name="diagnosis_options_autoclassify">Auto-Diagnosis</string>
@@ -49,14 +50,46 @@ string>    <string name="hello_world">Hello world!</string>
     <string name="survey_tutorial_take">Take Survey</string>
     <string name="survey_results_explanation">The survey has diagnosed you acne as:</string>
 
-    <string name="recommendation_recommendation">Based on your histroy of acne we recommend blah blah blah.</string>
+    <string name="recommendation_recommendation">Based on your history of acne we recommend blah blah blah.</string>
 
     <string name="privacy_disagree">Close Application</string>
     <string name="privacy_agree">Agree</string>
+
+    <string name="privacy_statement">HIPAA Privacy Authorization Form\n
+**Authorization for Use or Disclosure of Protected Health Information
+(Required by the Health Insurance Portability and Accountability Act, 45 C.F.R.
+Parts 160 and 164)**\n
+
+I  authorize  Sebacia to  use  and  disclose  the  protected  health  information  described  below.\n
+
+This  authorization  for  release  of  information  covers  the  period  of  healthcare 
+from: all past, present, and future periods or until treatment ends.\n
+
+**3. Extent  of  Authorization**\n
+I  authorize  the  release  of  my  health  record  with Sebacia (including treatment photos, treatment data).\n
+
+4.  This  medical  information  may  be  used  by  the  person  I  authorize  to  receive 
+this  information  for  medical  treatment  or  consultation,  billing  or  claims  payment,  or 
+other  purposes  as  I  may  direct. \n
+5.  This  authorization  shall  be  inforce  and  effect  until treatment ends,  at  which  time  this  authorization  expires.\n
+6.  I  understand  that  I  have  the  right  to  revoke  this  authorization,  in  writing, \n
+at  any  time.  I  understand  that  a  revocation  is  not  effective  to  the  extent  that  any 
+person  or  entity  has  already  acted  in  reliance  on  my  authorization  or  if  my 
+authorization  was  obtained  as  a  condition  of  obtaining  insurance  coverage  and  the 
+insurer  has  a  legal  right  to  contest  a  claim. \n
+7.  I  understand  that  my  treatment,  payment,  enrollment,  or  eligibility  for 
+benefits  will  not  be  conditioned  on  whether  I  sign  this  authorization. \n
+8.  I  understand  that  information  used  or  disclosed  pursuant  to  this 
+authorization  may  be  disclosed  by  the  recipient  and  may  no  longer  be  protected  by 
+federal  or  state  law.\n
+By choosing accept you agree to all terms listed in the Privacy Statement.</string>
 
     <string name="hist_view_img">History of previous pictures</string>
 
     <string name="camera_take_picture">Take Picture</string>
     <string name="camera_diagnose">Diagnose Acne</string>
+
+    <string name="finddoc_title_string">Seeking treatment for</string>
+    <string name="finddoc_level">Acne Level 0</string>
 
 </resources>

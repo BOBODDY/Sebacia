@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="#0099cc"
+    android:layout_height="match_parent" android:background="@color/gold3"
     tools:context="com.derma.sebacia.RecommendationActivity"
     android:orientation="horizontal">
 
@@ -23,6 +23,8 @@
             android:text="@string/common_next"
             android:id="@+id/recommendation_btn_next"
             android:layout_gravity="center_horizontal"
+            android:background="@color/black"
+            android:textColor="@color/gold1"
             android:layout_weight="0.05" />
 
         <ImageView
@@ -36,6 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/common_prev"
+            android:background="@color/black"
+            android:textColor="@color/gold1"
             android:id="@+id/recommendation_btn_prev"
             android:layout_weight="0.05" />
     </LinearLayout>
@@ -50,7 +54,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/recommendation_recommendation"
-            android:id="@+id/recommendation_txt_rec" />
+            android:id="@+id/recommendation_txt_rec"
+            android:textColor="@color/black" />
 
         <Button
             android:layout_width="wrap_content"
@@ -58,6 +63,8 @@
             android:text="@string/title_activity_find_doctor"
             android:id="@+id/recommendation_btn_finddoc"
             android:layout_below="@+id/recommendation_txt_rec"
+            android:background="@color/black"
+            android:textColor="@color/gold1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp" />
 
@@ -67,6 +74,8 @@
             android:text="@string/title_activity_camera"
             android:id="@+id/recommendation_btn_cam"
             android:layout_below="@+id/recommendation_btn_finddoc"
+            android:background="@color/black"
+            android:textColor="@color/gold1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp" />
 

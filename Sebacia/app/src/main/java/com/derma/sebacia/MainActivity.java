@@ -23,21 +23,11 @@ public class MainActivity extends AppCompatActivity {
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
         btnProg = (Button)findViewById(R.id.main_btn_prog);
         btnProg.setTypeface(face);
-        btnProg.setOnClickListener(new View.OnClickListener(){
+        btnProg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), HistoryActivity.class);
                 startActivity(i);
-            }
-        });
-
-        btnAbt = (Button)findViewById(R.id.main_btn_abt);
-        btnAbt.setTypeface(face);
-        btnAbt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PageAboutActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -49,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
     }
 
     @Override
@@ -69,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
         switch(id) {
             case (R.id.action_settings) :
                 intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            case (R.id.about) :
+                intent = new Intent(this, PageAboutActivity.class);
                 startActivity(intent);
                 return true;
             case (R.id.privacy) :
