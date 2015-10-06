@@ -114,7 +114,7 @@ public class SurveyActivity extends Activity {
 
     private void handleSurveyResponse (View view) {
         if (currentQuestion == numQuestions) {
-            DialogFragment resultsFrag = new SurveyResultsFragment ();
+            DialogFragment resultsFrag = SurveyResultsFragment.newInstance("10");
             resultsFrag.show(getFragmentManager(), "results_dialog");
         }
         else {

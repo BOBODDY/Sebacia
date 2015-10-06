@@ -165,7 +165,11 @@ public class CameraActivity extends AppCompatActivity {
     public void beginSurvey(View view) {
         Intent intent = new Intent(this, SurveyActivity.class);
         Log.d(TAG, "is Picture null? " + (selfie == null));
-        intent.putExtra("picturePath", selfie.getFilePath());
+        try {
+            intent.putExtra("picturePath", selfie.getFilePath());
+        } catch (NullPointerException e) {
+            // Handle exception here
+        }
         startActivity(intent);
     }
 }
