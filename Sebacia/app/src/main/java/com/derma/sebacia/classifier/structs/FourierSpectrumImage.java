@@ -1,4 +1,4 @@
-package main.java.com.derma.sebacia.classifier.structs;
+package com.derma.sebacia.classifier.structs;
 
 import boofcv.abst.transform.fft.DiscreteFourierTransform;
 import boofcv.alg.filter.blur.BlurImageOps;

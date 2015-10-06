@@ -1,4 +1,4 @@
-package main.java.com.derma.sebacia.classifier.structs;
+package com.derma.sebacia.classifier.structs;
 
 import boofcv.struct.image.ImageFloat32;
 
