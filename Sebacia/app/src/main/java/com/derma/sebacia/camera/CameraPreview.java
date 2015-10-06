@@ -3,8 +3,12 @@ package com.derma.sebacia.camera;
 import android.content.Context;
 import android.hardware.Camera;
 import android.util.Log;
+import android.view.Display;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -14,12 +18,15 @@ import java.io.IOException;
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
+    
+    private Context context;
 
     private static String TAG = "Sebacia";
 
     public CameraPreview(Context context, Camera camera) {
         super(context);
         mCamera = camera;
+        this.context = context;
 
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
@@ -61,7 +68,34 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         // set preview size and make any resize, rotate or
         // reformatting changes here
-        mCamera.setDisplayOrientation(90);
+        Camera.Parameters parameters = mCamera.getParameters();
+        Camera.Size size = getBestPreviewSize(w, h);
+        
+        Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        switch (display.getRotation()) {
+            case Surface.ROTATION_0: // This is display orientation
+                if (size.height > size.width) parameters.setPreviewSize(size.width, size.height);
+                else parameters.setPreviewSize(size.width, size.height);
+                mCamera.setDisplayOrientation(90);
+                break;
+            case Surface.ROTATION_90:
+                if (size.height > size.width) parameters.setPreviewSize(size.width, size.height);
+                else parameters.setPreviewSize(size.width, size.height);
+                mCamera.setDisplayOrientation(0);
+                break;
+            case Surface.ROTATION_180:
+                if (size.height > size.width) parameters.setPreviewSize(size.width, size.height);
+                else parameters.setPreviewSize(size.width, size.height);
+                mCamera.setDisplayOrientation(270);
+                break;
+            case Surface.ROTATION_270:
+                if (size.height > size.width) parameters.setPreviewSize(size.width, size.height);
+                else parameters.setPreviewSize(size.width, size.height);
+                mCamera.setDisplayOrientation(180);
+                break;
+        }
+        
+        mCamera.setParameters(parameters);
 
         // start preview with new settings
         try {
@@ -71,5 +105,25 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         } catch (Exception e){
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
+    }
+
+    private Camera.Size getBestPreviewSize(int width, int height) {
+        Camera.Size result=null;
+        Camera.Parameters p = mCamera.getParameters();
+        for (Camera.Size size : p.getSupportedPreviewSizes()) {
+            if (size.width<=width && size.height<=height) {
+                if (result==null) {
+                    result=size;
+                } else {
+                    int resultArea=result.width*result.height;
+                    int newArea=size.width*size.height;
+
+                    if (newArea>resultArea) {
+                        result=size;
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
