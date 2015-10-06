@@ -23,4 +23,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:support-v4:23.0.1'
+    compile 'org.georegression:georegression:0.8'
+    compile 'org.boofcv:android:0.19'
 }
