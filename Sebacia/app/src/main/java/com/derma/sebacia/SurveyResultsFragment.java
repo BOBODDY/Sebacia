@@ -42,7 +42,7 @@ public class SurveyResultsFragment extends DialogFragment {
         try {
             acneLevel = getArguments().getString(ACNE_LEVEL);
         } catch (NullPointerException e) {
-            // Exit the app
+            // TODO: Exit the app
         }
 
         // Inflate the layout for this fragment
