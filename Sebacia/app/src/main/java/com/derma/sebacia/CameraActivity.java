@@ -15,8 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.app.FragmentTransaction;
 import android.app.FragmentManager;
@@ -68,6 +71,12 @@ public class CameraActivity extends AppCompatActivity {
             mPreview = new CameraPreview(this, mCamera);
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(mPreview);
+
+            ImageView overlay = new ImageView(this);
+            Bitmap bmp = BitmapFactory.decodeResource(this.getResources(), R.drawable.faceoval);
+            overlay.setImageBitmap(bmp);
+            overlay.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            preview.addView(overlay);
         } else {
             Log.e(TAG, "no camera found");
         }
@@ -138,6 +147,9 @@ public class CameraActivity extends AppCompatActivity {
 
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             bitmap = rotateBitmap(bitmap, rotation);
+            
+            Log.d(TAG, "rotated image width: " + bitmap.getWidth());
+            Log.d(TAG, "rotated image height: " + bitmap.getHeight());
             
             Log.d(TAG, "rotated bmp is null? " + (bitmap == null));
 

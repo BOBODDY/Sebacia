@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by nick on 9/8/15.
@@ -74,28 +75,31 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         switch (display.getRotation()) {
             case Surface.ROTATION_0: // This is display orientation
-                if (size.height > size.width) parameters.setPreviewSize(size.width, size.height);
+                if (size.height > size.width) parameters.setPreviewSize(size.height, size.width);
                 else parameters.setPreviewSize(size.width, size.height);
                 mCamera.setDisplayOrientation(90);
                 break;
             case Surface.ROTATION_90:
-                if (size.height > size.width) parameters.setPreviewSize(size.width, size.height);
+                if (size.height > size.width) parameters.setPreviewSize(size.height, size.width);
                 else parameters.setPreviewSize(size.width, size.height);
                 mCamera.setDisplayOrientation(0);
                 break;
             case Surface.ROTATION_180:
-                if (size.height > size.width) parameters.setPreviewSize(size.width, size.height);
+                if (size.height > size.width) parameters.setPreviewSize(size.height, size.width);
                 else parameters.setPreviewSize(size.width, size.height);
                 mCamera.setDisplayOrientation(270);
                 break;
             case Surface.ROTATION_270:
-                if (size.height > size.width) parameters.setPreviewSize(size.width, size.height);
+                if (size.height > size.width) parameters.setPreviewSize(size.height, size.width);
                 else parameters.setPreviewSize(size.width, size.height);
                 mCamera.setDisplayOrientation(180);
                 break;
         }
         
+        Camera.Size pictureSize = getBestPictureSize(mCamera.getParameters());
+        parameters.setPictureSize(pictureSize.width, pictureSize.height);
         mCamera.setParameters(parameters);
+        
 
         // start preview with new settings
         try {
@@ -105,6 +109,27 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         } catch (Exception e){
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
+    }
+    
+    private Camera.Size getBestPictureSize(Camera.Parameters parameters) {
+        Camera.Size result = null;
+        
+        List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
+        for(int i = 0; i < sizes.size(); i++) {
+            Camera.Size size = sizes.get(i);
+            if(result == null) {
+                result = size;
+            } else {
+                int resultArea = result.width * result.height;
+                int newArea = size.width * size.height;
+                
+                if(newArea > resultArea) {
+                    result = size;
+                }
+            }
+        }
+        
+        return result;
     }
 
     private Camera.Size getBestPreviewSize(int width, int height) {
