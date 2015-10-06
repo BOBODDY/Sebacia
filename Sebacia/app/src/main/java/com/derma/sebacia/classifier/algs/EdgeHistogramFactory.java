@@ -12,7 +12,7 @@ public class EdgeHistogramFactory extends DescriptorFactory<Texture,EdgeHistogra
 
     /* IMPORTANT : this implementation uses 2x2 image blocks and changes the size of subimages by adding
      *             blocks, so it does not average quadrants in an image block to get a 2x2 block of average
-     *             pixel values */
+     *             pixel values; it may matter how different screen sizes are accommodated for */
 
     private static final int imageBlockLength = 2;
     private static final int imageBlocksPerSubImage = 1;

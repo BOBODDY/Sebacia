@@ -11,9 +11,14 @@ import java.util.Iterator;
  */
 public class Shape {
 
+    /* TODO : figure out a good value for this */
+    /* TODO : add a method that ensures all outlines only contain this number of points */
     public static final int N = 10;
+    /* the edge describing the shape */
     public Contour outline;
+    /* the center of the shape */
     public Point2D_F32 centroid;
+    /* the value used to compute shape descriptors */
     public ShapeSignature[] signatures;
 
     public Shape (Contour outline)

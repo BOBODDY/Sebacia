@@ -69,7 +69,7 @@ public class TextureBrowsingFactory extends DescriptorFactory<Texture, TextureBr
         {
             for (int v = 0; v < enhanced.height; v++)
             {
-                /* TODO : angle variable can be precalculated after you figure our range of sizes */
+                /* TODO : angle variable can be precalculated after you figure our range of image dimensions */
                 angle = Math.toDegrees(Math.PI + Math.atan2(u,v));
                 w = 0;
                 while (!(wedgeCutOffs[w] <= angle && angle < wedgeCutOffs[w+1]))

@@ -15,7 +15,9 @@ public class FourierSpectrumImage {
 
     public ImageFloat32 magnitude;
     public ImageFloat32 phase;
+    /* the number of types this fourier image has been smoothed */
     public int blurs;
+    /* the number of types this fourier image has been enhanced */
     public int enhancements;
     public int width, height;
 
@@ -56,9 +58,9 @@ public class FourierSpectrumImage {
         FourierSpectrumImage smoothed = new FourierSpectrumImage(spectrum);
         BlurImageOps.gaussian(smoothed.magnitude, smoothed.magnitude, -1, 5, null);
         /* TODO: find out if blurring the phase is useful, since the phase isn't generally used */
-        BlurImageOps.gaussian(smoothed.phase, smoothed.phase, -1, 5, null);
+        BlurImageOps.gaussian(smoothed.phase, smoothed.phase, -1, 2, null);
 
-        smoothed.blurs++;
+        smoothed.blurs = spectrum.blurs + 1;
 
         return smoothed;
     }
