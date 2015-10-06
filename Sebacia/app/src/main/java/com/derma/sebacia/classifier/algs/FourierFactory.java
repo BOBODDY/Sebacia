@@ -1,8 +1,8 @@
-package main.java.com.derma.sebacia.classifier.algs;
+package com.derma.sebacia.classifier.algs;
 
 
-import main.java.com.derma.sebacia.classifier.structs.FourierDescriptor;
-import main.java.com.derma.sebacia.classifier.structs.Shape;
+import com.derma.sebacia.classifier.structs.FourierDescriptor;
+import com.derma.sebacia.classifier.structs.Shape;
 
 /**
  * Created by Jessie on 9/29/2015.
