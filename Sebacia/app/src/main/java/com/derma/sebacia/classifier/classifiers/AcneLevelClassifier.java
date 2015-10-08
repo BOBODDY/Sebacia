@@ -1,4 +1,4 @@
-package main.java.com.derma.sebacia.classifier.classifiers;
+package com.derma.sebacia.classifier.classifiers;
 
 import boofcv.alg.feature.detect.edge.CannyEdge;
 import boofcv.alg.filter.binary.Contour;
@@ -7,8 +7,8 @@ import boofcv.factory.feature.detect.edge.FactoryEdgeDetectors;
 import boofcv.struct.image.ImageFloat32;
 import boofcv.struct.image.ImageSInt16;
 import boofcv.struct.image.ImageUInt8;
-import main.java.com.derma.sebacia.classifier.algs.ImageSubdivider;
-import main.java.com.derma.sebacia.classifier.structs.RegionImage;
+import com.derma.sebacia.classifier.algs.ImageSubdivider;
+import com.derma.sebacia.classifier.structs.RegionImage;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package main.java.com.derma.sebacia.classifier.classifiers;
+package com.derma.sebacia.classifier.classifiers;
 
 /**
  * Created by Jessie on 10/6/2015.
