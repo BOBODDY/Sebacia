@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,7 +60,8 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         
-        db = new LocalDb(getApplicationContext());
+//        db = new LocalDb(getApplicationContext());
+        new loadDbTask().execute(getApplicationContext());
         
         Log.d(TAG, "in CameraActivity");
 
@@ -222,5 +224,16 @@ public class CameraActivity extends AppCompatActivity {
         Log.d(TAG, "is path empty? " + (selfiePath == null));
         intent.putExtra("picturePath", selfiePath);
         startActivity(intent);
+    }
+    
+    private class loadDbTask extends AsyncTask<Context, Void, Void> {
+        
+        protected Void doInBackground(Context... contexts) {
+            
+            db = new LocalDb(contexts[0]);
+            
+            return null;
+        }
+        
     }
 }
