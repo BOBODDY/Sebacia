@@ -114,10 +114,24 @@ public class SurveyActivity extends Activity {
 
     private void handleSurveyResponse (View view) {
         if (currentQuestion == numQuestions) {
-            DialogFragment resultsFrag = new SurveyResultsFragment ();
-            resultsFrag.show(getFragmentManager(), "results_dialog");
+            // Determine the acne level
+            String level = null;
+            for(int i=0; i < answers.length; i++) {
+                if(answers[i] == 0) {
+                    level =  Integer.toString(i);
+                }
+            }
+
+            // Show the result
+            if(level != null) {
+                DialogFragment resultsFrag = SurveyResultsFragment.newInstance(level);
+                resultsFrag.show(getFragmentManager(), "results_dialog");
+            } else {
+                // TODO: Exit the app
+            }
         }
         else {
+            // Continue the survey
             imgCompare.setImageResource(compareIds[currentQuestion]);
         }
     }

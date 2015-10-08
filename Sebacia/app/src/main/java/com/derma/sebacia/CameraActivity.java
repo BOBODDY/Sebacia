@@ -222,7 +222,11 @@ public class CameraActivity extends AppCompatActivity {
     public void beginSurvey(View view) {
         Intent intent = new Intent(this, SurveyActivity.class);
         Log.d(TAG, "is path empty? " + (selfiePath == null));
-        intent.putExtra("picturePath", selfiePath);
+        try {
+            intent.putExtra("picturePath", selfiePath);
+        } catch (NullPointerException e) {
+            // TODO: Exit the app or handle when there is no camera
+        }
         startActivity(intent);
     }
     
