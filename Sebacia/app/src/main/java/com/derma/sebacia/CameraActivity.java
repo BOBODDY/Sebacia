@@ -21,6 +21,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.app.FragmentTransaction;
 import android.app.FragmentManager;
@@ -47,11 +48,11 @@ public class CameraActivity extends AppCompatActivity {
     private Camera mCamera;
     private CameraPreview mPreview;
     private Button captureButton, diagnoseButton;
+    private ProgressBar loading;
     LocalDb db;
 
     private static String TAG = "Sebacia";
     
-    private byte[] pictureData;
     private Picture selfie;
     private String selfiePath;
 
@@ -59,6 +60,8 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        
+        loading = (ProgressBar) findViewById(R.id.camera_loading);
         
 //        db = new LocalDb(getApplicationContext());
         new loadDbTask().execute(getApplicationContext());
@@ -88,7 +91,10 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mCamera != null) {
-                    mCamera.takePicture(null, null, mPicture);
+                    captureButton.setEnabled(false);
+                    diagnoseButton.setEnabled(false);
+                    loading.setVisibility(View.VISIBLE);
+                    new TakePictureTask().execute();
 
 //                    DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
 //                    diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
@@ -152,17 +158,12 @@ public class CameraActivity extends AppCompatActivity {
             
             Log.d(TAG, "rotated image width: " + bitmap.getWidth());
             Log.d(TAG, "rotated image height: " + bitmap.getHeight());
-            
-            Log.d(TAG, "rotated bmp is null? " + (bitmap == null));
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             
-            if(bitmap != null) {
-                boolean compressResult = bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                Log.d(TAG, "compressed bitmap result: " + compressResult);
-            } else {
-                Log.e(TAG, "rotated bitmap is null!!");
-            }
+            boolean compressResult = bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Log.d(TAG, "compressed bitmap result: " + compressResult);
+            
             byte[] byteArray = stream.toByteArray();
             
             Log.d(TAG, "length of byte array: " + byteArray.length);
@@ -170,15 +171,14 @@ public class CameraActivity extends AppCompatActivity {
             Picture newPic = new Picture(filename, new AcneLevel(1, "1"), byteArray);
             db.addPicture(newPic);
             
-            pictureData = newPic.getPic();
-            
-//            selfie = newPic;
             selfiePath = newPic.getFilePath();
             Log.d(TAG, "set file path to " + selfiePath);
             
             Log.d(TAG, "saved picture to " + filename);
 
             Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
+            
+            loading.setVisibility(View.INVISIBLE);
 
             DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
             diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
@@ -228,6 +228,15 @@ public class CameraActivity extends AppCompatActivity {
             // TODO: Exit the app or handle when there is no camera
         }
         startActivity(intent);
+    }
+    
+    private class TakePictureTask extends AsyncTask<Void, Void, Void> {
+        protected Void doInBackground(Void... voids) {
+
+            mCamera.takePicture(null, null, mPicture);
+            
+            return null;
+        }
     }
     
     private class loadDbTask extends AsyncTask<Context, Void, Void> {
