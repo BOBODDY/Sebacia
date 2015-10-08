@@ -8,11 +8,11 @@
     android:background="@color/gold3"
     android:focusable="false">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/main_btn_cam"
-        android:src="@android:drawable/ic_menu_camera"
+        android:src="@drawable/cameraclipart"
         android:contentDescription="@string/main_btn_cam"
         android:background="@color/black"
         android:textColor="@color/gold1"
