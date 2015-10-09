@@ -91,5 +91,7 @@ By choosing accept you agree to all terms listed in the Privacy Statement.</stri
 
     <string name="finddoc_title_string">Seeking treatment for</string>
     <string name="finddoc_level">Acne Level 0</string>
+    <string name="survey_img_compare_dsc">compared_image</string>
+    <string name="survey_img_selfie_dsc">selfie_image</string>
 
 </resources>
