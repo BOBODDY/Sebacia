@@ -5,25 +5,26 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class SurveyActivity extends Activity implements View.OnClickListener {
     ImageView imgCompare, imgSelfie;
     int compareIds[];
-    int[] answers;
+    Set<Integer> answers;
     final int numQuestions = 6;  // TODO : make this a constant somewhere in the application
-                                 //        because it corresponds to the number of acne classifications
-                                 //        and other classes will make use of this value
+    //        because it corresponds to the number of acne classifications
+    //        and other classes will make use of this value
     int currentQuestion;
-    
+    int prevQuestion;
+
     private final String TAG = "Sebacia";
 
     @Override
@@ -38,28 +39,30 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         compareIds[3] = R.drawable.penguin0;
         compareIds[4] = R.drawable.phone0;
         compareIds[5] = R.drawable.sun0;
-        currentQuestion = 0;
 
-        answers = new int[numQuestions];
+        currentQuestion = numQuestions / 2;
+        prevQuestion = currentQuestion;
 
-        imgCompare = (ImageView)findViewById(R.id.survey_img_compare);
-        imgSelfie = (ImageView)findViewById(R.id.survey_img_selfie);
-        
+        answers = new HashSet<>();
+
+        imgCompare = (ImageView) findViewById(R.id.survey_img_compare);
+        imgSelfie = (ImageView) findViewById(R.id.survey_img_selfie);
+
         // Filepath of selfie given as a bundle in intent
         Bundle b = getIntent().getExtras();
         Log.d(TAG, "in SurveyActivity onCreate()");
-        if(b != null) {
+        if (b != null) {
             String filepath = b.getString("picturePath");
             Log.d(TAG, "looking at picture path: " + filepath);
             Bitmap bmp = null;
             try {
                 bmp = BitmapFactory.decodeStream(openFileInput(filepath));
-            } catch(FileNotFoundException fnfe) {
+            } catch (FileNotFoundException fnfe) {
                 Log.e(TAG, "file not found", fnfe);
-            } catch(NullPointerException npe) {
+            } catch (NullPointerException npe) {
                 // Picture is null
             }
-            if(bmp != null) {
+            if (bmp != null) {
                 Log.d(TAG, "bmp width: " + bmp.getWidth());
                 Log.d(TAG, "bmp height: " + bmp.getHeight());
                 imgSelfie.setImageBitmap(bmp);
@@ -86,6 +89,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE
         );
 
+        // Show Tutorial
         DialogFragment tutorialFrag = new SurveyTutorialFragment();
         tutorialFrag.show(getFragmentManager(), "tutorial_dialog");
     }
@@ -93,23 +97,21 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        answers.add(currentQuestion);
+        prevQuestion = currentQuestion;
+
+        switch (v.getId()) {
             case R.id.survey_img_compare:
-                answers[currentQuestion++] = 1;
+                currentQuestion--;
                 break;
             case R.id.survey_img_selfie:
-                answers[currentQuestion++] = 0;
+                currentQuestion++;
                 break;
         }
-        handleSurveyResponse(v);
-    }
 
-    private void handleSurveyResponse (View view) {
-        if (currentQuestion == numQuestions) {
+        if (answers.contains(currentQuestion) || currentQuestion < 0 || currentQuestion >= numQuestions) {
             showResults();
-        }
-        else {
+        } else {
             // Continue the survey
             imgCompare.setImageResource(compareIds[currentQuestion]);
         }
@@ -117,24 +119,14 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
 
     private void showResults() {
         // Determine the acne level
-        String level = null;
-        for(int i=0; i < answers.length; i++) {
-            if(answers[i] == 0) {
-                level =  Integer.toString(i);
-            }
-        }
+        String level = Integer.toString(prevQuestion);
 
         // Show the result
-        if(level != null) {
-            DialogFragment resultsFrag = SurveyResultsFragment.newInstance(level);
-            resultsFrag.show(getFragmentManager(), "results_dialog");
-        } else {
-            // TODO: Exit the app
-        }
+        DialogFragment resultsFrag = SurveyResultsFragment.newInstance(level);
+        resultsFrag.show(getFragmentManager(), "results_dialog");
     }
 
-    public void goToRecommendation (View view)
-    {
+    public void goToRecommendation(View view) {
         Intent intent = new Intent(view.getContext(), RecommendationActivity.class);
         startActivity(intent);
     }
