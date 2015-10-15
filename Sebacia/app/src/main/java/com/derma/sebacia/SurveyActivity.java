@@ -1,27 +1,21 @@
 package com.derma.sebacia;
 
-import com.derma.sebacia.util.SystemUiHider;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
-import android.nfc.Tag;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.io.FileNotFoundException;
 
 
-public class SurveyActivity extends Activity {
+public class SurveyActivity extends Activity implements View.OnClickListener {
     ImageView imgCompare, imgSelfie;
     int compareIds[];
     int[] answers;
@@ -62,6 +56,8 @@ public class SurveyActivity extends Activity {
                 bmp = BitmapFactory.decodeStream(openFileInput(filepath));
             } catch(FileNotFoundException fnfe) {
                 Log.e(TAG, "file not found", fnfe);
+            } catch(NullPointerException npe) {
+                // Picture is null
             }
             if(bmp != null) {
                 Log.d(TAG, "bmp width: " + bmp.getWidth());
@@ -74,20 +70,12 @@ public class SurveyActivity extends Activity {
             Log.d(TAG, "bundle is null");
         }
 
-        // Set up the user interaction to manually show or hide the system UI.
-        imgCompare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleAcneClick(view);
-            }
-        });
+        // Set first image to compare with
+        imgCompare.setImageResource(compareIds[currentQuestion]);
 
-        imgSelfie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleSelfieClick(view);
-            }
-        });
+        // Set up the user interaction to manually show or hide the system UI.
+        imgCompare.setOnClickListener(this);
+        imgSelfie.setOnClickListener(this);
 
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -102,37 +90,46 @@ public class SurveyActivity extends Activity {
         tutorialFrag.show(getFragmentManager(), "tutorial_dialog");
     }
 
-    private void handleAcneClick (View view) {
-        answers[currentQuestion++] = 1;
-        handleSurveyResponse(view);
-    }
 
-    private void handleSelfieClick (View view) {
-        answers[currentQuestion++] = 0;
-        handleSurveyResponse(view);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.survey_img_compare:
+                answers[currentQuestion++] = 1;
+                break;
+            case R.id.survey_img_selfie:
+                answers[currentQuestion++] = 0;
+                break;
+        }
+        handleSurveyResponse(v);
     }
 
     private void handleSurveyResponse (View view) {
         if (currentQuestion == numQuestions) {
-            // Determine the acne level
-            String level = null;
-            for(int i=0; i < answers.length; i++) {
-                if(answers[i] == 0) {
-                    level =  Integer.toString(i);
-                }
-            }
-
-            // Show the result
-            if(level != null) {
-                DialogFragment resultsFrag = SurveyResultsFragment.newInstance(level);
-                resultsFrag.show(getFragmentManager(), "results_dialog");
-            } else {
-                // TODO: Exit the app
-            }
+            showResults();
         }
         else {
             // Continue the survey
             imgCompare.setImageResource(compareIds[currentQuestion]);
+        }
+    }
+
+    private void showResults() {
+        // Determine the acne level
+        String level = null;
+        for(int i=0; i < answers.length; i++) {
+            if(answers[i] == 0) {
+                level =  Integer.toString(i);
+            }
+        }
+
+        // Show the result
+        if(level != null) {
+            DialogFragment resultsFrag = SurveyResultsFragment.newInstance(level);
+            resultsFrag.show(getFragmentManager(), "results_dialog");
+        } else {
+            // TODO: Exit the app
         }
     }
 
@@ -141,4 +138,5 @@ public class SurveyActivity extends Activity {
         Intent intent = new Intent(view.getContext(), RecommendationActivity.class);
         startActivity(intent);
     }
+
 }
