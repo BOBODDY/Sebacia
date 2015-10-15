@@ -1,5 +1,6 @@
 package com.derma.sebacia;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,6 +38,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -94,13 +96,8 @@ public class CameraActivity extends AppCompatActivity {
                     captureButton.setEnabled(false);
                     diagnoseButton.setEnabled(false);
                     loading.setVisibility(View.VISIBLE);
-                    new TakePictureTask().execute();
-
-//                    DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
-//                    diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
-
-//                    Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
-//                    finish();
+                    
+                    mCamera.takePicture(null, null, mPicture);
                 }
             }
         });
@@ -113,6 +110,17 @@ public class CameraActivity extends AppCompatActivity {
                 diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
             }
         });
+    }
+    
+    protected void onStart() {
+        super.onStart();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.camera_tutorial);
+        builder.setTitle("Tutorial");
+        
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     protected void onPause() {
@@ -132,56 +140,7 @@ public class CameraActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
             Log.d(TAG, "in PictureCallback");
             
-            String filename = getImageFileName();
-
-            Display display = getWindowManager().getDefaultDisplay();
-            int rotation = 0;
-            switch (display.getRotation()) {
-                case Surface.ROTATION_0: // This is display orientation
-                    rotation = 270;
-                    break;
-                case Surface.ROTATION_90:
-                    rotation = 0;
-                    break;
-                case Surface.ROTATION_180:
-                    rotation = 90;
-                    break;
-                case Surface.ROTATION_270:
-                    rotation = 180;
-                    break;
-            }
-            
-            Log.d(TAG, "using a rotation of " + rotation + " degrees");
-
-            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-            bitmap = rotateBitmap(bitmap, rotation);
-            
-            Log.d(TAG, "rotated image width: " + bitmap.getWidth());
-            Log.d(TAG, "rotated image height: " + bitmap.getHeight());
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            
-            boolean compressResult = bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            Log.d(TAG, "compressed bitmap result: " + compressResult);
-            
-            byte[] byteArray = stream.toByteArray();
-            
-            Log.d(TAG, "length of byte array: " + byteArray.length);
-            
-            Picture newPic = new Picture(filename, new AcneLevel(1, "1"), byteArray);
-            db.addPicture(newPic);
-            
-            selfiePath = newPic.getFilePath();
-            Log.d(TAG, "set file path to " + selfiePath);
-            
-            Log.d(TAG, "saved picture to " + filename);
-
-            Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
-            
-            loading.setVisibility(View.INVISIBLE);
-
-            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
-            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
+            new TakePictureTask().execute(data);
         }
     };
     
@@ -210,7 +169,7 @@ public class CameraActivity extends AppCompatActivity {
         }
         catch (Exception e){
             // Camera is not available (in use or does not exist)
-            Log.e(TAG, "error getting camera instance", e);
+            Log.e(TAG, "Camera is not available (in use or does not exist)", e);
         }
         return c; // returns null if camera is unavailable
     }
@@ -230,10 +189,74 @@ public class CameraActivity extends AppCompatActivity {
         startActivity(intent);
     }
     
-    private class TakePictureTask extends AsyncTask<Void, Void, Void> {
-        protected Void doInBackground(Void... voids) {
+    private class TakePictureTask extends AsyncTask<byte[], Void, Void> {
+        protected Void doInBackground(byte[]... bytes) {
+            
+            byte[] data = bytes[0];
 
-            mCamera.takePicture(null, null, mPicture);
+            Log.d(TAG, "in PictureCallback");
+
+            String filename = getImageFileName();
+
+            Display display = getWindowManager().getDefaultDisplay();
+            int rotation = 0;
+            switch (display.getRotation()) {
+                case Surface.ROTATION_0: // This is display orientation
+                    rotation = 270;
+                    break;
+                case Surface.ROTATION_90:
+                    rotation = 0;
+                    break;
+                case Surface.ROTATION_180:
+                    rotation = 90;
+                    break;
+                case Surface.ROTATION_270:
+                    rotation = 180;
+                    break;
+            }
+
+            Log.d(TAG, "using a rotation of " + rotation + " degrees");
+
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+            bitmap = rotateBitmap(bitmap, rotation);
+
+            Log.d(TAG, "rotated image width: " + bitmap.getWidth());
+            Log.d(TAG, "rotated image height: " + bitmap.getHeight());
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+            boolean compressResult = bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Log.d(TAG, "compressed bitmap result: " + compressResult);
+
+            byte[] byteArray = stream.toByteArray();
+
+            Log.d(TAG, "length of byte array: " + byteArray.length);
+
+            Picture newPic = new Picture(filename, new AcneLevel(1, "1"), byteArray);
+
+            // Null things out for garbage collection
+            byteArray = null;
+            stream = null;
+            bitmap = null;
+
+            db.addPicture(newPic);
+
+            selfiePath = newPic.getFilePath();
+            Log.d(TAG, "set file path to " + selfiePath);
+
+            Log.d(TAG, "saved picture to " + filename);
+
+            Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
+
+            CameraActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    loading.setVisibility(View.INVISIBLE);
+                }
+            });
+
+            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
+            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
             
             return null;
         }
