@@ -1,9 +1,14 @@
 package com.derma.sebacia;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
@@ -21,6 +26,40 @@ public class SplashActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+//        SharedPreferences settings = getSharedPreferences("shared_preferences", 0);
+//
+//        if (settings.getBoolean("isAccepted", false)) {
+//            //the app is being launched for first time, do something
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//
+//            builder.setMessage(R.string.privacy_statement)
+//                    .setTitle("Privacy Statement");
+//
+//            builder.setPositiveButton(R.string.privacy_agree, new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int id) {
+//                    // User clicked OK button
+//                    SharedPreferences settings = getSharedPreferences("shared_preferences", 0);
+//                    settings.edit().putBoolean("isAccepted", true).commit();
+//                    Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
+//                    startActivity(mainActivity);
+//                }
+//            });
+//
+//            builder.setNegativeButton(R.string.privacy_disagree, new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int id) {
+//                    // User cancelled the dialog
+//                    finish();
+//                }
+//            });
+//
+//            AlertDialog dialog = builder.create();
+//            dialog.show();
+
+            // first time task
+
+            // record the fact that the app has been started at least once
+
 
         Thread welcomeThread = new Thread() {
 
