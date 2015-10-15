@@ -48,7 +48,7 @@
 
     <string name="survey_tutorial_instructions">This is a survey to help you diagnose your acne. You will be shown a sequence of six levels of acne, ranging from 1-6. If your acne is less severe than the acne presented in the picture, click your selfie. If it is more severe, then click the acne level picture.</string>
     <string name="survey_tutorial_take">Take Survey</string>
-    <string name="survey_results_explanation">The survey has diagnosed you acne as:</string>
+    <string name="survey_results_explanation">The survey has diagnosed your acne as:</string>
 
     <string name="recommendation_recommendation">Based on your history of acne we recommend blah blah blah.</string>
 
@@ -95,5 +95,6 @@ By choosing accept you agree to all terms listed in the Privacy Statement.</stri
     <string name="survey_img_selfie_dsc">selfie_image</string>
     
     <string name="camera_tutorial">Make sure you are in an area with good lighting.</string>
+
 
 </resources>
