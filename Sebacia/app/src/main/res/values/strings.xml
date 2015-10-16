@@ -26,7 +26,7 @@
     <string name="title_activity_about">About</string>
     <string name="title_activity_page_about">About</string>
     <string name="title_activity_privacy">Privacy Statement</string>
-    <string name="title_activity_history">History</string>
+    <string name="title_activity_history">Progress</string>
     <string name="title_activity_find_doctor">Find a Doctor</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_survey">Survey</string>
