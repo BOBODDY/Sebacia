@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
+import com.derma.sebacia.R;
 import com.derma.sebacia.data.AcneLevel;
 import com.derma.sebacia.data.Doctor;
 import com.derma.sebacia.data.Patient;
@@ -26,11 +27,16 @@ import java.util.List;
 
 /**
  * Created by nick on 9/15/15.
+ * Local database implementation
+ *
  */
 public class LocalDb implements databaseInterface {
 
     DatabaseOpenHelper dbHelper;
     Context context;
+    final int numQuestions = 6;  // TODO : make this a constant somewhere in the application
+    //        because it corresponds to the number of acne classifications
+    //        and other classes will make use of this value
     
     private final String TAG = "Sebacia";
     
@@ -177,6 +183,20 @@ public class LocalDb implements databaseInterface {
         return null;
     }
 
+    public int[] getSurveyPictures() {
+        int[] surveyPictures = new int[numQuestions];
+
+        // TODO: Consider pulling these from a DB
+        surveyPictures[0] = R.drawable.grade0;
+        surveyPictures[1] = R.drawable.grade1;
+        surveyPictures[2] = R.drawable.grade2;
+        surveyPictures[3] = R.drawable.grade3;
+        surveyPictures[4] = R.drawable.grade4;
+        surveyPictures[5] = R.drawable.grade5;
+
+        return surveyPictures;
+    }
+
     //POSTS
     public boolean addPatient(Patient patient) {
         return false;
@@ -217,9 +237,9 @@ public class LocalDb implements databaseInterface {
         values.put(PictureEntry.COLUMN_NAME_PATH, picture.getFilePath());
         values.put(PictureEntry.COLUMN_NAME_SEVERITY, picture.getSeverity().getLevel());
         values.put(PictureEntry.COLUMN_NAME_PATIENT, 1); //TODO: very very bad, please change to actual patient id
-        
+
         long newRowId = db.insert(PictureEntry.TABLE_NAME, null, values);
-        
+
         db.close();
         
         Log.d(TAG, "inserted picture: " + newRowId);

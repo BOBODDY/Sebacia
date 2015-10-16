@@ -18,7 +18,7 @@
     <string name="common_7">7</string>
     <string name="common_8">8</string>
     <string name="common_9">9</string>
-    <string name="common_acne_lvl">Acne Level</string>
+    <string name="common_acne_lvl">Grade</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -46,7 +46,7 @@
     <string name="diagnosis_options_autoclassify">Auto-Diagnosis</string>
     <string name="diagnosis_options_survey">Survey</string>
 
-    <string name="survey_tutorial_instructions">This is a survey to help you diagnose your acne. You will be shown a sequence of six levels of acne, ranging from 1-6. If your acne is less severe than the acne presented in the picture, click your selfie. If it is more severe, then click the acne level picture.</string>
+    <string name="survey_tutorial_instructions">This is a survey to help you diagnose your acne. You will be shown a series of pictures of different acne grades. If your acne is less severe than the acne presented in the picture, click your selfie. If it is more severe, then click the comparison picture.</string>
     <string name="survey_tutorial_take">Take Survey</string>
     <string name="survey_results_explanation">The survey has diagnosed your acne as:</string>
 

@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.derma.sebacia.database.LocalDb;
+import com.derma.sebacia.database.databaseInterface;
+
 import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,9 +22,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     ImageView imgCompare, imgSelfie;
     int compareIds[];
     Set<Integer> answers;
-    final int numQuestions = 6;  // TODO : make this a constant somewhere in the application
-    //        because it corresponds to the number of acne classifications
-    //        and other classes will make use of this value
+
     int currentQuestion;
     int prevQuestion;
 
@@ -31,16 +32,11 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
+        databaseInterface db = new LocalDb(getApplicationContext());
 
-        compareIds = new int[numQuestions];
-        compareIds[0] = R.drawable.comp0;
-        compareIds[1] = R.drawable.scissors0;
-        compareIds[2] = R.drawable.dog0;
-        compareIds[3] = R.drawable.penguin0;
-        compareIds[4] = R.drawable.phone0;
-        compareIds[5] = R.drawable.sun0;
+        compareIds = db.getSurveyPictures();
 
-        currentQuestion = numQuestions / 2;
+        currentQuestion = compareIds.length / 2;
         prevQuestion = currentQuestion;
 
         answers = new HashSet<>();
@@ -102,14 +98,14 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.survey_img_compare:
-                currentQuestion--;
+                currentQuestion++;
                 break;
             case R.id.survey_img_selfie:
-                currentQuestion++;
+                currentQuestion--;
                 break;
         }
 
-        if (answers.contains(currentQuestion) || currentQuestion < 0 || currentQuestion >= numQuestions) {
+        if (answers.contains(currentQuestion) || currentQuestion < 0 || currentQuestion >= compareIds.length) {
             showResults();
         } else {
             // Continue the survey

@@ -10,24 +10,28 @@ import java.util.List;
 
 /**
  * Created by Daniel on 9/12/2015.
+ * Interface that allows us to switch between local and external db
+ *
  */
 public interface databaseInterface {
 
     //GETS
-    public Picture getPicture(int PatientID, String FilePath);
+    Picture getPicture(int PatientID, String FilePath);
 
-    public List<Picture> getPatientPics(Patient patient);
+    List<Picture> getPatientPics(Patient patient);
 
-    public List<Doctor> getDoctors(AcneLevel Severity);
+    List<Doctor> getDoctors(AcneLevel Severity);
 
-    public Doctor getDoctor(int DocID);
+    Doctor getDoctor(int DocID);
 
-    public Patient getPatient(Patient patient);
+    Patient getPatient(Patient patient);
+
+    int[] getSurveyPictures();
 
     //POSTS
-    public boolean addPatient(Patient patient);
+    boolean addPatient(Patient patient);
 
-    public boolean addDoctor(Doctor doctor);
+    boolean addDoctor(Doctor doctor);
 
-    public boolean addPicture(Picture picture);
+    boolean addPicture(Picture picture);
 }
