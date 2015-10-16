@@ -7,7 +7,7 @@
     <string name="common_back">Back</string>
     <string name="common_ok">OK</string>
     <string name="common_doctor">Find Doctor</string>
-    <string name="common_recommendation">Recommendation</string>
+    <string name="common_recommendation">Details</string>
     <string name="common_0">0</string>
     <string name="common_1">1</string>
     <string name="common_2">2</string>
@@ -29,8 +29,8 @@
     <string name="title_activity_history">History</string>
     <string name="title_activity_find_doctor">Find a Doctor</string>
     <string name="title_activity_splash">SplashActivity</string>
-    <string name="title_activity_survey">SurveyActivity</string>
-    <string name="title_activity_recommendation">RecommendationActivity</string>
+    <string name="title_activity_survey">Survey</string>
+    <string name="title_activity_recommendation">Details</string>
 
     <string name="main_btn_cam">Camera</string>
     <string name="main_btn_prog">Progress</string>
@@ -90,7 +90,7 @@ By choosing accept you agree to all terms listed in the Privacy Statement.</stri
     <string name="camera_diagnose">Diagnose Acne</string>
 
     <string name="finddoc_title_string">Seeking treatment for</string>
-    <string name="finddoc_level">Acne Level 0</string>
+    <string name="finddoc_level">Acne Grade: </string>
     <string name="survey_img_compare_dsc">compared_image</string>
     <string name="survey_img_selfie_dsc">selfie_image</string>
     

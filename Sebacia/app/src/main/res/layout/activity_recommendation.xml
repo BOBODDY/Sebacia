@@ -17,16 +17,6 @@
         android:layout_weight="0.5"
         android:orientation="vertical">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/common_next"
-            android:id="@+id/recommendation_btn_next"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/black"
-            android:textColor="@color/gold1"
-            android:layout_weight="0.05" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,14 +24,6 @@
             android:src="@drawable/key0"
             android:layout_weight="0.9" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/common_prev"
-            android:background="@color/black"
-            android:textColor="@color/gold1"
-            android:id="@+id/recommendation_btn_prev"
-            android:layout_weight="0.05" />
     </LinearLayout>
 
     <RelativeLayout
@@ -71,8 +53,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_activity_camera"
-            android:id="@+id/recommendation_btn_cam"
+            android:text="@string/main_btn_prog"
+            android:id="@+id/recommendation_btn_prog"
             android:layout_below="@+id/recommendation_btn_finddoc"
             android:background="@color/black"
             android:textColor="@color/gold1"

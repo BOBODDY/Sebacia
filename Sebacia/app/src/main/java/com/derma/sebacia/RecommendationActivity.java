@@ -9,55 +9,41 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.derma.sebacia.database.LocalDb;
+import com.derma.sebacia.database.databaseInterface;
+
 
 public class RecommendationActivity extends Activity {
+    // used to put extra from survey activity
+    public static final String ACNE_LEVEL = "LEVEL";
+
     ImageView imgHist;
     TextView txtRec;
-    Button btnNext, btnPrev, btnFindDoc, btnCam;
+    Button btnFindDoc, btnProg;
 
-    int testImgIds[];
-    final int numTestImgs = 7;
-    int currentImg;
+    int surveyPictures[];
+    int acneLevel = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommendation);
+        databaseInterface db = new LocalDb(getApplicationContext());
 
-        testImgIds = new int[numTestImgs];
-        testImgIds[0] = R.drawable.key0;
-        testImgIds[1] = R.drawable.comp0;
-        testImgIds[2] = R.drawable.scissors0;
-        testImgIds[3] = R.drawable.dog0;
-        testImgIds[4] = R.drawable.penguin0;
-        testImgIds[5] = R.drawable.phone0;
-        testImgIds[6] = R.drawable.sun0;
-        currentImg = 0;
+        surveyPictures = db.getSurveyPictures();
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            acneLevel = extras.getInt(ACNE_LEVEL);
+        }
 
         imgHist = (ImageView)findViewById(R.id.recommendation_img_history);
+        imgHist.setImageResource(surveyPictures[acneLevel]);
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
 
         txtRec = (TextView)findViewById(R.id.recommendation_txt_rec);
         txtRec.setTypeface(face);
-
-        btnNext = (Button)findViewById(R.id.recommendation_btn_next);
-        btnNext.setTypeface(face);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextImage(v);
-            }
-        });
-
-        btnPrev = (Button)findViewById(R.id.recommendation_btn_prev);
-        btnPrev.setTypeface(face);
-        btnPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                previoiusImage(v);
-            }
-        });
 
         btnFindDoc = (Button)findViewById(R.id.recommendation_btn_finddoc);
         btnFindDoc.setTypeface(face);
@@ -69,12 +55,12 @@ public class RecommendationActivity extends Activity {
             }
         });
 
-        btnCam = (Button)findViewById(R.id.recommendation_btn_cam);
-        btnCam.setTypeface(face);
-        btnCam.setOnClickListener(new View.OnClickListener() {
+        btnProg = (Button)findViewById(R.id.recommendation_btn_prog);
+        btnProg.setTypeface(face);
+        btnProg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), CameraActivity.class);
+                Intent intent = new Intent(v.getContext(), HistoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -89,20 +75,4 @@ public class RecommendationActivity extends Activity {
         );
     }
 
-    private void nextImage (View view)
-    {
-        currentImg = (currentImg + 1) % numTestImgs;
-        handleImageView(view);
-    }
-
-    private void previoiusImage (View view)
-    {
-        currentImg = (currentImg - 1) % numTestImgs;
-        handleImageView(view);
-    }
-
-    private void handleImageView (View view)
-    {
-        imgHist.setImageResource(testImgIds[currentImg]);
-    }
 }

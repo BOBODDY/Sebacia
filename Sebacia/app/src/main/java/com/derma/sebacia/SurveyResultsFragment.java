@@ -27,10 +27,10 @@ public class SurveyResultsFragment extends DialogFragment {
      * @param level Parameter 1.
      * @return A new instance of fragment SurveyResultsFragment.
      */
-    public static SurveyResultsFragment newInstance(String level) {
+    public static SurveyResultsFragment newInstance(int level) {
         SurveyResultsFragment fragment = new SurveyResultsFragment();
         Bundle args = new Bundle();
-        args.putString(ACNE_LEVEL, level);
+        args.putString(ACNE_LEVEL, Integer.toString(level));
         fragment.setArguments(args);
         return fragment;
     }

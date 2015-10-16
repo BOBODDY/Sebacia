@@ -22,6 +22,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     ImageView imgCompare, imgSelfie;
     int compareIds[];
     Set<Integer> answers;
+    int level;
 
     int currentQuestion;
     int prevQuestion;
@@ -106,6 +107,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         }
 
         if (answers.contains(currentQuestion) || currentQuestion < 0 || currentQuestion >= compareIds.length) {
+            level = prevQuestion;
             showResults();
         } else {
             // Continue the survey
@@ -114,9 +116,6 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     }
 
     private void showResults() {
-        // Determine the acne level
-        String level = Integer.toString(prevQuestion);
-
         // Show the result
         DialogFragment resultsFrag = SurveyResultsFragment.newInstance(level);
         resultsFrag.show(getFragmentManager(), "results_dialog");
@@ -124,6 +123,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
 
     public void goToRecommendation(View view) {
         Intent intent = new Intent(view.getContext(), RecommendationActivity.class);
+        intent.putExtra(RecommendationActivity.ACNE_LEVEL, level);
         startActivity(intent);
     }
 
