@@ -9,6 +9,7 @@ import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -191,6 +192,8 @@ public class CameraActivity extends AppCompatActivity {
     
     private class TakePictureTask extends AsyncTask<byte[], Void, Void> {
         protected Void doInBackground(byte[]... bytes) {
+
+            Looper.prepare();
             
             byte[] data = bytes[0];
 
