@@ -54,35 +54,10 @@
 
     <string name="privacy_disagree">Close Application</string>
     <string name="privacy_agree">Agree</string>
+    
+    <string name="privacy_statement_title">HIPAA Privacy Authorization Form</string>
 
-    <string name="privacy_statement">HIPAA Privacy Authorization Form\n
-**Authorization for Use or Disclosure of Protected Health Information
-(Required by the Health Insurance Portability and Accountability Act, 45 C.F.R.
-Parts 160 and 164)**\n
-
-I  authorize  Sebacia to  use  and  disclose  the  protected  health  information  described  below.\n
-
-This  authorization  for  release  of  information  covers  the  period  of  healthcare 
-from: all past, present, and future periods or until treatment ends.\n
-
-**3. Extent  of  Authorization**\n
-I  authorize  the  release  of  my  health  record  with Sebacia (including treatment photos, treatment data).\n
-
-4.  This  medical  information  may  be  used  by  the  person  I  authorize  to  receive 
-this  information  for  medical  treatment  or  consultation,  billing  or  claims  payment,  or 
-other  purposes  as  I  may  direct. \n
-5.  This  authorization  shall  be  inforce  and  effect  until treatment ends,  at  which  time  this  authorization  expires.\n
-6.  I  understand  that  I  have  the  right  to  revoke  this  authorization,  in  writing, \n
-at  any  time.  I  understand  that  a  revocation  is  not  effective  to  the  extent  that  any 
-person  or  entity  has  already  acted  in  reliance  on  my  authorization  or  if  my 
-authorization  was  obtained  as  a  condition  of  obtaining  insurance  coverage  and  the 
-insurer  has  a  legal  right  to  contest  a  claim. \n
-7.  I  understand  that  my  treatment,  payment,  enrollment,  or  eligibility  for 
-benefits  will  not  be  conditioned  on  whether  I  sign  this  authorization. \n
-8.  I  understand  that  information  used  or  disclosed  pursuant  to  this 
-authorization  may  be  disclosed  by  the  recipient  and  may  no  longer  be  protected  by 
-federal  or  state  law.\n
-By choosing accept you agree to all terms listed in the Privacy Statement.</string>
+    <string name="privacy_statement">HIPAA Privacy Authorization Form\n**Authorization for Use or Disclosure of Protected Health Information(Required by the Health Insurance Portability and Accountability Act, 45 C.F.R.Parts 160 and 164)**\nI authorize Sebacia to use and disclose the protected health information described below.\nThis authorization for release of information covers the period of healthcare from: all past, present, and future periods or until treatment ends.\n **3.Extent of Authorization**\nI authorize the release of my health record with Sebacia (including treatment photos, treatment data).\n 4. This medical information may be used by the person I authorize to receive this information for medical treatment or consultation, billing or claims payment, or other purposes as I may direct.\n5. This authorization shall be inforce and effect until treatment ends, at which time this authorization expires.\n6. I understand that I have the right to revoke this authorization, in writing,\n at any time. I understand that a revocation is not effective to the extent that anyperson or entity has already acted in reliance on my authorization or if my authorization was obtained as a condition of obtaining insurance coverage and theinsurer has a legal right to contest a claim.\n7. I understand that my treatment, payment, enrollment, or eligibility for benefits will not be conditioned on whether I sign this authorization.\n8. I understand that information used or disclosed pursuant to this authorization may be disclosed by the recipient and may no longer be protected by federal or state law.\n By choosing accept you agree to all terms listed in the Privacy Statement.</string>
 
     <string name="hist_view_img">History of previous pictures</string>
 
