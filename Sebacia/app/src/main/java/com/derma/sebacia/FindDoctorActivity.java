@@ -8,19 +8,30 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FindDoctorActivity extends ListActivity {
+    public static String ACNE_LEVEL = "ACNE_LEVEL";
     private Location mLastLocation;
+    private int acneLevel;
+    private TextView lvlText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_doctor);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            acneLevel = extras.getInt(ACNE_LEVEL);
+        }
+
+        lvlText = (TextView) findViewById(R.id.finddoc_level_txt);
+        lvlText.setText(Integer.toString(acneLevel));
 
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
@@ -36,8 +47,7 @@ public class FindDoctorActivity extends ListActivity {
 
             @Override
             public void onProviderEnabled(String provider) {
-
-            Toast.makeText(FindDoctorActivity.this, "Location is " + mLastLocation, Toast.LENGTH_LONG).show();
+                Toast.makeText(FindDoctorActivity.this, "Location is " + mLastLocation, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -46,7 +56,7 @@ public class FindDoctorActivity extends ListActivity {
             }
         };
 
-        if(getApplicationContext().checkCallingOrSelfPermission("android.permission.ACCESS_FINE_LOCATION") == PackageManager.PERMISSION_GRANTED) {
+        if (getApplicationContext().checkCallingOrSelfPermission("android.permission.ACCESS_FINE_LOCATION") == PackageManager.PERMISSION_GRANTED) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
             mLastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }
@@ -55,10 +65,10 @@ public class FindDoctorActivity extends ListActivity {
         //Toast.makeText(FindDoctorActivity.this, "Location is " + mLastLocation, Toast.LENGTH_LONG).show();
 
         List<String> messages = new ArrayList<>();
-        if(mLastLocation != null) {
+        if (mLastLocation != null) {
             String lastLocationString = "Latitute: " + String.valueOf(mLastLocation.getLatitude()) + "\nLongitude: " + String.valueOf(mLastLocation.getLongitude());
             messages.add(lastLocationString);
-            for(int i=0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) {
                 messages.add(lastLocationString);
             }
         } else {

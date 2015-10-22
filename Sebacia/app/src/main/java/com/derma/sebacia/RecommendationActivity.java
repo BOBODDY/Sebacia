@@ -51,6 +51,7 @@ public class RecommendationActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FindDoctorActivity.class);
+                intent.putExtra(FindDoctorActivity.ACNE_LEVEL, acneLevel);
                 startActivity(intent);
             }
         });
