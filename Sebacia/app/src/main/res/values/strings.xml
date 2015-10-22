@@ -68,8 +68,22 @@
     <string name="finddoc_level">Acne Grade: </string>
     <string name="survey_img_compare_dsc">compared_image</string>
     <string name="survey_img_selfie_dsc">selfie_image</string>
-    
+
+    <string name="detail_acne_0">Clear</string>
+    <string name="description_acne_0">Residual discoloration and erythema may be present</string>
+    <string name="detail_acne_1">Almost Clear</string>
+    <string name="description_acne_1">A few papules may be present (may be residual discoloration and erythema)</string>
+    <string name="detail_acne_2">Mild</string>
+    <string name="description_acne_2">Some inflammatory lesions (papules/pustules only; no nodular lesions)</string>
+    <string name="detail_acne_3">Moderate</string>
+    <string name="description_acne_3">Inflammatory lesions are more apparent, many papules/pustules; no more than one small nodular lesion</string>
+    <string name="detail_acne_4">Moderately Severe</string>
+    <string name="description_acne_4">Highly inflammatory lesions predominate, numerous papules/pustules; may have up to 2 nodular lesions</string>
+    <string name="detail_acne_5">Severe</string>
+    <string name="description_acne_5">Abundant significant inflammatory acne with scarring potential; more than 2 nodular lesions</string>
+
     <string name="camera_tutorial">Make sure you are in an area with good lighting.</string>
+    <string name="recommendation_img_history_desc">Image representing the acne level</string>
 
 
 </resources>

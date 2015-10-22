@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="@color/gold3"
     tools:context="com.derma.sebacia.RecommendationActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
@@ -15,13 +16,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:id="@+id/recommendation_img_history"
-            android:layout_weight="0.9" />
+            android:layout_weight="0.7"
+            android:contentDescription="@string/recommendation_img_history_desc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textAlignment="center"
+            android:layout_weight="0.1"
+            android:id="@+id/recommendation_acne_short_detail"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 
@@ -35,6 +49,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/recommendation_recommendation"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:id="@+id/recommendation_txt_rec"
             android:textColor="@color/black" />
 
