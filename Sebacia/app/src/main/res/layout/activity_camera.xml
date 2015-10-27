@@ -12,8 +12,13 @@
         android:id="@+id/camera_preview"
         android:layout_width="fill_parent"
         android:layout_height="350dp"
-        android:layout_marginBottom="25dp"
-        />
+        android:layout_marginBottom="25dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/faceoval"/>
+    </FrameLayout>
+    
     
     <ProgressBar
         android:id="@+id/camera_loading"
