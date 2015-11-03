@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.AsyncTask;
+import android.os.Debug;
 import android.os.Environment;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -51,12 +52,13 @@ public class CameraActivity extends AppCompatActivity {
     private Camera mCamera;
     private CameraPreview mPreview;
     private Button captureButton, diagnoseButton;
+    private ImageView overlay;
     private ProgressBar loading;
     LocalDb db;
 
     private static String TAG = "Sebacia";
     
-    private Picture selfie;
+//    private Picture selfie;
     private String selfiePath;
 
     @Override
@@ -73,6 +75,8 @@ public class CameraActivity extends AppCompatActivity {
 
         // Create an instance of Camera
         mCamera = getCameraInstance();
+        
+        overlay = (ImageView) findViewById(R.id.camera_overlay);
 
         // Create our Preview view and set it as the content of our activity.
         if(mCamera != null) {
@@ -80,11 +84,11 @@ public class CameraActivity extends AppCompatActivity {
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(mPreview);
 
-            ImageView overlay = new ImageView(this);
-            Bitmap bmp = BitmapFactory.decodeResource(this.getResources(), R.drawable.faceoval);
-            overlay.setImageBitmap(bmp);
-            overlay.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            preview.addView(overlay);
+//            ImageView overlay = new ImageView(this);
+//            Bitmap bmp = BitmapFactory.decodeResource(this.getResources(), R.drawable.faceoval);
+//            overlay.setImageBitmap(bmp);
+//            overlay.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//            preview.addView(overlay);
         } else {
             Log.e(TAG, "no camera found");
         }
@@ -141,6 +145,38 @@ public class CameraActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
             Log.d(TAG, "in PictureCallback");
             
+//            String filename = getImageFileName();
+//            int displayRotation = getDisplayRotation();
+//
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+//            bitmap = rotateBitmap(bitmap, displayRotation);
+//            
+//            try {
+//                FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+//                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//                fos.close();
+//            } catch(FileNotFoundException fnfe) {
+//                Log.e(TAG, "failed to write image", fnfe);
+//            } catch(IOException ioe) {
+//                Log.e(TAG, "error closing file output stream", ioe);
+//            }
+//            
+//            Picture newPic = new Picture(filename, null, bitmap);
+//
+//            selfiePath = newPic.getFilePath();
+//
+//            Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
+//
+//            CameraActivity.this.runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    loading.setVisibility(View.INVISIBLE);
+//                }
+//            });
+//
+//            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
+//            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
+            
             new TakePictureTask().execute(data);
         }
     };
@@ -190,63 +226,61 @@ public class CameraActivity extends AppCompatActivity {
         startActivity(intent);
     }
     
+    private int getDisplayRotation() {
+        Display display = getWindowManager().getDefaultDisplay();
+        int rotation = 0;
+        switch (display.getRotation()) {
+            case Surface.ROTATION_0: // This is display orientation
+                rotation = 270;
+                break;
+            case Surface.ROTATION_90:
+                rotation = 0;
+                break;
+            case Surface.ROTATION_180:
+                rotation = 90;
+                break;
+            case Surface.ROTATION_270:
+                rotation = 180;
+                break;
+        }
+        return rotation;
+    }
+    
     private class TakePictureTask extends AsyncTask<byte[], Void, Void> {
         protected Void doInBackground(byte[]... bytes) {
 
             Looper.prepare();
+
+            Debug.startMethodTracing("camera");
             
             byte[] data = bytes[0];
 
             Log.d(TAG, "in PictureCallback");
 
             String filename = getImageFileName();
-
-            Display display = getWindowManager().getDefaultDisplay();
-            int rotation = 0;
-            switch (display.getRotation()) {
-                case Surface.ROTATION_0: // This is display orientation
-                    rotation = 270;
-                    break;
-                case Surface.ROTATION_90:
-                    rotation = 0;
-                    break;
-                case Surface.ROTATION_180:
-                    rotation = 90;
-                    break;
-                case Surface.ROTATION_270:
-                    rotation = 180;
-                    break;
-            }
-
-            Log.d(TAG, "using a rotation of " + rotation + " degrees");
+            int rotation = getDisplayRotation();
 
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             bitmap = rotateBitmap(bitmap, rotation);
 
-            Log.d(TAG, "rotated image width: " + bitmap.getWidth());
-            Log.d(TAG, "rotated image height: " + bitmap.getHeight());
+            try {
+                FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.close();
+            } catch(FileNotFoundException fnfe) {
+                Log.e(TAG, "failed to write image", fnfe);
+            } catch(IOException ioe) {
+                Log.e(TAG, "error closing file output stream", ioe);
+            }
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-            boolean compressResult = bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            Log.d(TAG, "compressed bitmap result: " + compressResult);
-
-            byte[] byteArray = stream.toByteArray();
-
-            Log.d(TAG, "length of byte array: " + byteArray.length);
-
-            Picture newPic = new Picture(filename, new AcneLevel(1, "1"), byteArray);
+            Picture newPic = new Picture(filename, new AcneLevel(1, "1"), bitmap);
 
             // Null things out for garbage collection
-            byteArray = null;
-            stream = null;
             bitmap = null;
 
             db.addPicture(newPic);
 
             selfiePath = newPic.getFilePath();
-            Log.d(TAG, "set file path to " + selfiePath);
-
             Log.d(TAG, "saved picture to " + filename);
 
             Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
@@ -257,6 +291,8 @@ public class CameraActivity extends AppCompatActivity {
                     loading.setVisibility(View.INVISIBLE);
                 }
             });
+            
+            Debug.stopMethodTracing();
 
             DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
             diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");

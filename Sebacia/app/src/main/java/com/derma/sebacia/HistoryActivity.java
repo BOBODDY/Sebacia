@@ -16,11 +16,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import com.derma.sebacia.R;
+import com.derma.sebacia.data.HistoryAdapter;
 import com.derma.sebacia.data.Patient;
 import com.derma.sebacia.data.Picture;
 import com.derma.sebacia.database.LocalDb;
@@ -42,29 +45,26 @@ public class HistoryActivity extends AppCompatActivity {
 //    ImageView imageView;
     ListView imageList;
     
-    PictureAdapter adapter;
+    HistoryAdapter adapter;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        //TODO: pull images from database
-
-//        imageView = (ImageView)this.findViewById(R.id.hist_view_img);
         imageList = (ListView) findViewById(R.id.history_list);
-//        Picture[] emptyList = {};
-        ArrayList<Picture> emptyList = new ArrayList<>();
-        adapter = new PictureAdapter(getApplicationContext(), R.id.textView, emptyList);
-        imageList.setAdapter(adapter);
-        
+        List<Picture> pictures = new ArrayList<>();
+//        adapter = new HistoryAdapter(getApplicationContext(), pictures);
+//        imageList.setAdapter(adapter);
+//        imageList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent i = new Intent(getApplicationContext(), FindDoctorActivity.class);
+//                startActivity(i);
+//            }
+//        });
+
         new loadDbTask().execute(getApplicationContext());
-    }
-    
-    protected void onStart() {
-        super.onStart();
-        
-        new getPicturesTask().execute();
     }
     
     private class getPicturesTask extends AsyncTask<Void, Void, List<Picture>> {
@@ -77,18 +77,16 @@ public class HistoryActivity extends AppCompatActivity {
         
         protected void onPostExecute(List<Picture> pictures) {
             if(pictures.size() > 0) {
-//                Picture topPic = pictures.get(0);
-                adapter.addAll(pictures);
-//                Bitmap bmp = topPic.getPicBitmap();
-//
-//                imageView.setImageBitmap(bmp);
-//                imageView.setOnClickListener(new ImageView.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Intent i = new Intent(getApplicationContext(), FindDoctorActivity.class);
-//                        startActivity(i);
-//                    }
-//                });
+                adapter = new HistoryAdapter(getApplicationContext(), pictures);
+                imageList.setAdapter(adapter);
+                imageList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent i = new Intent(getApplicationContext(), FindDoctorActivity.class);
+                        startActivity(i);
+                    }
+                });
+//                adapter.addAll(pictures);
             }
         }
     }
@@ -124,32 +122,8 @@ public class HistoryActivity extends AppCompatActivity {
             return null;
         }
 
-    }
-    
-    private class PictureAdapter extends ArrayAdapter<Picture> {
-        
-        public PictureAdapter(Context context, int textViewResourceId, ArrayList<Picture> pictures) {
-            super(context, textViewResourceId, pictures);
-            this.addAll(pictures);
-        }
-        
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v = convertView;
-            if(v == null) {
-                LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.activity_history, null);
-            }
-            
-            Picture pic = this.getItem(position);
-            if(pic != null) {
-                ImageView iv = (ImageView) findViewById(R.id.history_list_item_image);
-                if(iv != null) {
-                    iv.setImageBitmap(pic.getPicBitmap());
-                }
-            }
-            
-            return v;
+        protected void onPostExecute(Void aVoid) {
+            new getPicturesTask().execute();
         }
     }
 }

@@ -3,6 +3,8 @@ package com.derma.sebacia.data;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.io.ByteArrayOutputStream;
+
 /**
  * Created by Daniel on 9/12/2015.
  */
@@ -11,13 +13,18 @@ public class Picture {
     String FilePath;
     AcneLevel Severity;
     byte[] Pic;
+    Bitmap bmp;
 
     //FUNCTIONALITY
     public Bitmap getPicBitmap() {
-        if(Pic != null) {
-            return BitmapFactory.decodeByteArray(Pic, 0, Pic.length);
+        if(bmp == null) {
+            if (Pic != null) {
+                return BitmapFactory.decodeByteArray(Pic, 0, Pic.length);
+            } else {
+                return null;
+            }
         } else {
-            return null;
+            return bmp;
         }
     }
 
@@ -29,6 +36,11 @@ public class Picture {
         Pic = pic;
     }
 
+    public Picture(String filePath, AcneLevel severity, Bitmap bmp) {
+        FilePath = filePath;
+        Severity = severity;
+        this.bmp = bmp;
+    }
     //SETTERS
     public void setFilePath(String filePath) {
         FilePath = filePath;
@@ -48,6 +60,13 @@ public class Picture {
     }
 
     public byte[] getPic() {
+        if(Pic == null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            if(bmp != null) {
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            }
+            Pic = stream.toByteArray();
+        }
         return Pic;
     }
 
