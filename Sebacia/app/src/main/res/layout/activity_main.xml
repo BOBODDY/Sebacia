@@ -14,7 +14,7 @@
         android:id="@+id/main_btn_cam"
         android:src="@drawable/cameraclipart"
         android:contentDescription="@string/main_btn_cam"
-        android:background="@color/black"
+        android:background="@color/gold3"
         android:textColor="@color/gold1"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -25,7 +25,7 @@
         android:text="@string/main_btn_prog"
         android:id="@+id/main_btn_prog"
         android:layout_marginTop="56dp"
-        android:background="@color/black"
+        android:background="@drawable/mybutton"
         android:textColor="@color/gold1"
         android:layout_below="@+id/main_btn_cam"
         android:layout_marginBottom="15dp"

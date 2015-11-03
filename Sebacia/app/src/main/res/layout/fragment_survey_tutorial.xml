@@ -14,13 +14,13 @@
 
     <Button
         android:id="@+id/survey_turorial_btn_ok"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/survey_turorial_txt_txt"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_weight="0.33"
-        android:background="@color/black"
+        android:background="@drawable/mybutton"
         android:text="@string/survey_tutorial_take"
         android:textColor="@color/gold1" />
 
