@@ -2,12 +2,14 @@ package com.derma.sebacia;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import com.derma.sebacia.data.Doctor;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -100,6 +102,18 @@ public class FindDoctorActivity extends ListActivity {
         double a = Math.pow(Math.sin(dLat / 2),2) + Math.pow(Math.sin(dLon / 2),2) * Math.cos(lat1) * Math.cos(lat2);
         double c = 2 * Math.asin(Math.sqrt(a));
         return Radius * c;
+    }
+
+    public void sendEmail(View view) {
+        Intent sendIntent;
+
+        sendIntent = new Intent(Intent.ACTION_SENDTO);
+        sendIntent.setType("text/plain");
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"tpadaniel@aol.com"});
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Sebacia Patient Request");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "testing sebacia email request");
+
+        startActivity(Intent.createChooser(sendIntent, "Send Mail"));
     }
 
 }

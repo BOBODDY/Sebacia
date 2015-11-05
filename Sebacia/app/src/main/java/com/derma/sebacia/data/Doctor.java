@@ -1,81 +1,93 @@
 package com.derma.sebacia.data;
 
-/**
- * Created by Daniel on 9/12/2015.
- */
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Doctor {
 
-    String Name;
-    String Adress;
-    double lati;
-    double longi;
-    int DocID;
-    AcneLevel Min;
-    AcneLevel Max;
+    private String name;
+    private String adress;
+    private int id;
+    private int acneMin;
+    private int acneMax;
+    private double lat;
+    private double llong;
 
-    //FUNCTIONALITY
+    @Override
+    public String toString() {
+        return "\n\nname:" + name + " adress:" + adress + " id:" + id +
+                " acneMin:" + acneMin + " acneMax:" + acneMax + " lat/long:" + lat +"/"+llong +"\n\n";
+    }
 
-
+    public Doctor() {
+    }
 
     //CONSTRUCTOR
-    public Doctor(String name, String adress, double lati, double longi, int DocID, AcneLevel min, AcneLevel max) {
-        Name = name;
-        Adress = adress;
-        this.lati = lati;
-        this.longi = longi;
-        this.DocID = DocID;
-        Min = min;
-        Max = max;
+    public Doctor(String name, String adress, double lat, double llong, int id, int min, int max) {
+        name = name;
+        adress = adress;
+        this.lat = lat;
+        this.llong = llong;
+        this.id = id;
+        acneMin = min;
+        acneMax = max;
     }
 
-    //SETTERS
     public void setName(String name) {
-        Name = name;
-    }
-
-    public void setMax(AcneLevel max) {
-        Max = max;
-    }
-
-    public void setMin(AcneLevel min) {
-        Min = min;
-    }
-
-    public void setID(int DocID) {
-        this.DocID = DocID;
+        this.name = name;
     }
 
     public void setAdress(String adress) {
-        Adress = adress;
+        this.adress = adress;
     }
 
-    public void setLati(double lati) { this.lati = lati; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public void setLongi(double longi) { this.longi = longi; }
+    public void setAcneMin(int acneMin) {
+        this.acneMin = acneMin;
+    }
 
-    //GETTERS
+    public void setAcneMax(int acneMax) {
+        this.acneMax = acneMax;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public void setLong(double llong) {
+        this.llong = llong;
+    }
+
     public String getName() {
-        return Name;
-    }
-
-    public AcneLevel getMax() {
-        return Max;
-    }
-
-    public AcneLevel getMin() {
-        return Min;
-    }
-
-    public int getID() {
-        return DocID;
+        return name;
     }
 
     public String getAdress() {
-        return Adress;
+        return adress;
     }
 
-    public double getLati() { return lati; }
+    public int getId() {
+        return id;
+    }
 
-    public double getLongi() { return longi; }
+    public int getAcneMin() {
+        return acneMin;
+    }
+
+    public int getAcneMax() {
+        return acneMax;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLong() {
+        return llong;
+    }
+
 
 }
