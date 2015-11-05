@@ -24,8 +24,8 @@ public class Doctor {
 
     //CONSTRUCTOR
     public Doctor(String name, String adress, double lat, double llong, int id, int min, int max) {
-        name = name;
-        adress = adress;
+        this.name = name;
+        this.adress = adress;
         this.lat = lat;
         this.llong = llong;
         this.id = id;
