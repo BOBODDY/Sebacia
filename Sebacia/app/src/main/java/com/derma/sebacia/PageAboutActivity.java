@@ -11,12 +11,29 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
 
+import com.derma.sebacia.data.Doctor;
+import com.derma.sebacia.database.DoctorDB;
+
+import java.util.List;
+
 public class PageAboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_about);
+
+//        TextView title = (TextView) findViewById(R.id.pageabout_tv_title_app);
+//        String mock = "GO AWAY";
+//        try {
+//            DoctorDB docDB = new DoctorDB();
+//            docDB.execute(DoctorDB.request.COORDINATE.ordinal(), 0,3, 3, 2);
+//            List<Doctor> print = docDB.get();
+//            mock = print.toString();
+//            title.setText(mock);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

@@ -12,13 +12,14 @@ import java.util.Map;
  */
 public interface DoctorDBInterface {
 
-    public Doctor getDoctor(int DocID);
-
     //list of docs given list of IDs. If a ID is not there, will return NULL
-    public List<Doctor> getDoctorList(List<Integer> docIDs);
+    public List<Doctor> getDoctorList(Integer[] docIDs);
 
-    //returns Doc_ID with their geographical coordinates.
-    public Map<Integer, Coordnate> getDoctors(AcneLevel Severity);
+    //list of doctor that treat a specified severity.
+    public List<Doctor> getDoctorBySeverity(Integer Severity);
+
+    //returns doctor list that is withing a certain range of coordinates
+    public List<Doctor> getDoctorsByCoordinate(int maxLat, int minLat, int minLong, int maxLong);
 
     public boolean addDoctor(Doctor doctor);
 

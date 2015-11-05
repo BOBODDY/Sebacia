@@ -1,68 +1,83 @@
 package com.derma.sebacia.data;
 
-/**
- * Created by Daniel on 9/12/2015.
- */
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Doctor {
 
-    String Name;
-    String Adress;
-    int DocID;
-    AcneLevel Min;
-    AcneLevel Max;
+    private String name;
+    private String adress;
+    private int id;
+    private int acneMin;
+    private int acneMax;
+    private double lat;
+    private double llong;
 
-    //FUNCTIONALITY
-
-
-
-    //CONSTRUCTOR
-    public Doctor(String name, String adress, int DocID, AcneLevel min, AcneLevel max) {
-        Name = name;
-        Adress = adress;
-        this.DocID = DocID;
-        Min = min;
-        Max = max;
+    @Override
+    public String toString() {
+        return "\n\nname:" + name + " adress:" + adress + " id:" + id +
+                " acneMin:" + acneMin + " acneMax:" + acneMax + " lat/long:" + lat +"/"+llong +"\n\n";
     }
 
-    //SETTERS
+    public Doctor() {
+
+    }
+
     public void setName(String name) {
-        Name = name;
-    }
-
-    public void setMax(AcneLevel max) {
-        Max = max;
-    }
-
-    public void setMin(AcneLevel min) {
-        Min = min;
-    }
-
-    public void setID(int DocID) {
-        this.DocID = DocID;
+        this.name = name;
     }
 
     public void setAdress(String adress) {
-        Adress = adress;
+        this.adress = adress;
     }
 
-    //GETTERS
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setAcneMin(int acneMin) {
+        this.acneMin = acneMin;
+    }
+
+    public void setAcneMax(int acneMax) {
+        this.acneMax = acneMax;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public void setLong(double llong) {
+        this.llong = llong;
+    }
+
     public String getName() {
-        return Name;
-    }
-
-    public AcneLevel getMax() {
-        return Max;
-    }
-
-    public AcneLevel getMin() {
-        return Min;
-    }
-
-    public int getID() {
-        return DocID;
+        return name;
     }
 
     public String getAdress() {
-        return Adress;
+        return adress;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getAcneMin() {
+        return acneMin;
+    }
+
+    public int getAcneMax() {
+        return acneMax;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLong() {
+        return llong;
+    }
+
+
 }

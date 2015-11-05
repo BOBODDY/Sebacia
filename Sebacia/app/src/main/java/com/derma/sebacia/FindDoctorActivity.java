@@ -2,11 +2,13 @@ package com.derma.sebacia;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,6 +79,16 @@ public class FindDoctorActivity extends ListActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
         setListAdapter(adapter);
+    }
+
+    public void sendEmail(View view) {
+        Intent sendIntent;
+
+        sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Sebacia Patient Request");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "testing sebacia email request");
+
+        startActivity(Intent.createChooser(sendIntent, "Send Mail"));
     }
 
 }
