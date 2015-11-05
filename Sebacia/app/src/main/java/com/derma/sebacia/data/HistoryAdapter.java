@@ -37,11 +37,11 @@ public class HistoryAdapter extends ArrayAdapter<Picture> {
         
         Picture pic = pictures.get(position);
         if(pic.getSeverity() != null) {
-            acneLevel.setText(pic.getSeverity().getLevel());
+            acneLevel.setText(pic.getSeverity().getName());
         } else {
             acneLevel.setText("N/A");
         }
-        selfie.setImageBitmap(pic.getPicBitmap());
+        selfie.setImageBitmap(pic.getPicThumbnail());
         
         return rowView;
     }

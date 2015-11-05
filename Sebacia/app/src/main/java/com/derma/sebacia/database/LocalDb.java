@@ -100,7 +100,7 @@ public class LocalDb implements databaseInterface {
         }
         
         if(bytes != null) {
-            return new Picture(filePath, new AcneLevel(sev, sev + ""), bytes);
+            return new Picture(filePath, new AcneLevel(sev, sev + ""));
         }
         
         return null;
@@ -120,7 +120,8 @@ public class LocalDb implements databaseInterface {
         String[] projection = {
                 PictureEntry._ID,
                 PictureEntry.COLUMN_NAME_PATIENT,
-                PictureEntry.COLUMN_NAME_PATH
+                PictureEntry.COLUMN_NAME_PATH,
+                PictureEntry.COLUMN_NAME_SEVERITY
         };
         
         String sortOrder = PictureEntry.COLUMN_NAME_PATH + " DESC";
@@ -143,23 +144,9 @@ public class LocalDb implements databaseInterface {
             Log.d(TAG, "there are some lines");
             do {
                 String path = c.getString(c.getColumnIndexOrThrow(PictureEntry.COLUMN_NAME_PATH));
+                String sev = c.getString(c.getColumnIndexOrThrow(PictureEntry.COLUMN_NAME_SEVERITY));
 
-                try {
-                    FileInputStream fis = context.openFileInput(path);
-
-                    int n = fis.available();
-                    byte[] bytes = new byte[n];
-                    int res = fis.read(bytes);
-
-                    if (res != -1) {
-                        pics.add(new Picture(path, null, bytes));
-                    }
-
-                } catch (FileNotFoundException fnfe) {
-                    Log.e(TAG, "file not found", fnfe);
-                } catch (IOException ioe) {
-                    Log.e(TAG, "io exception", ioe);
-                }
+                pics.add(new Picture(path, new AcneLevel(Integer.valueOf(sev), sev)));
 
             } while (c.moveToNext());
         } else {
@@ -215,26 +202,6 @@ public class LocalDb implements databaseInterface {
         
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Log.d(TAG, "got a database: db == null: " + (db == null));
-        
-        try {
-            Log.d(TAG, "path to save picture: " + picture.getFilePath());
-            FileOutputStream fos = context.openFileOutput(picture.getFilePath(), Context.MODE_PRIVATE);
-
-            byte[] bytes = picture.getPic();
-            if(bytes != null) {
-                Log.d(TAG, "writing picture");
-                fos.write(bytes);
-            } else {
-                Log.d(TAG, "no data to write");
-            }
-            fos.close();
-        } catch(FileNotFoundException fnfe) {
-            Log.e(TAG, "file not found writing picture", fnfe);
-            return false;
-        } catch(IOException ioe) {
-            Log.e(TAG, "io exception writing picture", ioe);
-            return false;
-        }
 
         ContentValues values = new ContentValues();
         values.put(PictureEntry.COLUMN_NAME_PATH, picture.getFilePath());

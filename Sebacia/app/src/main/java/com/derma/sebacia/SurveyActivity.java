@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.derma.sebacia.database.LocalDb;
 import com.derma.sebacia.database.databaseInterface;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
@@ -53,11 +54,12 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
             Log.d(TAG, "looking at picture path: " + filepath);
             Bitmap bmp = null;
             try {
-                bmp = BitmapFactory.decodeStream(openFileInput(filepath));
-            } catch (FileNotFoundException fnfe) {
-                Log.e(TAG, "file not found", fnfe);
+//                File f = new File(getFilesDir().getPath() + File.separator + filepath);
+//                Log.d(TAG, "reading file from: " + f.getAbsolutePath());
+                bmp = BitmapFactory.decodeFile(filepath);
             } catch (NullPointerException npe) {
                 // Picture is null
+                Log.e(TAG, "null pointer in survey", npe);
             }
             if (bmp != null) {
                 Log.d(TAG, "bmp width: " + bmp.getWidth());
