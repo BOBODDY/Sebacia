@@ -143,39 +143,10 @@ public class CameraActivity extends AppCompatActivity {
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            Log.d(TAG, "in PictureCallback");
+            Log.v(TAG, "in PictureCallback");
             
-//            String filename = getImageFileName();
-//            int displayRotation = getDisplayRotation();
-//
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-//            bitmap = rotateBitmap(bitmap, displayRotation);
-//            
-//            try {
-//                FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//                fos.close();
-//            } catch(FileNotFoundException fnfe) {
-//                Log.e(TAG, "failed to write image", fnfe);
-//            } catch(IOException ioe) {
-//                Log.e(TAG, "error closing file output stream", ioe);
-//            }
-//            
-//            Picture newPic = new Picture(filename, null, bitmap);
-//
-//            selfiePath = newPic.getFilePath();
-//
-//            Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
-//
-//            CameraActivity.this.runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    loading.setVisibility(View.INVISIBLE);
-//                }
-//            });
-//
-//            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
-//            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
+            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
+            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
             
             new TakePictureTask().execute(data);
         }
@@ -250,8 +221,6 @@ public class CameraActivity extends AppCompatActivity {
         protected Void doInBackground(byte[]... bytes) {
 
             Looper.prepare();
-
-            Debug.startMethodTracing("camera");
             
             byte[] data = bytes[0];
 
@@ -262,21 +231,24 @@ public class CameraActivity extends AppCompatActivity {
 
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             bitmap = rotateBitmap(bitmap, rotation);
+            
+            File f = new File(getFilesDir() + File.separator + filename);
+            Log.d(TAG, "Saving picture to: " + f.getAbsolutePath());
 
             try {
-                FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+//                FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+                FileOutputStream fos = new FileOutputStream(f);
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
                 fos.close();
+                
+                filename = f.getCanonicalPath();
             } catch(FileNotFoundException fnfe) {
                 Log.e(TAG, "failed to write image", fnfe);
             } catch(IOException ioe) {
                 Log.e(TAG, "error closing file output stream", ioe);
             }
 
-            Picture newPic = new Picture(filename, new AcneLevel(1, "1"), bitmap);
-
-            // Null things out for garbage collection
-            bitmap = null;
+            Picture newPic = new Picture(filename, new AcneLevel(1, "1"));
 
             db.addPicture(newPic);
 
@@ -291,8 +263,6 @@ public class CameraActivity extends AppCompatActivity {
                     loading.setVisibility(View.INVISIBLE);
                 }
             });
-            
-            Debug.stopMethodTracing();
 
             DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
             diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
