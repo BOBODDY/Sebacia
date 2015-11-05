@@ -9,6 +9,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import com.derma.sebacia.data.Doctor;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -27,6 +29,8 @@ public class FindDoctorActivity extends ListActivity {
     private int acneLevel;
     private TextView lvlText;
     private double minDistForNearest = 100000000; // returned haversine distance in km
+    
+    private final String TAG = "Sebacia";
 
     // Used for haversine
     static final double Radius = 6372.8; // Radius of the Earth in km
@@ -82,13 +86,13 @@ public class FindDoctorActivity extends ListActivity {
         if (mLastLocation != null) {
             for (Doctor doctor : doctors) {
                 if(haversine(mLastLocation.getLatitude(), mLastLocation.getLongitude(), doctor.getLat(), doctor.getLong()) < minDistForNearest) {
+                    Log.v(TAG, "adding " + doctor.getAdress());
                     messages.add(doctor.getAdress());
                 }
             }
         } else {
             messages.add("Unable to determine location");
         }
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
         setListAdapter(adapter);
     }
