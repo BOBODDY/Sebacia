@@ -81,7 +81,7 @@ public class FindDoctorActivity extends ListActivity {
         List<String> messages = new ArrayList<>();
         if (mLastLocation != null) {
             for (Doctor doctor : doctors) {
-                if(haversine(mLastLocation.getLatitude(), mLastLocation.getLongitude(), doctor.getLati(), doctor.getLongi()) < minDistForNearest) {
+                if(haversine(mLastLocation.getLatitude(), mLastLocation.getLongitude(), doctor.getLat(), doctor.getLong()) < minDistForNearest) {
                     messages.add(doctor.getAdress());
                 }
             }
