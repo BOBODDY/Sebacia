@@ -172,7 +172,10 @@ public class LocalDb implements databaseInterface {
     }
 
     public List<Doctor> getDoctors(AcneLevel Severity){
-        return null;
+        List<Doctor> doctors = new ArrayList<>();
+        doctors.add(new Doctor("Cory Anderson", "2905 Premiere Pkwy, Duluth, GA 30097", 34, -84.5, 0, new AcneLevel(0, "Grade 0"), new AcneLevel(5, "Grade 5")));
+
+        return doctors;
     }
 
     public Doctor getDoctor(int DocID){

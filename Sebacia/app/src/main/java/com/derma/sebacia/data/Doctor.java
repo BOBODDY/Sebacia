@@ -7,6 +7,8 @@ public class Doctor {
 
     String Name;
     String Adress;
+    double lati;
+    double longi;
     int DocID;
     AcneLevel Min;
     AcneLevel Max;
@@ -16,9 +18,11 @@ public class Doctor {
 
 
     //CONSTRUCTOR
-    public Doctor(String name, String adress, int DocID, AcneLevel min, AcneLevel max) {
+    public Doctor(String name, String adress, double lati, double longi, int DocID, AcneLevel min, AcneLevel max) {
         Name = name;
         Adress = adress;
+        this.lati = lati;
+        this.longi = longi;
         this.DocID = DocID;
         Min = min;
         Max = max;
@@ -45,6 +49,10 @@ public class Doctor {
         Adress = adress;
     }
 
+    public void setLati(double lati) { this.lati = lati; }
+
+    public void setLongi(double longi) { this.longi = longi; }
+
     //GETTERS
     public String getName() {
         return Name;
@@ -65,4 +73,9 @@ public class Doctor {
     public String getAdress() {
         return Adress;
     }
+
+    public double getLati() { return lati; }
+
+    public double getLongi() { return longi; }
+
 }
