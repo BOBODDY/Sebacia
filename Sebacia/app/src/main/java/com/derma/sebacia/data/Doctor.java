@@ -20,7 +20,17 @@ public class Doctor {
     }
 
     public Doctor() {
+    }
 
+    //CONSTRUCTOR
+    public Doctor(String name, String adress, double lat, double llong, int id, int min, int max) {
+        name = name;
+        adress = adress;
+        this.lat = lat;
+        this.llong = llong;
+        this.id = id;
+        acneMin = min;
+        acneMax = max;
     }
 
     public void setName(String name) {
