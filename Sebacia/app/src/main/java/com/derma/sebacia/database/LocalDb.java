@@ -216,4 +216,20 @@ public class LocalDb implements databaseInterface {
         
         return newRowId != -1;
     }
+    
+    public boolean setPictureSeverity(String filename, AcneLevel sevLevel) {
+        if(dbHelper == null)
+            initializeDbHelper();
+        
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        
+        ContentValues cv = new ContentValues();
+        cv.put(PictureEntry.COLUMN_NAME_SEVERITY, sevLevel.getName());
+        
+        int updated = db.update(PictureEntry.TABLE_NAME, cv, PictureEntry.COLUMN_NAME_PATH + " = " + filename, null);
+        
+        db.close();
+        
+        return updated > 0;
+    }
 }
