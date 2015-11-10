@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.derma.sebacia.database.LocalDb;
 import com.derma.sebacia.database.databaseInterface;
 
+import java.util.Iterator;
+
 
 public class RecommendationActivity extends Activity {
     // used to put extra from survey activity
@@ -21,7 +23,7 @@ public class RecommendationActivity extends Activity {
     TextView txtRec, txtDet;
     Button btnFindDoc, btnProg;
 
-    int surveyPictures[];
+    Iterator<Integer> surveyPictures[];
     int acneDescriptions[];
     int acneDetails[];
     int acneLevel = -1;
@@ -42,7 +44,7 @@ public class RecommendationActivity extends Activity {
         }
 
         imgHist = (ImageView)findViewById(R.id.recommendation_img_history);
-        imgHist.setImageResource(surveyPictures[acneLevel]);
+        imgHist.setImageResource(surveyPictures[acneLevel].next());
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/ufonts.com_avantgarde-book.ttf");
 

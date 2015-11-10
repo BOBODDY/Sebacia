@@ -4,9 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.util.Log;
 
 import com.derma.sebacia.R;
@@ -20,10 +17,12 @@ import com.derma.sebacia.database.DatabaseContract.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by nick on 9/15/15.
@@ -173,16 +172,34 @@ public class LocalDb implements databaseInterface {
         return null;
     }
 
-    public int[] getSurveyPictures() {
-        int[] surveyPictures = new int[numQuestions];
+    public Iterator<Integer>[] getSurveyPictures() {
+        Iterator<Integer>[] surveyPictures = new Iterator[numQuestions];
 
         // TODO: Consider pulling these from a DB
-        surveyPictures[0] = R.drawable.grade0;
-        surveyPictures[1] = R.drawable.grade1;
-        surveyPictures[2] = R.drawable.grade2;
-        surveyPictures[3] = R.drawable.grade3;
-        surveyPictures[4] = R.drawable.grade4;
-        surveyPictures[5] = R.drawable.grade5;
+        Set<Integer> grade0 = new HashSet<>();
+        grade0.add(R.drawable.grade0);
+
+        Set<Integer> grade1 = new HashSet<>();
+        grade1.add(R.drawable.grade1);
+
+        Set<Integer> grade2 = new HashSet<>();
+        grade2.add(R.drawable.grade2);
+
+        Set<Integer> grade3 = new HashSet<>();
+        grade3.add(R.drawable.grade3);
+
+        Set<Integer> grade4 = new HashSet<>();
+        grade4.add(R.drawable.grade4);
+
+        Set<Integer> grade5 = new HashSet<>();
+        grade5.add(R.drawable.grade5);
+
+        surveyPictures[0] = grade0.iterator();
+        surveyPictures[1] = grade1.iterator();
+        surveyPictures[2] = grade2.iterator();
+        surveyPictures[3] = grade3.iterator();
+        surveyPictures[4] = grade4.iterator();
+        surveyPictures[5] = grade5.iterator();
 
         return surveyPictures;
     }

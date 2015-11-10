@@ -10,18 +10,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.derma.sebacia.data.AcneLevel;
+import com.derma.sebacia.data.Picture;
 import com.derma.sebacia.database.LocalDb;
 import com.derma.sebacia.database.databaseInterface;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 
 public class SurveyActivity extends Activity implements View.OnClickListener {
     ImageView imgCompare, imgSelfie;
-    int compareIds[];
+    Iterator<Integer> compareIds[];
     Set<Integer> answers;
     int level;
 
@@ -73,7 +76,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         }
 
         // Set first image to compare with
-        imgCompare.setImageResource(compareIds[currentQuestion]);
+        imgCompare.setImageResource(compareIds[currentQuestion].next());
 
         // Set up the user interaction to manually show or hide the system UI.
         imgCompare.setOnClickListener(this);
@@ -110,11 +113,16 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
 
         if (answers.contains(currentQuestion) || currentQuestion < 0 || currentQuestion >= compareIds.length) {
             level = prevQuestion;
+            saveResults();
             showResults();
         } else {
             // Continue the survey
-            imgCompare.setImageResource(compareIds[currentQuestion]);
+            imgCompare.setImageResource(compareIds[currentQuestion].next());
         }
+    }
+
+    private void saveResults() {
+        Picture picture = new Picture("", new AcneLevel(level, ""));
     }
 
     private void showResults() {

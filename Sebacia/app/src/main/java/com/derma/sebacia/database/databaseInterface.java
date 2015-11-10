@@ -6,7 +6,9 @@ import com.derma.sebacia.data.Patient;
 
 import com.derma.sebacia.data.Picture;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Daniel on 9/12/2015.
@@ -26,7 +28,7 @@ public interface databaseInterface {
 
     Patient getPatient(Patient patient);
 
-    int[] getSurveyPictures();
+    Iterator<Integer>[] getSurveyPictures();
 
     //POSTS
     boolean addPatient(Patient patient);
