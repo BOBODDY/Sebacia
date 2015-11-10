@@ -36,4 +36,6 @@ public interface databaseInterface {
     boolean addDoctor(Doctor doctor);
 
     boolean addPicture(Picture picture);
+
+    boolean setPictureSeverity(String filename, AcneLevel sevLevel);
 }

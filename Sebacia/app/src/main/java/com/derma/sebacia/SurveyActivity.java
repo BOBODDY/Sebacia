@@ -38,13 +38,16 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     int currentQuestion;
     int prevQuestion;
 
+    // DB
+    databaseInterface db = new LocalDb(getApplicationContext());
+    String filepath = null;
+
     private final String TAG = "Sebacia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
-        databaseInterface db = new LocalDb(getApplicationContext());
 
         // Get the pictures
         compareIds = db.getSurveyPictures();
@@ -72,7 +75,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         Bundle b = getIntent().getExtras();
         Log.d(TAG, "in SurveyActivity onCreate()");
         if (b != null) {
-            String filepath = b.getString("picturePath");
+            filepath = b.getString("picturePath");
             Log.d(TAG, "looking at picture path: " + filepath);
             Bitmap bmp = null;
             try {
@@ -172,7 +175,10 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     }
 
     private void saveResults() {
-        Picture picture = new Picture("", new AcneLevel(level, ""));
+        // Only save results when a picture was taken
+        if(filepath != null) {
+            db.setPictureSeverity(filepath, new AcneLevel(level, "IGA: " + level));
+        }
     }
 
     private void showResults() {
