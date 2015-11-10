@@ -23,11 +23,18 @@ import java.util.Set;
 
 
 public class SurveyActivity extends Activity implements View.OnClickListener {
+    // Survey layout variables
     ImageView imgCompare, imgSelfie;
-    Iterator<Integer> compareIds[];
-    Set<Integer> answers;
-    int level;
 
+    // Survey results handling
+    Set<Integer> answers;   // Keep track of decisions the user made per survey
+    int level;              // Final acne level
+    int timesTaken = 0;     // Keep track of how many times the user has taken the survey
+    int minTimesTaken = 2;  // The minimum number of times the user has to take the survey
+    int[][] results;        // Results from each survey to determine final level
+
+    // Survey navigation
+    Iterator<Integer> compareIds[];
     int currentQuestion;
     int prevQuestion;
 
@@ -39,13 +46,25 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_survey);
         databaseInterface db = new LocalDb(getApplicationContext());
 
+        // Get the pictures
         compareIds = db.getSurveyPictures();
 
+        // Prepare survey navigation
         currentQuestion = compareIds.length / 2;
         prevQuestion = currentQuestion;
 
-        answers = new HashSet<>();
+        // Prepare survey results
+        answers = new HashSet<>();                  // Keep track of answers of current survey
+        results = new int[compareIds.length][1];    // Keep track of results between surveys
 
+        // Initialize results to keep track of how frequent a result occurs
+        // TODO: Use something other than a double array (vector)
+        for(int i=0; i<results.length; i++) {
+            results[i] = new int[1];
+            results[i][0] = 0;
+        }
+
+        // Set initial pictures
         imgCompare = (ImageView) findViewById(R.id.survey_img_compare);
         imgSelfie = (ImageView) findViewById(R.id.survey_img_selfie);
 
@@ -102,6 +121,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         answers.add(currentQuestion);
         prevQuestion = currentQuestion;
 
+        // Navigate the survey
         switch (v.getId()) {
             case R.id.survey_img_compare:
                 currentQuestion++;
@@ -112,9 +132,39 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         }
 
         if (answers.contains(currentQuestion) || currentQuestion < 0 || currentQuestion >= compareIds.length) {
-            level = prevQuestion;
-            saveResults();
-            showResults();
+            timesTaken++;
+            results[currentQuestion][0]++;
+
+            // Reset the survey
+            answers = new HashSet<>();
+            currentQuestion = compareIds.length / 2;
+
+            // Check if we still have images to show
+            boolean stillHaveIDs = true;
+            for(Iterator<Integer> id : compareIds) {
+                if(!id.hasNext()) {
+                    stillHaveIDs = false;
+                }
+            }
+
+            if(timesTaken >= minTimesTaken || !stillHaveIDs) {
+                // TODO: Make this more efficient besides using a double array (vector)
+                int max = -1;
+                for(int i=0; i<results.length; i++) {
+                    int[] result = results[i];
+                    if(result[0] > max) {
+                        max = result[0];
+                        level = i;
+                    }
+                }
+
+                // Save the result and go to the details
+                saveResults();
+                showResults();
+            } else {
+                // Continue the survey
+                imgCompare.setImageResource(compareIds[currentQuestion].next());
+            }
         } else {
             // Continue the survey
             imgCompare.setImageResource(compareIds[currentQuestion].next());
