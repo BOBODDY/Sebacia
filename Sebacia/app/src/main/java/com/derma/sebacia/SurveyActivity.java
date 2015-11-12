@@ -138,7 +138,13 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
 
         if (answers.contains(currentQuestion) || currentQuestion < 0 || currentQuestion >= compareIds.length) {
             timesTaken++;
-            results[currentQuestion][0]++;
+            if (currentQuestion < 0) {
+                results[0][0]++;
+            } else if (currentQuestion > compareIds.length - 1) {
+                results[compareIds.length - 1][0]++;
+            } else {
+                results[currentQuestion][0]++;
+            }
 
             // Reset the survey
             answers = new HashSet<>();

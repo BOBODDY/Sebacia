@@ -29,6 +29,7 @@ public class FindDoctorActivity extends ListActivity {
     private int acneLevel;
     private TextView lvlText;
     private double minDistForNearest = 100000000; // returned haversine distance in km
+    private int maxDoctorsDisplayed = 10;
     
     private final String TAG = "Sebacia";
 
@@ -84,10 +85,12 @@ public class FindDoctorActivity extends ListActivity {
         List<Doctor> doctors = db.getDoctors(new AcneLevel(acneLevel, ""));
         List<String> messages = new ArrayList<>();
         if (mLastLocation != null) {
+            int numDoctorsDisplayed = 0;
             for (Doctor doctor : doctors) {
-                if(haversine(mLastLocation.getLatitude(), mLastLocation.getLongitude(), doctor.getLat(), doctor.getLong()) < minDistForNearest) {
+                if(haversine(mLastLocation.getLatitude(), mLastLocation.getLongitude(), doctor.getLat(), doctor.getLong()) < minDistForNearest && numDoctorsDisplayed < maxDoctorsDisplayed) {
                     Log.v(TAG, "adding " + doctor.getAdress());
                     messages.add(doctor.getAdress());
+                    numDoctorsDisplayed++;
                 }
             }
         } else {
