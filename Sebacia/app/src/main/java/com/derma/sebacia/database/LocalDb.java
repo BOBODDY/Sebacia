@@ -212,10 +212,10 @@ public class LocalDb implements databaseInterface {
 
         Set<Integer> grade4 = new HashSet<>();
         grade4.add(R.drawable.grade4);
-        grade3.add(R.drawable.iga4_00);
-        grade3.add(R.drawable.iga4_01);
-        grade3.add(R.drawable.iga4_02);
-        grade3.add(R.drawable.iga4_03);
+        grade4.add(R.drawable.iga4_00);
+        grade4.add(R.drawable.iga4_01);
+        grade4.add(R.drawable.iga4_02);
+        grade4.add(R.drawable.iga4_03);
 
         Set<Integer> grade5 = new HashSet<>();
         grade5.add(R.drawable.grade5);
