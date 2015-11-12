@@ -159,7 +159,9 @@ public class LocalDb implements databaseInterface {
 
     public List<Doctor> getDoctors(AcneLevel Severity){
         List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("Cory Anderson", "2905 Premiere Pkwy, Duluth, GA 30097", 34, -84.5, 0, 0, 4));
+
+        // TODO: Consider puting these in a Json file and parsing it or in a DB
+        doctors.add(new Doctor("Cory Anderson", "2905 Premiere Pkwy, Duluth, GA 30097", 34, -84.5, 0, 0, 5));
 
         return doctors;
     }
@@ -181,9 +183,14 @@ public class LocalDb implements databaseInterface {
 
         Set<Integer> grade1 = new HashSet<>();
         grade1.add(R.drawable.grade1);
+        grade1.add(R.drawable.iga1_00);
+        grade1.add(R.drawable.iga1_01);
 
         Set<Integer> grade2 = new HashSet<>();
         grade2.add(R.drawable.grade2);
+        grade2.add(R.drawable.iga2_00);
+        grade2.add(R.drawable.iga2_01);
+        grade2.add(R.drawable.iga2_02);
 
         Set<Integer> grade3 = new HashSet<>();
         grade3.add(R.drawable.grade3);
