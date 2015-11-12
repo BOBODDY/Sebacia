@@ -145,8 +145,8 @@ public class CameraActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
             Log.v(TAG, "in PictureCallback");
             
-            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
-            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
+//            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
+//            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
             
             new TakePictureTask().execute(data);
         }
