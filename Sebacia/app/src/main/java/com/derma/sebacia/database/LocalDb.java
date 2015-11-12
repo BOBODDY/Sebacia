@@ -159,7 +159,9 @@ public class LocalDb implements databaseInterface {
 
     public List<Doctor> getDoctors(AcneLevel Severity){
         List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("Cory Anderson", "2905 Premiere Pkwy, Duluth, GA 30097", 34, -84.5, 0, 0, 4));
+
+        // TODO: Consider puting these in a Json file and parsing it or in a DB
+        doctors.add(new Doctor("Cory Anderson", "2905 Premiere Pkwy, Duluth, GA 30097", 34, -84.5, 0, 0, 5));
 
         return doctors;
     }
@@ -181,15 +183,46 @@ public class LocalDb implements databaseInterface {
 
         Set<Integer> grade1 = new HashSet<>();
         grade1.add(R.drawable.grade1);
+        grade1.add(R.drawable.iga1_00);
+        grade1.add(R.drawable.iga1_01);
 
         Set<Integer> grade2 = new HashSet<>();
         grade2.add(R.drawable.grade2);
+        grade2.add(R.drawable.iga2_00);
+        grade2.add(R.drawable.iga2_01);
+        grade2.add(R.drawable.iga2_02);
 
         Set<Integer> grade3 = new HashSet<>();
         grade3.add(R.drawable.grade3);
+        grade3.add(R.drawable.iga3_00);
+        grade3.add(R.drawable.iga3_01);
+        grade3.add(R.drawable.iga3_02);
+        grade3.add(R.drawable.iga3_03);
+        grade3.add(R.drawable.iga3_04);
+        grade3.add(R.drawable.iga3_05);
+        grade3.add(R.drawable.iga3_06);
+        grade3.add(R.drawable.iga3_07);
+        grade3.add(R.drawable.iga3_08);
+        grade3.add(R.drawable.iga3_09);
+        grade3.add(R.drawable.iga3_10);
+        grade3.add(R.drawable.iga3_11);
+        grade3.add(R.drawable.iga3_12);
+        grade3.add(R.drawable.iga3_13);
+        grade3.add(R.drawable.iga3_14);
+        grade3.add(R.drawable.iga3_15);
+        grade3.add(R.drawable.iga3_16);
+        grade3.add(R.drawable.iga3_17);
+        grade3.add(R.drawable.iga3_18);
+        grade3.add(R.drawable.iga3_19);
+        grade3.add(R.drawable.iga3_20);
+        grade3.add(R.drawable.iga3_21);
 
         Set<Integer> grade4 = new HashSet<>();
         grade4.add(R.drawable.grade4);
+        grade4.add(R.drawable.iga4_00);
+        grade4.add(R.drawable.iga4_01);
+        grade4.add(R.drawable.iga4_02);
+        grade4.add(R.drawable.iga4_03);
 
         Set<Integer> grade5 = new HashSet<>();
         grade5.add(R.drawable.grade5);
