@@ -39,7 +39,8 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     int prevQuestion;
 
     // DB
-    databaseInterface db = new LocalDb(getApplicationContext());
+//    databaseInterface db = new LocalDb(getApplicationContext());
+    databaseInterface db;
     String filepath = null;
 
     private final String TAG = "Sebacia";
@@ -48,6 +49,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
+        db = new LocalDb(getApplicationContext());
 
         // Get the pictures
         compareIds = db.getSurveyPictures();

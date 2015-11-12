@@ -145,7 +145,7 @@ public class LocalDb implements databaseInterface {
                 String path = c.getString(c.getColumnIndexOrThrow(PictureEntry.COLUMN_NAME_PATH));
                 String sev = c.getString(c.getColumnIndexOrThrow(PictureEntry.COLUMN_NAME_SEVERITY));
 
-                pics.add(new Picture(path, new AcneLevel(Integer.valueOf(sev), sev)));
+                pics.add(new Picture(path, new AcneLevel(Integer.valueOf(sev), "IGA: " + sev)));
 
             } while (c.moveToNext());
         } else {
@@ -241,9 +241,8 @@ public class LocalDb implements databaseInterface {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         
         ContentValues cv = new ContentValues();
-        cv.put(PictureEntry.COLUMN_NAME_SEVERITY, sevLevel.getName());
-        
-        int updated = db.update(PictureEntry.TABLE_NAME, cv, PictureEntry.COLUMN_NAME_PATH + " = " + filename, null);
+        cv.put(PictureEntry.COLUMN_NAME_SEVERITY, sevLevel.getLevel() + "");
+        int updated = db.update(PictureEntry.TABLE_NAME, cv, PictureEntry.COLUMN_NAME_PATH + " = '" + filename + "'", null);
         
         db.close();
         
