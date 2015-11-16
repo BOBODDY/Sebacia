@@ -22,7 +22,9 @@
         android:text="@string/hello_world"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/buttonMakeRequest"
+        android:layout_toStartOf="@+id/buttonMakeRequest" />
 
     <Button
         android:layout_width="wrap_content"

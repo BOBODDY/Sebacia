@@ -12,20 +12,22 @@ public class Doctor {
     private int acneMax;
     private double lat;
     private double llong;
+    private String email;
 
     @Override
     public String toString() {
-        return "\n\nname:" + name + " adress:" + adress + " id:" + id +
-                " acneMin:" + acneMin + " acneMax:" + acneMax + " lat/long:" + lat +"/"+llong +"\n\n";
+        return "\n\nname:" + name + "\nadress:" + adress + "\nid:" + id + "\nemial:" + email +
+                "\nacneMin:" + acneMin + "\nacneMax:" + acneMax + "\nlat/long:" + lat +"/"+llong +"\n\n";
     }
 
     public Doctor() {
     }
 
     //CONSTRUCTOR
-    public Doctor(String name, String adress, double lat, double llong, int id, int min, int max) {
+    public Doctor(String name, String adress, double lat, double llong, int id, int min, int max, String email) {
         this.name = name;
         this.adress = adress;
+        this.email = email;
         this.lat = lat;
         this.llong = llong;
         this.id = id;
@@ -61,6 +63,8 @@ public class Doctor {
         this.llong = llong;
     }
 
+    public void setEmail(String email) { this.email = email; }
+
     public String getName() {
         return name;
     }
@@ -88,6 +92,8 @@ public class Doctor {
     public double getLong() {
         return llong;
     }
+
+    public String getEmail() { return email; }
 
 
 }

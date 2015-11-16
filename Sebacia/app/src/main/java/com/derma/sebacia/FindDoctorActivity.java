@@ -96,7 +96,7 @@ public class FindDoctorActivity extends ListActivity {
         } else {
             messages.add("Unable to determine location");
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
+        ArrayAdapter<Doctor> adapter = new FindDoctorAdapter(this, doctors);
         setListAdapter(adapter);
     }
 
@@ -110,12 +110,4 @@ public class FindDoctorActivity extends ListActivity {
         double c = 2 * Math.asin(Math.sqrt(a));
         return Radius * c;
     }
-
-    public void sendEmail(View view) {
-        String emailFromList = "fakeEmail";
-        Intent i = new Intent(this, SurveyQuestionsActivity.class);
-        i.putExtra("email", emailFromList);
-        startActivity(i);
-    }
-
 }

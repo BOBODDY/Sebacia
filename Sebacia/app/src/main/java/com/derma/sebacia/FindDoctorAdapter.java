@@ -1,6 +1,7 @@
 package com.derma.sebacia;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.derma.sebacia.data.Doctor;
+
 import java.util.List;
 
 /**
@@ -20,10 +23,10 @@ import java.util.List;
  */
 public class FindDoctorAdapter extends ArrayAdapter {
 
-    private final List<String> doctorList;
+    private final List<Doctor> doctorList;
     private final Activity context;
 
-    public FindDoctorAdapter(Activity context, List<String> list) {
+    public FindDoctorAdapter(Activity context, List<Doctor> list) {
         super(context, R.layout.row_layout_doclist, list);
         this.context = context;
         doctorList = list;
@@ -40,13 +43,13 @@ public class FindDoctorAdapter extends ArrayAdapter {
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.d("GroceryMate", "shopper requested");
-//                Toast.makeText(context, "shopper requested", Toast.LENGTH_SHORT).show();
-//                doctorList.remove(doctorList.get(position));
-//                notifyDataSetChanged();
+                    String emailFromList = doctorList.get(position).getEmail();
+                    Intent i = new Intent(getContext(), SurveyQuestionsActivity.class);
+                    i.putExtra("email", emailFromList);
+                    getContext().startActivity(i);
             }
         });
-        textView.setText(doctorList.get(position));
+        textView.setText(doctorList.get(position).toString());
         return view;
     }
 }
