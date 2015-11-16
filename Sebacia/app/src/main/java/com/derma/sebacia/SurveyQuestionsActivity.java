@@ -18,6 +18,8 @@ public class SurveyQuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_questions);
 
+        Intent i = getIntent();
+        final String email = i.getStringExtra("email");
         //get text views
         final TextView questionOne = (TextView) findViewById(R.id.quesitonOne);
         final TextView questionTwo = (TextView) findViewById(R.id.questionTwo);
@@ -33,7 +35,7 @@ public class SurveyQuestionsActivity extends AppCompatActivity {
                 //open intent to send emails
                 Intent sendIntent = new Intent(Intent.ACTION_SEND);
                 sendIntent.setType("message/rfc822");
-                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"tpadaniel@aol.com"});
+                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
                 sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Sebacia Patient Request");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "Patient Survery\n___________________________\n\n" +
                         questionOne.getText() + "\n" + answerOne.getText() +

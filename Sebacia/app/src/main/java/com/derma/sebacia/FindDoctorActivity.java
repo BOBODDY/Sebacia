@@ -112,8 +112,9 @@ public class FindDoctorActivity extends ListActivity {
     }
 
     public void sendEmail(View view) {
-
+        String emailFromList = "fakeEmail";
         Intent i = new Intent(this, SurveyQuestionsActivity.class);
+        i.putExtra("email", emailFromList);
         startActivity(i);
     }
 
