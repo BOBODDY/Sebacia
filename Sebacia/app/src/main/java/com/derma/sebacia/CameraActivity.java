@@ -60,6 +60,7 @@ public class CameraActivity extends AppCompatActivity {
     
 //    private Picture selfie;
     private String selfiePath;
+    private byte[] thumbData; // Byte array of picture thumbnail to send to Survey
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +85,11 @@ public class CameraActivity extends AppCompatActivity {
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(mPreview);
 
-//            ImageView overlay = new ImageView(this);
-//            Bitmap bmp = BitmapFactory.decodeResource(this.getResources(), R.drawable.faceoval);
-//            overlay.setImageBitmap(bmp);
-//            overlay.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//            preview.addView(overlay);
+            ImageView overlay = new ImageView(this);
+            Bitmap bmp = BitmapFactory.decodeResource(this.getResources(), R.drawable.faceoval);
+            overlay.setImageBitmap(bmp);
+            overlay.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            preview.addView(overlay);
         } else {
             Log.e(TAG, "no camera found");
         }
@@ -98,8 +99,8 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mCamera != null) {
-                    captureButton.setEnabled(false);
-                    diagnoseButton.setEnabled(false);
+//                    captureButton.setEnabled(false);
+//                    diagnoseButton.setEnabled(false);
                     loading.setVisibility(View.VISIBLE);
                     
                     mCamera.takePicture(null, null, mPicture);
@@ -145,12 +146,54 @@ public class CameraActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
             Log.v(TAG, "in PictureCallback");
             
-//            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
-//            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
+            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
+            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeByteArray(data, 0, data.length, options);
             
-            new TakePictureTask().execute(data);
+            options.inSampleSize = calculateInSampleSize(options, 200, 200);
+            
+            options.inJustDecodeBounds = false;
+            
+            Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+
+            int displayRotation = getDisplayRotation();
+            bmp = rotateBitmap(bmp, displayRotation);
+            
+            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+            
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, byteStream);
+            
+            thumbData = byteStream.toByteArray();
+            
+            new SavePictureTask().execute(data);
         }
     };
+
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
     
     private Bitmap rotateBitmap(Bitmap in, int angle) {
         Matrix mat = new Matrix();
@@ -191,6 +234,7 @@ public class CameraActivity extends AppCompatActivity {
         Log.d(TAG, "is path empty? " + (selfiePath == null));
         try {
             intent.putExtra("picturePath", selfiePath);
+            intent.putExtra("thumbnail", thumbData);
         } catch (NullPointerException e) {
             // TODO: Exit the app or handle when there is no camera
         }
@@ -217,7 +261,7 @@ public class CameraActivity extends AppCompatActivity {
         return rotation;
     }
     
-    private class TakePictureTask extends AsyncTask<byte[], Void, Void> {
+    private class SavePictureTask extends AsyncTask<byte[], Void, Void> {
         protected Void doInBackground(byte[]... bytes) {
 
             Looper.prepare();
@@ -236,7 +280,6 @@ public class CameraActivity extends AppCompatActivity {
             Log.d(TAG, "Saving picture to: " + f.getAbsolutePath());
 
             try {
-//                FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
                 FileOutputStream fos = new FileOutputStream(f);
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
                 fos.close();
@@ -264,8 +307,8 @@ public class CameraActivity extends AppCompatActivity {
                 }
             });
 
-            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
-            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
+//            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
+//            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
             
             return null;
         }

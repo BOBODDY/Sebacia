@@ -39,7 +39,6 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     int prevQuestion;
 
     // DB
-//    databaseInterface db = new LocalDb(getApplicationContext());
     databaseInterface db;
     String filepath = null;
 
@@ -77,17 +76,12 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         Bundle b = getIntent().getExtras();
         Log.d(TAG, "in SurveyActivity onCreate()");
         if (b != null) {
+            
             filepath = b.getString("picturePath");
-            Log.d(TAG, "looking at picture path: " + filepath);
-            Bitmap bmp = null;
-            try {
-//                File f = new File(getFilesDir().getPath() + File.separator + filepath);
-//                Log.d(TAG, "reading file from: " + f.getAbsolutePath());
-                bmp = BitmapFactory.decodeFile(filepath);
-            } catch (NullPointerException npe) {
-                // Picture is null
-                Log.e(TAG, "null pointer in survey", npe);
-            }
+
+            byte[] thumbData = b.getByteArray("thumbnail");
+            
+            Bitmap bmp = BitmapFactory.decodeByteArray(thumbData, 0, thumbData.length);
             if (bmp != null) {
                 Log.d(TAG, "bmp width: " + bmp.getWidth());
                 Log.d(TAG, "bmp height: " + bmp.getHeight());
@@ -200,5 +194,6 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         intent.putExtra(RecommendationActivity.ACNE_LEVEL, level);
         startActivity(intent);
     }
+    
 
 }
