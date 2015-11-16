@@ -113,13 +113,8 @@ public class FindDoctorActivity extends ListActivity {
 
     public void sendEmail(View view) {
 
-        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        sendIntent.setType("message/rfc822");
-        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"tpadaniel@aol.com"});
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Sebacia Patient Request");
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "testing sebacia email request");
-
-        startActivity(Intent.createChooser(sendIntent, "Send Mail using:"));
+        Intent i = new Intent(this, SurveyQuestionsActivity.class);
+        startActivity(i);
     }
 
 }

@@ -83,6 +83,10 @@
             android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" >
         </activity>
+        <activity
+            android:name=".SurveyQuestionsActivity"
+            android:label="@string/title_activity_survey_questions" >
+        </activity>
     </application>
 
 </manifest>

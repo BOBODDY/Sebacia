@@ -84,6 +84,12 @@
 
     <string name="camera_tutorial">Make sure you are in an area with good lighting.</string>
     <string name="recommendation_img_history_desc">Image representing the acne level</string>
+    <string name="title_activity_survey_questions">SurveyQuestionsActivity</string>
+    <string name="survey_question_one">Have you every been proscribed medication for treatment?</string>
+    <string name="survey_question_two">Does your acne effect your daily life?</string>
+    <string name="survey_question_three">How long have you had acne?</string>
+    <string name="sumbit">Submit</string>
+    <string name="q_survey_notification">Please fill our this brief questionare to send to the doctor</string>
 
 
 </resources>
