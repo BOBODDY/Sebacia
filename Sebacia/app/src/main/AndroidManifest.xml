@@ -77,7 +77,7 @@
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
-            android:name=".RecommendationActivity"
+            android:name=".DetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_recommendation"
             android:screenOrientation="landscape"

@@ -15,7 +15,7 @@ import com.derma.sebacia.database.databaseInterface;
 import java.util.Iterator;
 
 
-public class RecommendationActivity extends Activity {
+public class DetailsActivity extends Activity {
     // used to put extra from survey activity
     public static final String ACNE_LEVEL = "LEVEL";
 
