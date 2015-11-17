@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gold3"
-    tools:context="com.derma.sebacia.SurveyActivity">
+    tools:context="com.derma.sebacia.ui.SurveyActivity">
 
     <ImageView
         android:id="@+id/survey_img_compare"

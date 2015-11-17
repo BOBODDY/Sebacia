@@ -1,17 +1,18 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.app.ListActivity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+
+import com.derma.sebacia.data.FindDoctorAdapter;
+import com.derma.sebacia.R;
 import com.derma.sebacia.data.Doctor;
 
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;

@@ -1,4 +1,4 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
 
+import com.derma.sebacia.R;
 import com.derma.sebacia.data.Doctor;
 import com.derma.sebacia.database.DoctorDB;
 

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/gold3"
     android:orientation="vertical"
-    tools:context="com.derma.sebacia.PageAboutActivity">
+    tools:context="com.derma.sebacia.ui.PageAboutActivity">
 
 
     <ScrollView

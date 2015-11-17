@@ -1,4 +1,4 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.app.DialogFragment;
 import android.graphics.Typeface;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.derma.sebacia.R;
 
 
 public class SurveyResultsFragment extends DialogFragment {

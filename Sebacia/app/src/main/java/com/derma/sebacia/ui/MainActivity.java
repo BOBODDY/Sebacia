@@ -1,7 +1,6 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +12,9 @@ import android.view.View;
 import android.graphics.Typeface;
 import android.widget.Button;
 import android.content.Intent;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.derma.sebacia.R;
 
 public class MainActivity extends AppCompatActivity {
     Button btnProg, btnAbt;

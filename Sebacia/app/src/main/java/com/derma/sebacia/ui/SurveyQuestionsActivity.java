@@ -1,4 +1,4 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.content.Intent;
 import android.sax.EndElementListener;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.derma.sebacia.R;
 
 public class SurveyQuestionsActivity extends AppCompatActivity {
 

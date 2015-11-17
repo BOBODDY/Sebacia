@@ -1,18 +1,12 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 
+import com.derma.sebacia.R;
 
 
 public class SplashActivity extends Activity {

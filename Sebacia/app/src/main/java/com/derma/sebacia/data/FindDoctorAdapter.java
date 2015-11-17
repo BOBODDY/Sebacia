@@ -1,20 +1,18 @@
-package com.derma.sebacia;
+package com.derma.sebacia.data;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ActionMenuView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
+import com.derma.sebacia.R;
 import com.derma.sebacia.data.Doctor;
+import com.derma.sebacia.ui.SurveyQuestionsActivity;
 
 import java.util.List;
 

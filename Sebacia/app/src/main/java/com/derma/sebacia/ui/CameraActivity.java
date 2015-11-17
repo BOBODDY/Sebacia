@@ -1,4 +1,4 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,28 +8,22 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.AsyncTask;
-import android.os.Debug;
-import android.os.Environment;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.app.FragmentTransaction;
-import android.app.FragmentManager;
 import android.app.DialogFragment;
 
+import com.derma.sebacia.R;
 import com.derma.sebacia.camera.CameraPreview;
 import com.derma.sebacia.data.AcneLevel;
 import com.derma.sebacia.data.Picture;
@@ -40,7 +34,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
