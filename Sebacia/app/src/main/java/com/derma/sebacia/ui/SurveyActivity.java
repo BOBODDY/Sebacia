@@ -76,6 +76,7 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
         if (b != null) {
             
             filepath = b.getString("picturePath");
+            Log.d(TAG, "set file path to " + filepath);
 
             byte[] thumbData = b.getByteArray("thumbnail");
             
@@ -176,8 +177,11 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
 
     private void saveResults() {
         // Only save results when a picture was taken
+        Log.d(TAG, "the filepath is " + filepath);
+        Log.d(TAG, "setting to level: " + level);
         if(filepath != null) {
-            db.setPictureSeverity(filepath, new AcneLevel(level, "IGA: " + level));
+            boolean res = db.setPictureSeverity(filepath, new AcneLevel(level, "IGA: " + level));
+            Log.d(TAG, "did we succeed? " + res);
         }
     }
 

@@ -138,6 +138,14 @@ public class CameraActivity extends AppCompatActivity {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
             Log.v(TAG, "in PictureCallback");
+
+            String s = getFilesDir() + File.separator + getImageFileName();
+            File tmpF = new File(s);
+            try {
+                selfiePath = tmpF.getCanonicalPath();
+            } catch(IOException ioe) {
+
+            }
             
             DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
             diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
@@ -256,20 +264,17 @@ public class CameraActivity extends AppCompatActivity {
     
     private class SavePictureTask extends AsyncTask<byte[], Void, Void> {
         protected Void doInBackground(byte[]... bytes) {
-
-            Looper.prepare();
-            
             byte[] data = bytes[0];
 
             Log.d(TAG, "in PictureCallback");
 
-            String filename = getImageFileName();
+            String filename = selfiePath;
             int rotation = getDisplayRotation();
 
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             bitmap = rotateBitmap(bitmap, rotation);
             
-            File f = new File(getFilesDir() + File.separator + filename);
+            File f = new File(filename);
             Log.d(TAG, "Saving picture to: " + f.getAbsolutePath());
 
             try {
@@ -288,21 +293,9 @@ public class CameraActivity extends AppCompatActivity {
 
             db.addPicture(newPic);
 
-            selfiePath = newPic.getFilePath();
+//            selfiePath = newPic.getFilePath();
             Log.d(TAG, "saved picture to " + filename);
 
-            Toast.makeText(getApplicationContext(), "Took picture", Toast.LENGTH_SHORT).show();
-
-            CameraActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    loading.setVisibility(View.INVISIBLE);
-                }
-            });
-
-//            DialogFragment diagOptFrag = new DiagnosisOptionsFragment();
-//            diagOptFrag.show(getFragmentManager(), "diag_opt_dialog");
-            
             return null;
         }
     }
