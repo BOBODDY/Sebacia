@@ -11,12 +11,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.derma.sebacia.data.AcneLevel;
-import com.derma.sebacia.data.Picture;
 import com.derma.sebacia.database.LocalDb;
 import com.derma.sebacia.database.databaseInterface;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -190,8 +187,8 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
     }
 
     public void goToRecommendation(View view) {
-        Intent intent = new Intent(view.getContext(), RecommendationActivity.class);
-        intent.putExtra(RecommendationActivity.ACNE_LEVEL, level);
+        Intent intent = new Intent(view.getContext(), DetailsActivity.class);
+        intent.putExtra(DetailsActivity.ACNE_LEVEL, level);
         startActivity(intent);
     }
     
