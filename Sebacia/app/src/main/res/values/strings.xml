@@ -84,7 +84,7 @@
 
     <string name="camera_tutorial">Make sure you are in an area with good lighting. Frame your face within the outline for best results.</string>
     <string name="recommendation_img_history_desc">Image representing the acne level</string>
-    <string name="title_activity_survey_questions">SurveyQuestionsActivity</string>
+    <string name="title_activity_survey_questions">Survey</string>
     <string name="survey_question_one">Have you every been prescribed medication for treatment?</string>
     <string name="survey_question_two">Does your acne effect your daily life?</string>
     <string name="survey_question_three">How long have you had acne?</string>
