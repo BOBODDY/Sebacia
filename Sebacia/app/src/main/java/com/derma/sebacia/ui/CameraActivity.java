@@ -2,6 +2,7 @@ package com.derma.sebacia.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -117,6 +118,12 @@ public class CameraActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.camera_tutorial);
         builder.setTitle("Tutorial");
+        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
         
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -293,7 +300,6 @@ public class CameraActivity extends AppCompatActivity {
 
             db.addPicture(newPic);
 
-//            selfiePath = newPic.getFilePath();
             Log.d(TAG, "saved picture to " + filename);
 
             return null;

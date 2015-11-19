@@ -26,8 +26,7 @@ public class HistoryActivity extends AppCompatActivity {
     private static String TAG = "Sebacia";
     
     databaseInterface db;
-    
-//    ImageView imageView;
+
     ListView imageList;
     
     HistoryAdapter adapter;
@@ -38,16 +37,6 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         imageList = (ListView) findViewById(R.id.history_list);
-        List<Picture> pictures = new ArrayList<>();
-//        adapter = new HistoryAdapter(getApplicationContext(), pictures);
-//        imageList.setAdapter(adapter);
-//        imageList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent i = new Intent(getApplicationContext(), FindDoctorActivity.class);
-//                startActivity(i);
-//            }
-//        });
 
         new loadDbTask().execute(getApplicationContext());
     }

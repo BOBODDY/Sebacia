@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int id) {
                     // User clicked OK button
                     SharedPreferences settings = getSharedPreferences("shared_preferences", 0);
-                    settings.edit().putBoolean("isAccepted", true).commit();
+                    settings.edit().putBoolean("isAccepted", true).apply();
                 }
             });
 
