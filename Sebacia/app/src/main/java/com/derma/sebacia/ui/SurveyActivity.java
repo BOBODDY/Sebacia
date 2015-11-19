@@ -79,14 +79,16 @@ public class SurveyActivity extends Activity implements View.OnClickListener {
             Log.d(TAG, "set file path to " + filepath);
 
             byte[] thumbData = b.getByteArray("thumbnail");
-            
-            Bitmap bmp = BitmapFactory.decodeByteArray(thumbData, 0, thumbData.length);
-            if (bmp != null) {
-                Log.d(TAG, "bmp width: " + bmp.getWidth());
-                Log.d(TAG, "bmp height: " + bmp.getHeight());
-                imgSelfie.setImageBitmap(bmp);
-            } else {
-                Log.d(TAG, "bitmap is null");
+
+            if(thumbData != null) {
+                Bitmap bmp = BitmapFactory.decodeByteArray(thumbData, 0, thumbData.length);
+                if (bmp != null) {
+                    Log.d(TAG, "bmp width: " + bmp.getWidth());
+                    Log.d(TAG, "bmp height: " + bmp.getHeight());
+                    imgSelfie.setImageBitmap(bmp);
+                } else {
+                    Log.d(TAG, "bitmap is null");
+                }
             }
         } else {
             Log.d(TAG, "bundle is null");
