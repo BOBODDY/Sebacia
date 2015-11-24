@@ -89,7 +89,7 @@
     <string name="survey_question_two">Does your acne effect your daily life?</string>
     <string name="survey_question_three">How long have you had acne?</string>
     <string name="sumbit">Submit</string>
-    <string name="q_survey_notification">Please fill our this brief questionare to send to the doctor</string>
+    <string name="q_survey_notification">Please fill out this brief questionnaire to send to the doctor</string>
 
 
 </resources>
