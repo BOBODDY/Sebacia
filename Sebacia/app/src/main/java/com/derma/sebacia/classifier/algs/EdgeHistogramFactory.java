@@ -1,9 +1,9 @@
-package com.derma.sebacia.classifier.algs;
+package main.java.com.derma.sebacia.classifier.algs;
 
 
 import boofcv.struct.image.ImageFloat32;
-import com.derma.sebacia.classifier.structs.EdgeHistogramDescriptor;
-import com.derma.sebacia.classifier.structs.Texture;
+import main.java.com.derma.sebacia.classifier.structs.EdgeHistogramDescriptor;
+import main.java.com.derma.sebacia.classifier.structs.Texture;
 
 /**
  * Created by Jessie on 10/4/2015.

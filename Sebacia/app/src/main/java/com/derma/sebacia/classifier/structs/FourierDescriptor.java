@@ -1,4 +1,4 @@
-package com.derma.sebacia.classifier.structs;
+package main.java.com.derma.sebacia.classifier.structs;
 
 /**
  * Created by Jessie on 9/29/2015.

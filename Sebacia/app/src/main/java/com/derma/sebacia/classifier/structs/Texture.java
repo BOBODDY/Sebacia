@@ -1,4 +1,4 @@
-package com.derma.sebacia.classifier.structs;
+package main.java.com.derma.sebacia.classifier.structs;
 
 import boofcv.struct.image.ImageFloat32;
 
@@ -16,7 +16,11 @@ public class Texture {
     public Texture (ImageFloat32 image)
     {
         this.image = image;
-        this.spectrum = new FourierSpectrumImage(image);
+    }
+
+    public void setSpectrum ()
+    {
+        this.spectrum = new FourierSpectrumImage(this.image);
     }
 
 }
