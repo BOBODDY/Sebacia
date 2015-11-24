@@ -18,6 +18,7 @@ import com.derma.sebacia.data.Picture;
 import com.derma.sebacia.database.LocalDb;
 import com.derma.sebacia.database.databaseInterface;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class HistoryActivity extends AppCompatActivity {
     ListView imageList;
     
     HistoryAdapter adapter;
+
+    List<Picture> pics;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class HistoryActivity extends AppCompatActivity {
     
     private class getPicturesTask extends AsyncTask<Void, Void, List<Picture>> {
         public List<Picture> doInBackground(Void... params) {
-            List<Picture> pics = db.getPatientPics(new Patient(1));
+            pics = db.getPatientPics(new Patient(1));
             
             return pics;
         }
@@ -57,10 +60,10 @@ public class HistoryActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent i = new Intent(getApplicationContext(), FindDoctorActivity.class);
+                        i.putExtra("ACNE_LEVEL", pics.get(position).getSeverity().getLevel());
                         startActivity(i);
                     }
                 });
-//                adapter.addAll(pictures);
             }
         }
     }
