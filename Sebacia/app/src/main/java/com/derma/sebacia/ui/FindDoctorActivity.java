@@ -29,7 +29,7 @@ public class FindDoctorActivity extends ListActivity {
     private Location mLastLocation;
     private int acneLevel;
     private TextView lvlText;
-    private double minDistForNearest = 100000000; // returned haversine distance in km
+    private double minDistForNearest = 100; // returned haversine distance in km
     private int maxDoctorsDisplayed = 10;
     
     private final String TAG = "Sebacia";
