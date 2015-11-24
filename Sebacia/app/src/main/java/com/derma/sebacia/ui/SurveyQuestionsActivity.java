@@ -39,10 +39,10 @@ public class SurveyQuestionsActivity extends AppCompatActivity {
                 sendIntent.setType("message/rfc822");
                 sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
                 sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Sebacia Patient Request");
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Patient Survery\n___________________________\n\n" +
-                        questionOne.getText() + "\n" + answerOne.getText() +
-                        "\n\n" + questionTwo.getText() + "\n" + answerTwo.getText() + "\n\n +" +
-                        questionThree.getText() + "\n" + answerThree.getText());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Patient Survery\n___________________________" +
+                        "\n\n<b>1) " + questionOne.getText() + "</b>\n" + answerOne.getText() +
+                        "\n\n<b>2) " + questionTwo.getText() + "</b>\n" + answerTwo.getText() +
+                        "\n\n<b>3) " + questionThree.getText() + "</b>\n" + answerThree.getText());
 
                 startActivity(Intent.createChooser(sendIntent, "Send Mail using:"));
             }
