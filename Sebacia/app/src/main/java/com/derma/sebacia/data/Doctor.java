@@ -16,7 +16,7 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "name:" + name + "\nadress:" + adress;
+        return "name:" + name + "\naddress:" + adress;
     }
 
     public Doctor() {
