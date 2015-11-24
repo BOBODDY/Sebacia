@@ -11,7 +11,6 @@ public class AcneLevel {
     //FUNCTIONALITY
 
 
-
     //CONSTRUCTOR
     public AcneLevel(int level, String name) {
         Level = level;

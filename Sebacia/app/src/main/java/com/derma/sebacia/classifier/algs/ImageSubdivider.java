@@ -1,4 +1,4 @@
-package main.java.com.derma.sebacia.classifier.algs;
+package com.derma.sebacia.classifier.algs;
 
 import boofcv.alg.filter.binary.BinaryImageOps;
 import boofcv.alg.filter.binary.Contour;
@@ -6,8 +6,8 @@ import boofcv.struct.ConnectRule;
 import boofcv.struct.image.ImageFloat32;
 import boofcv.struct.image.ImageUInt8;
 import georegression.struct.point.Point2D_I32;
-import main.java.com.derma.sebacia.classifier.structs.ImageRegion;
-import main.java.com.derma.sebacia.classifier.structs.RegionImage;
+import com.derma.sebacia.classifier.structs.ImageRegion;
+import com.derma.sebacia.classifier.structs.RegionImage;
 
 import java.util.ArrayList;
 import java.util.Iterator;

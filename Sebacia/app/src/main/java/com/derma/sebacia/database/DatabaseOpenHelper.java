@@ -16,7 +16,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = "Sebacia";
 
     private static final String DB_NAME = "pictures";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
 
     private static final String PICTURE_TABLE_CREATE =
             "CREATE TABLE " + PictureEntry.TABLE_NAME + " (" +

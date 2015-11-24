@@ -2,60 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.derma.sebacia.SurveyActivity">
-    
+    android:background="@color/gold3"
+    tools:context="com.derma.sebacia.ui.SurveyActivity">
+
     <ImageView
         android:id="@+id/survey_img_compare"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="0.5"
-        android:src="@drawable/comp0"/>
+        android:contentDescription="@string/survey_img_compare_dsc" />
     
     <ImageView
         android:id="@+id/survey_img_selfie"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:src="@drawable/faceoval"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="0.5"
-        android:src="@drawable/key0"/>
+        android:contentDescription="@string/survey_img_selfie_dsc" />
     
 </LinearLayout>
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" android:orientation="horizontal"-->
-    <!--tools:context="com.derma.sebacia.SurveyActivity"-->
-    <!--android:background="@color/gold3">-->
-
-    <!--&lt;!&ndash; The primary full-screen view. This can be replaced with whatever view-->
-         <!--is needed to present your content, e.g. VideoView, SurfaceView,-->
-         <!--TextureView, etc. &ndash;&gt;-->
-
-    <!--&lt;!&ndash; This FrameLayout insets its children based on system windows using-->
-         <!--android:fitsSystemWindows. &ndash;&gt;-->
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1">-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/survey_img_compare"-->
-            <!--android:src="@drawable/comp0" />-->
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1">-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/survey_img_selfie"-->
-            <!--android:src="@drawable/key0" />-->
-    <!--</RelativeLayout>-->
-
-<!--</LinearLayout>-->

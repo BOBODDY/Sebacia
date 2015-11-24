@@ -1,4 +1,4 @@
-package main.java.com.derma.sebacia.classifier.classifiers;
+package com.derma.sebacia.classifier.classifiers;
 
 import boofcv.alg.feature.detect.edge.CannyEdge;
 import boofcv.alg.filter.binary.Contour;

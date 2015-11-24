@@ -1,4 +1,4 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

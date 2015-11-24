@@ -6,28 +6,36 @@ import com.derma.sebacia.data.Patient;
 
 import com.derma.sebacia.data.Picture;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Daniel on 9/12/2015.
+ * Interface that allows us to switch between local and external db
+ *
  */
 public interface databaseInterface {
 
     //GETS
-    public Picture getPicture(int PatientID, String FilePath);
+    Picture getPicture(int PatientID, String FilePath);
 
-    public List<Picture> getPatientPics(Patient patient);
+    List<Picture> getPatientPics(Patient patient);
 
-    public List<Doctor> getDoctors(AcneLevel Severity);
+    List<Doctor> getDoctors(AcneLevel Severity);
 
-    public Doctor getDoctor(int DocID);
+    Doctor getDoctor(int DocID);
 
-    public Patient getPatient(Patient patient);
+    Patient getPatient(Patient patient);
+
+    Iterator<Integer>[] getSurveyPictures();
 
     //POSTS
-    public boolean addPatient(Patient patient);
+    boolean addPatient(Patient patient);
 
-    public boolean addDoctor(Doctor doctor);
+    boolean addDoctor(Doctor doctor);
 
-    public boolean addPicture(Picture picture);
+    boolean addPicture(Picture picture);
+
+    boolean setPictureSeverity(String filename, AcneLevel sevLevel);
 }

@@ -1,29 +1,24 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.derma.sebacia.R;
+import com.derma.sebacia.data.HistoryAdapter;
 import com.derma.sebacia.data.Patient;
 import com.derma.sebacia.data.Picture;
 import com.derma.sebacia.database.LocalDb;
 import com.derma.sebacia.database.databaseInterface;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
@@ -31,25 +26,19 @@ public class HistoryActivity extends AppCompatActivity {
     private static String TAG = "Sebacia";
     
     databaseInterface db;
-    
-    ImageView imageView;
 
+    ListView imageList;
+    
+    HistoryAdapter adapter;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        //TODO: pull images from database
+        imageList = (ListView) findViewById(R.id.history_list);
 
-        imageView = (ImageView)this.findViewById(R.id.hist_view_img);
-        
-        db = new LocalDb(getApplicationContext());
-    }
-    
-    protected void onStart() {
-        super.onStart();
-        
-        new getPicturesTask().execute();
+        new loadDbTask().execute(getApplicationContext());
     }
     
     private class getPicturesTask extends AsyncTask<Void, Void, List<Picture>> {
@@ -62,17 +51,16 @@ public class HistoryActivity extends AppCompatActivity {
         
         protected void onPostExecute(List<Picture> pictures) {
             if(pictures.size() > 0) {
-                Picture topPic = pictures.get(0);
-                Bitmap bmp = topPic.getPicBitmap();
-
-                imageView.setImageBitmap(bmp);
-                imageView.setOnClickListener(new ImageView.OnClickListener() {
+                adapter = new HistoryAdapter(getApplicationContext(), pictures);
+                imageList.setAdapter(adapter);
+                imageList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent i = new Intent(getApplicationContext(), FindDoctorActivity.class);
                         startActivity(i);
                     }
                 });
+//                adapter.addAll(pictures);
             }
         }
     }
@@ -97,5 +85,19 @@ public class HistoryActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class loadDbTask extends AsyncTask<Context, Void, Void> {
+
+        protected Void doInBackground(Context... contexts) {
+
+            db = new LocalDb(contexts[0]);
+
+            return null;
+        }
+
+        protected void onPostExecute(Void aVoid) {
+            new getPicturesTask().execute();
+        }
     }
 }

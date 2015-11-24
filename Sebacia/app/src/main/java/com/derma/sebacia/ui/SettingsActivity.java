@@ -1,4 +1,4 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -16,6 +16,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+
+import com.derma.sebacia.R;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.derma.sebacia;
+package com.derma.sebacia.ui;
 
 import android.app.DialogFragment;
 import android.graphics.Typeface;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.derma.sebacia.R;
 
 
 public class SurveyResultsFragment extends DialogFragment {
@@ -27,10 +28,10 @@ public class SurveyResultsFragment extends DialogFragment {
      * @param level Parameter 1.
      * @return A new instance of fragment SurveyResultsFragment.
      */
-    public static SurveyResultsFragment newInstance(String level) {
+    public static SurveyResultsFragment newInstance(int level) {
         SurveyResultsFragment fragment = new SurveyResultsFragment();
         Bundle args = new Bundle();
-        args.putString(ACNE_LEVEL, level);
+        args.putString(ACNE_LEVEL, Integer.toString(level));
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,7 +43,7 @@ public class SurveyResultsFragment extends DialogFragment {
         try {
             acneLevel = getArguments().getString(ACNE_LEVEL);
         } catch (NullPointerException e) {
-            // Exit the app
+            // TODO: Exit the app
         }
 
         // Inflate the layout for this fragment
