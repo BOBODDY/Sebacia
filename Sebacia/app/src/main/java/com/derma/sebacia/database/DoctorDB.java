@@ -2,17 +2,13 @@ package com.derma.sebacia.database;
 
 import android.os.AsyncTask;
 
-import com.derma.sebacia.data.AcneLevel;
-import com.derma.sebacia.data.Coordnate;
 import com.derma.sebacia.data.Doctor;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Daniel on 10/3/2015.
