@@ -1,4 +1,4 @@
-package com.derma.sebacia.classifier.structs;
+package main.java.com.derma.sebacia.classifier.structs;
 
 import georegression.struct.point.Point2D_F32;
 import georegression.struct.point.Point2D_I32;

@@ -1,10 +1,10 @@
-package com.derma.sebacia.classifier.algs;
+package main.java.com.derma.sebacia.classifier.algs;
 
 
 import georegression.struct.point.Point2D_I32;
-import com.derma.sebacia.classifier.structs.FourierSpectrumImage;
-import com.derma.sebacia.classifier.structs.Texture;
-import com.derma.sebacia.classifier.structs.TextureBrowsingDescriptor;
+import main.java.com.derma.sebacia.classifier.structs.FourierSpectrumImage;
+import main.java.com.derma.sebacia.classifier.structs.Texture;
+import main.java.com.derma.sebacia.classifier.structs.TextureBrowsingDescriptor;
 
 import java.util.ArrayList;
 import java.util.Iterator;

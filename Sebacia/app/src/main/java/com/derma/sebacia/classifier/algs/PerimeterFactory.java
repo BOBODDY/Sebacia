@@ -1,9 +1,9 @@
-package com.derma.sebacia.classifier.algs;
+package main.java.com.derma.sebacia.classifier.algs;
 
 
 import georegression.struct.point.Point2D_I32;
-import com.derma.sebacia.classifier.structs.PerimeterDescriptor;
-import com.derma.sebacia.classifier.structs.Shape;
+import main.java.com.derma.sebacia.classifier.structs.PerimeterDescriptor;
+import main.java.com.derma.sebacia.classifier.structs.Shape;
 
 import java.util.Iterator;
 

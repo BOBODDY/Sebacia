@@ -1,8 +1,8 @@
-package com.derma.sebacia.classifier.algs;
+package main.java.com.derma.sebacia.classifier.algs;
 
 
-import com.derma.sebacia.classifier.structs.BoundaryMomentDescriptor;
-import com.derma.sebacia.classifier.structs.Shape;
+import main.java.com.derma.sebacia.classifier.structs.BoundaryMomentDescriptor;
+import main.java.com.derma.sebacia.classifier.structs.Shape;
 
 /**
  * Created by Jessie on 9/30/2015.

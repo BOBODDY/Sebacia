@@ -1,4 +1,4 @@
-package com.derma.sebacia.classifier.algs;
+package main.java.com.derma.sebacia.classifier.algs;
 
 
 import java.util.ArrayList;
