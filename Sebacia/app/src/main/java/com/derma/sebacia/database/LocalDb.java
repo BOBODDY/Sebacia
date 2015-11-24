@@ -161,7 +161,7 @@ public class LocalDb implements databaseInterface {
         List<Doctor> doctors = new ArrayList<>();
 
         // TODO: Consider putting these in a Json file and parsing it or put in a DB
-        doctors.add(new Doctor("Cory Anderson", "2905 Premiere Pkwy, Duluth, GA 30097", 34.005757, -84.093159, 0, 0, 5, "fakeEmial1@fake.fake"));
+        doctors.add(new Doctor("Cory Anderson", "2905 Premiere Pkwy, Duluth, GA 30097", 34.005757, -84.093159, 0, 0, 5, "tpadaniel@aol.com"));
         doctors.add(new Doctor("Edmond Griffin", "5555 Peachtree Dunwoody Road, Atlanta, GA  30342", 33.873418, -84.3579319, 1, 0, 5, "fakeEmial2@fake.fake"));
         doctors.add(new Doctor("D. Scott Karempelis", "5555 Peachtree Dunwoody Road, Atlanta, GA  30342", 33.873418, -84.3579319, 2, 0, 5, "fakeEmial3@fake.fake"));
         doctors.add(new Doctor("Jason Smith", "103 John Maddox Drive NW, Rome, GA  30165-1419", 0, 0, 3, 0, 5, "fakeEmial4@fake.fake"));
