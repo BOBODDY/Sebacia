@@ -16,8 +16,7 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "\n\nname:" + name + "\nadress:" + adress + "\nid:" + id + "\nemial:" + email +
-                "\nacneMin:" + acneMin + "\nacneMax:" + acneMax + "\nlat/long:" + lat +"/"+llong +"\n\n";
+        return "Name: " + name + "\nAddress :" + adress;
     }
 
     public Doctor() {

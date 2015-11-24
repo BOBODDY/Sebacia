@@ -13,11 +13,13 @@ public class ImageRegion {
     public Point2D_I32 anchor;
     public Shape shape;
     public Texture texture;
+    public boolean isSkin;
 
     public ImageRegion (ImageFloat32 image, int x, int y)
     {
         anchor = new Point2D_I32(x,y);
         texture = new Texture(image);
+        isSkin = true;
     }
 
     public void setShape (Contour edge)

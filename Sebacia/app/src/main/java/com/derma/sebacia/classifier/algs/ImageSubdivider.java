@@ -44,13 +44,34 @@ public class ImageSubdivider {
     public static void divideEdges (RegionImage regions, ImageUInt8 edgeImage)
     {
         int x, y;
+        ImageUInt8 edgeSubImage;
+        for (int i = 0; i < widthInRegions; i++)
+        {
+            x = i * regionDim;
+            for (int j = 0; j < heightInRegions; j++)
+            {
+                if (regions.regions[i][j].isSkin)
+                {
+                    y = j * regionDim;
+                    edgeSubImage = edgeImage.subimage(x, y, x+regionDim, y+regionDim);
+                    /* TODO : the assumption is that the largest contour in the region is the shape if there
+                     *        is a visible shape, make sure this is a good assumption */
+                    regions.regions[i][j].setShape(getLargestContour(BinaryImageOps.contour(edgeSubImage, ConnectRule.EIGHT, null)));
+                }
+            }
+        }
+    }
+
+    public static void setSpectrumOfRegions (RegionImage regions)
+    {
         for (int i = 0; i < widthInRegions; i++)
         {
             for (int j = 0; j < heightInRegions; j++)
             {
-                /* TODO : the assumption is that the largest contour in the region is the shape if there is a visible shape,
-                 *        make sure this is a good assumption */
-                regions.regions[i][j].setShape(getLargestContour(BinaryImageOps.contour(edgeImage, ConnectRule.EIGHT, null)));
+                if (regions.regions[i][j].isSkin)
+                {
+                    regions.regions[i][j].texture.setSpectrum();
+                }
             }
         }
     }
