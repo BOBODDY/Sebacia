@@ -276,6 +276,12 @@ public class CameraActivity extends AppCompatActivity {
             Log.d(TAG, "in PictureCallback");
 
             String filename = selfiePath;
+
+            Picture newPic = new Picture(filename, new AcneLevel(1, "1"));
+
+            db.addPicture(newPic);
+            Log.d(TAG, "saved picture to " + filename);
+
             int rotation = getDisplayRotation();
 
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
@@ -295,12 +301,6 @@ public class CameraActivity extends AppCompatActivity {
             } catch(IOException ioe) {
                 Log.e(TAG, "error closing file output stream", ioe);
             }
-
-            Picture newPic = new Picture(filename, new AcneLevel(1, "1"));
-
-            db.addPicture(newPic);
-
-            Log.d(TAG, "saved picture to " + filename);
 
             return null;
         }
